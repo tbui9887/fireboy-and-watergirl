@@ -5,6 +5,18 @@
 #include "common_func.h"
 #include "BaseObject.h"
 
+#define MAX_TILE 10
+
+struct Map{
+    int start_x_;
+    int start_y_;
+
+    int max_x_;
+    int max_y_;
+
+    int tile[MAX_MAP_X][MAX_MAP_Y];
+    char* file_name_;
+};
 
 class TileMap : public BaseObject
 {
@@ -21,10 +33,14 @@ public:
     ~GameMap() {}
 
     void LoadMap(const char* name);
-    void LoadTiles(SDL_Renderer* gRenderer);
+    void LoadTiles(SDL_Renderer* screen);
+    void Drawmap(SDL_Renderer* screen);
+
+
 private:
-    Map game_map_
-    TileMap tile_map[MAX_MAP_Y][MAX_MAP_X];
+    Map game_map_;
+    TileMap tile_map [MAX_TILE];
 };
+
 
 #endif // GAME_MAP_H_

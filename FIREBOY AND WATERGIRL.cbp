@@ -30,7 +30,19 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add directory="../mingw_dev_lib/include/SDL2" />
 		</Compiler>
+		<Linker>
+			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image  -lSDL2_mixer -lSDL2_ttf" />
+			<Add directory="../mingw_dev_lib/lib" />
+		</Linker>
+		<Unit filename="BaseObject.cpp" />
+		<Unit filename="BaseObject.h" />
+		<Unit filename="common_func.h" />
+		<Unit filename="game_map.cpp" />
+		<Unit filename="game_map.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="map_demo.txt" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

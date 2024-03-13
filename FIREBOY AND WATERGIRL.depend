@@ -3,10 +3,11 @@
 	"common_func.h"
 	"BaseObject.h"
 
-1710218649 d:\fireboy and watergirl\common_func.h
+1710289512 d:\fireboy and watergirl\common_func.h
 	<stdio.h>
 	<string>
 	<vector>
+	<fstream>
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
@@ -427,4 +428,17 @@
 
 1710218673 d:\fireboy and watergirl\baseobject.h
 	"common_func.h"
+
+1710267309 source:d:\fireboy and watergirl\main.cpp
+	"common_func.h"
+	"BaseObject.h"
+	"game_map.h"
+
+1710267135 source:d:\fireboy and watergirl\game_map.cpp
+	"common_func.h"
+	"game_map.h"
+
+1710289512 d:\fireboy and watergirl\game_map.h
+	"common_func.h"
+	"BaseObject.h"
 

@@ -4,7 +4,7 @@
 void GameMap::LoadMap(const char* name)
 {
     FILE* fp = NULL;
-    fopen_s(&fp, name, "rb");
+    fopen_s(&fp, name, "rb"); //tải file map lên
     if (fp == NULL){
         return;
     }
@@ -12,11 +12,13 @@ void GameMap::LoadMap(const char* name)
         for (int j = 0; j < MAX_MAP_X; j++){
             fscanf(fp, "%d", &game_map_.tile[i][j]);
             int val = game_map_.tile[i][j];
+            cout << val << " "; //check map có hoạt động đúng không
                 if (val > 0){
                     if (j > game_map_.max_y_) game_map_.max_x_ = j; //game_max_.max_y_ để tìm giá trị của x lớn nhất
                     if (i > game_map_.max_x_) game_map_.max_y_ = i;
                 }
-            }
+        }
+        cout << std::endl; //check map
     }
 
     game_map_.max_x_= (game_map_.max_x_+1)*BLOCK; //hiện tại biến đó chỉ là chỉ số của i và j => giá trị tối đa của bản đồ
@@ -31,11 +33,11 @@ void GameMap::LoadMap(const char* name)
 
 void GameMap::LoadTiles(SDL_Renderer* screen)
 {
-    char file_img[100]; // ten cua anh dang char[]
+    char file_img[100]; // tên của ảnh dạng char[]
     FILE* fp = NULL;
 
     for (int i = 0; i < MAX_TILE; i++){
-        sprintf_s(file_img, "Data/photo/%d.png", i);
+        sprintf_s(file_img, "Data/photo/%d.png", i); //đẩy từng ảnh lên trên
         fopen_s(&fp, file_img, "rb");
         if (fp == NULL){
             continue;

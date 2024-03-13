@@ -16,8 +16,8 @@ using std::cin;
 #include <SDL_mixer.h>
 
 //Screen dimensions
-const int SCREEN_WIDTH = 560;
-const int SCREEN_HEIGHT = 400;
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 640;
 
 //Transparent Color
 const int DelR = 255;
@@ -26,9 +26,9 @@ const int DelB = 255;
 
 //Struct for map
 
-#define MAX_MAP_X 35
-#define MAX_MAP_Y 25
+#define MAX_MAP_X 20
+#define MAX_MAP_Y 20
 
-#define BLOCK 16
+#define BLOCK 32
 
 #endif // COMMON_FUNCTION_H_

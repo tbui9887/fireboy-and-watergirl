@@ -42,6 +42,7 @@
 		<Unit filename="game_map.cpp" />
 		<Unit filename="game_map.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="map_1.txt" />
 		<Unit filename="map_demo.txt" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

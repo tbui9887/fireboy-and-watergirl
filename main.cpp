@@ -41,9 +41,9 @@ bool init()
 bool loadMedia()
 {
     bool success = true;
-    gMap.LoadMap("map_demo.txt");
+    gMap.LoadMap("Data/map/update_map_easy.txt");
+    gBackground.loadImg("Data/photo/background.png",gRenderer);
     gMap.LoadTiles(gRenderer);
-
     return success;
 }
 void close()
@@ -73,6 +73,7 @@ int main(int argc, char* args[])
                 //Update screen
                 SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 0.8);
                 SDL_RenderClear(gRenderer);
+                gBackground.Render(gRenderer, NULL);
                 gMap.Drawmap(gRenderer);
                 SDL_RenderPresent(gRenderer);
             }

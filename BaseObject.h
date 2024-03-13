@@ -13,7 +13,7 @@ public:
     SDL_Rect GetRect() { return ORect; } //chỉ lấy ra mà không thay đổi
     SDL_Texture* GetTexture() { return OTexture; }
 
-    bool loadImg(std::string path, SDL_Renderer* gRenderer);
+    virtual bool loadImg(std::string path, SDL_Renderer* gRenderer);
     void Render(SDL_Renderer* gRenderer, SDL_Rect* clip = NULL);
     void free();
 

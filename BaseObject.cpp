@@ -19,6 +19,7 @@ BaseObject::~BaseObject()
 
 bool BaseObject::loadImg (std::string path, SDL_Renderer* gRenderer)
 {
+    free();
     bool success = true;
     SDL_Texture* newTexture = NULL;
     SDL_Surface* loadedSurface = IMG_Load(path.c_str());

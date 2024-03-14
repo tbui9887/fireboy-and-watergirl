@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="FIREBOY AND WATERGIRL" />
+		<Option title="FIREBOY_AND_WATERGIRL" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -38,12 +38,13 @@
 		</Linker>
 		<Unit filename="BaseObject.cpp" />
 		<Unit filename="BaseObject.h" />
+		<Unit filename="Data/map/update_map_easy.txt" />
+		<Unit filename="MainCharact.cpp" />
+		<Unit filename="MainCharact.h" />
 		<Unit filename="common_func.h" />
 		<Unit filename="game_map.cpp" />
 		<Unit filename="game_map.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="map_1.txt" />
-		<Unit filename="map_demo.txt" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

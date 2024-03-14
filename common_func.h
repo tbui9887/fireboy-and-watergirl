@@ -31,4 +31,10 @@ const int DelB = 255;
 
 #define BLOCK 32
 
+enum CHARACTER
+{
+    WATER_GIRL,
+    FIRE_BOY
+};
+
 #endif // COMMON_FUNCTION_H_

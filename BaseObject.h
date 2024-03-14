@@ -17,7 +17,7 @@ public:
     void Render(SDL_Renderer* gRenderer, SDL_Rect* clip = NULL);
     void free();
 
-private:
+protected:
     SDL_Texture* OTexture;
     SDL_Rect ORect;
 };

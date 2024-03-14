@@ -37,7 +37,7 @@ void GameMap::LoadTiles(SDL_Renderer* screen)
     FILE* fp = NULL;
 
     for (int i = 0; i < MAX_TILE; i++){
-        sprintf_s(file_img, "Data/photo/%d.png", i); //đẩy từng ảnh lên trên
+        sprintf_s(file_img, "Data/photo/block/%d.png", i); //đẩy từng ảnh lên trên
         fopen_s(&fp, file_img, "rb");
         if (fp == NULL){
             continue;

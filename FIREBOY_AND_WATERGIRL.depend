@@ -3,7 +3,7 @@
 	"common_func.h"
 	"BaseObject.h"
 
-1710314553 d:\fireboy and watergirl\common_func.h
+1710376066 d:\fireboy and watergirl\common_func.h
 	<stdio.h>
 	<string>
 	<vector>
@@ -427,15 +427,16 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710363292 d:\fireboy and watergirl\baseobject.h
+1710381594 d:\fireboy and watergirl\baseobject.h
 	"common_func.h"
 
-1710346989 source:d:\fireboy and watergirl\main.cpp
+1710385976 source:d:\fireboy and watergirl\main.cpp
 	"common_func.h"
 	"BaseObject.h"
 	"game_map.h"
+	"MainCharact.h"
 
-1710348592 source:d:\fireboy and watergirl\game_map.cpp
+1710373964 source:d:\fireboy and watergirl\game_map.cpp
 	"common_func.h"
 	"game_map.h"
 
@@ -447,11 +448,51 @@
 	<SDL.h>
 	<stdio.h>
 
-1710351299 source:d:\fireboy and watergirl\maincharact.cpp
+1710385753 source:d:\fireboy and watergirl\maincharact.cpp
 	"common_func.h"
 	"MainCharact.h"
 
-1710348608 d:\fireboy and watergirl\maincharact.h
+1710381462 d:\fireboy and watergirl\maincharact.h
 	"common_func.h"
 	"BaseObject.h"
+
+1710395279 source:d:\fireboy_and_watergirl\baseobject.cpp
+	"common_func.h"
+	"BaseObject.h"
+
+1710376066 d:\fireboy_and_watergirl\common_func.h
+	<stdio.h>
+	<string>
+	<vector>
+	<fstream>
+	<iostream>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<SDL_mixer.h>
+
+1710381594 d:\fireboy_and_watergirl\baseobject.h
+	"common_func.h"
+
+1710373964 source:d:\fireboy_and_watergirl\game_map.cpp
+	"common_func.h"
+	"game_map.h"
+
+1710305032 d:\fireboy_and_watergirl\game_map.h
+	"common_func.h"
+	"BaseObject.h"
+
+1710395828 source:d:\fireboy_and_watergirl\main.cpp
+	"common_func.h"
+	"BaseObject.h"
+	"game_map.h"
+	"MainCharact.h"
+
+1710395828 d:\fireboy_and_watergirl\maincharact.h
+	"common_func.h"
+	"BaseObject.h"
+
+1710396021 source:d:\fireboy_and_watergirl\maincharact.cpp
+	"common_func.h"
+	"MainCharact.h"
 

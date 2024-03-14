@@ -1,12 +1,15 @@
 #include "common_func.h"
 #include "BaseObject.h"
 #include "game_map.h"
+#include "MainCharact.h"
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 
 BaseObject gBackground;
 GameMap gMap;
+MainObject Water(0,0);
+MainObject Fire(0,64);
 
 bool init()
 {
@@ -42,8 +45,12 @@ bool loadMedia()
 {
     bool success = true;
     gMap.LoadMap("Data/map/update_map_easy.txt");
-    gBackground.loadImg("Data/photo/background.png",gRenderer);
+    gBackground.loadImg("Data/photo/background/background.png",gRenderer);
     gMap.LoadTiles(gRenderer);
+    Water.loadImg("Data/photo/character/water_girl_stand.png", gRenderer);
+    Water.set_clips();
+    Fire.loadImg("Data/photo/character/fire_boy_stand.png", gRenderer);
+    Fire.set_clips();
     return success;
 }
 void close()
@@ -69,12 +76,17 @@ int main(int argc, char* args[])
             while (!quit){
                 while (SDL_PollEvent(&event) != 0){
                     if (event.type == SDL_QUIT) quit = true;
+                    Fire.HandleInputAction(event, gRenderer, FIRE_BOY);
+                    Water.HandleInputAction(event, gRenderer, WATER_GIRL);
+
                 }
                 //Update screen
                 SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 0.8);
                 SDL_RenderClear(gRenderer);
                 gBackground.Render(gRenderer, NULL);
                 gMap.Drawmap(gRenderer);
+                Fire.Show(gRenderer);
+                Water.Show(gRenderer);
                 SDL_RenderPresent(gRenderer);
             }
 

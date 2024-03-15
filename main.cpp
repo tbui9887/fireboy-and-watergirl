@@ -85,7 +85,12 @@ int main(int argc, char* args[])
                 SDL_RenderClear(gRenderer);
                 gBackground.Render(gRenderer, NULL);
                 gMap.Drawmap(gRenderer);
+
+                Map map_data = gMap.getMap();
+                Fire.DoPlayer(map_data);
                 Fire.Show(gRenderer);
+
+                Water.DoPlayer(map_data);
                 Water.Show(gRenderer);
                 SDL_RenderPresent(gRenderer);
             }

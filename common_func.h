@@ -29,7 +29,8 @@ const int DelB = 255;
 #define MAX_MAP_X 20
 #define MAX_MAP_Y 20
 
-#define BLOCK 32
+#define BLOCK 32 //= TILE SIZE
+#define BLANK_TILE 0
 
 enum CHARACTER
 {

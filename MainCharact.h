@@ -4,17 +4,20 @@
 
 #include "common_func.h"
 #include "BaseObject.h"
+#include "game_map.h"
 
 #define frame_main_character_walk 9
 #define frame_main_character_stand 7
-
+#define GRAVATY 0.5
+#define MAX_GRAVATY 6
+#define PLAYER_SPEED 1
 struct Input
 {
     int left_;
     int right_;
     int up_;
     int jump_;
-    int stand;
+    int stand_;
 };
 
 enum WalkType
@@ -38,6 +41,9 @@ public:
     void Show(SDL_Renderer* screen);
     void HandleInputAction(SDL_Event event, SDL_Renderer* screen, CHARACTER character); //character vi co 2 con nhan vat khac nhau
 
+    void DoPlayer(Map& map_data); //check dau cuoi kiem tra va cham
+    void check_to_map(Map& map_data);
+
 private:
     float x_val_;
     float y_val_;
@@ -54,6 +60,7 @@ private:
     int frame_; //lưu frame hiện tại
     int status_; //lưu trạng thái
     CHARACTER character; //luu nhan vat
+    bool on_ground = false;
 };
 
 #endif // MAIN_CHARACT_H_

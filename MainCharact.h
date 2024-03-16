@@ -11,6 +11,8 @@
 #define GRAVATY 0.5
 #define MAX_GRAVATY 6
 #define PLAYER_SPEED 1
+#define JUMP_SPEED 10
+
 struct Input
 {
     int left_;
@@ -27,7 +29,9 @@ enum WalkType
         WATER_WALK_RIGHT,
         WATER_WALK_LEFT,
         FIRE_STAND,
-        WATER_STAND
+        WATER_STAND,
+        FIRE_JUMP,
+        WATER_JUMP
     };
 
 class MainObject : public BaseObject

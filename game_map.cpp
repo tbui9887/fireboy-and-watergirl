@@ -14,8 +14,8 @@ void GameMap::LoadMap(const char* name)
             int val = game_map_.tile[i][j];
             cout << val << " "; //check map có hoạt động đúng không
                 if (val > 0){
-                    if (j > game_map_.max_y_) game_map_.max_x_ = j; //game_max_.max_y_ để tìm giá trị của x lớn nhất
-                    if (i > game_map_.max_x_) game_map_.max_y_ = i;
+                    if (j > game_map_.max_x_) game_map_.max_x_ = j; //game_max_.max_y_ để tìm giá trị của x lớn nhất
+                    if (i > game_map_.max_y_) game_map_.max_y_ = i;
                 }
         }
         cout << std::endl; //check map

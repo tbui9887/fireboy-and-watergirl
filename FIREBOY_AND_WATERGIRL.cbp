@@ -45,6 +45,8 @@
 		<Unit filename="game_map.cpp" />
 		<Unit filename="game_map.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="timer.cpp" />
+		<Unit filename="timer.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

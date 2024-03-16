@@ -24,6 +24,9 @@ const int DelR = 255;
 const int DelG = 0;
 const int DelB = 255;
 
+const int SCREEN_FPS = 60; //fps
+const int SCREEN_TICKS_PER_FRAME = 1000/SCREEN_FPS;
+
 //Struct for map
 
 #define MAX_MAP_X 20

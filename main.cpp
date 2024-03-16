@@ -2,6 +2,7 @@
 #include "BaseObject.h"
 #include "game_map.h"
 #include "MainCharact.h"
+#include "timer.h"
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
@@ -10,6 +11,7 @@ BaseObject gBackground;
 GameMap gMap;
 MainObject Water(0,0);
 MainObject Fire(0,64);
+LTimer fps_timer;
 
 bool init()
 {
@@ -69,11 +71,13 @@ int main(int argc, char* args[])
 {
     if (!init()) return -1;
     else{
+
         if (!loadMedia()) return -1;
         else{
             bool quit = false;
             SDL_Event event;
             while (!quit){
+                fps_timer.start();
                 while (SDL_PollEvent(&event) != 0){
                     if (event.type == SDL_QUIT) quit = true;
                     Fire.HandleInputAction(event, gRenderer, FIRE_BOY);
@@ -93,8 +97,14 @@ int main(int argc, char* args[])
                 Water.DoPlayer(map_data);
                 Water.Show(gRenderer);
                 SDL_RenderPresent(gRenderer);
-            }
 
+                int frameTicks = fps_timer.get_ticks();
+                if (frameTicks < SCREEN_TICKS_PER_FRAME){
+                    SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
+                }
+                cout << "real time" << frameTicks << std::endl;
+                cout << " time standard" << SCREEN_TICKS_PER_FRAME << std::endl;
+            }
         }
     }
     close();

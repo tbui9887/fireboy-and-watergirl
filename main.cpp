@@ -4,8 +4,8 @@
 #include "MainCharact.h"
 #include "timer.h"
 
-SDL_Window* gWindow = NULL;
-SDL_Renderer* gRenderer = NULL;
+static SDL_Window* gWindow = NULL;
+static SDL_Renderer* gRenderer = NULL;
 
 BaseObject gBackground;
 GameMap gMap;

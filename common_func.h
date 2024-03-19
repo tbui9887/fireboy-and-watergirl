@@ -34,6 +34,7 @@ const int SCREEN_TICKS_PER_FRAME = 1000/SCREEN_FPS;
 
 #define BLOCK 32 //= TILE SIZE
 #define BLANK_TILE 0
+#define LAVA_TILE 4
 
 enum CHARACTER
 {

@@ -202,10 +202,10 @@ void MainObject::check_to_map(Map& map_data)
     int height_min = height_frame_ < BLOCK ? height_frame_ : BLOCK;
 
     x1 = (x_pos_ + x_val_) / BLOCK;
-    x2 = (x_pos_ + x_val_ + width_frame_ - 1) / BLOCK;
+    x2 = (x_pos_ + x_val_ + width_frame_) / BLOCK;
 
     y1 = y_pos_ / BLOCK;
-    y2 = (y_pos_ + height_min - 1) / BLOCK;
+    y2 = (y_pos_ + height_min) / BLOCK;
 
    // cout << x1 << " " <<  x2 << " " <<  y1 << " " << y2 << std::endl;
 
@@ -231,8 +231,8 @@ void MainObject::check_to_map(Map& map_data)
 
     // Check vertically
     int width_min = width_frame_ < BLOCK ? width_frame_ : BLOCK;
-    x1 = x_pos_ / BLOCK;
-    x2 = (x_pos_ + width_min) / BLOCK;
+    x1 = (x_pos_ + diff_walk) / BLOCK;
+    x2 = (x_pos_ + width_min - diff_walk) / BLOCK;
 
     y1 = (y_pos_ + y_val_) / BLOCK;
     y2 = (y_pos_ + y_val_ + height_frame_) / BLOCK;
@@ -257,6 +257,11 @@ void MainObject::check_to_map(Map& map_data)
             }
         }
     }
+
+    if (map_data.tile[y2][x1] == LAVA_TILE|| map_data.tile[y2][x2] == LAVA_TILE)
+        {
+          cout << "LOSE\n";
+        }
 
     x_pos_ += x_val_;
     y_pos_ += y_val_;

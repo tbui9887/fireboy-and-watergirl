@@ -460,7 +460,7 @@
 	"common_func.h"
 	"BaseObject.h"
 
-1710504149 d:\fireboy_and_watergirl\common_func.h
+1710816664 d:\fireboy_and_watergirl\common_func.h
 	<stdio.h>
 	<string>
 	<vector>
@@ -482,19 +482,19 @@
 	"common_func.h"
 	"BaseObject.h"
 
-1710499027 source:d:\fireboy_and_watergirl\main.cpp
+1710576790 source:d:\fireboy_and_watergirl\main.cpp
 	"common_func.h"
 	"BaseObject.h"
 	"game_map.h"
 	"MainCharact.h"
 	"timer.h"
 
-1710505462 d:\fireboy_and_watergirl\maincharact.h
+1710846420 d:\fireboy_and_watergirl\maincharact.h
 	"common_func.h"
 	"BaseObject.h"
 	"game_map.h"
 
-1710566321 source:d:\fireboy_and_watergirl\maincharact.cpp
+1710576495 source:d:\fireboy_and_watergirl\maincharact.cpp
 	"common_func.h"
 	"MainCharact.h"
 	"game_map.h"

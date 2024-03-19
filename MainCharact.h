@@ -12,7 +12,7 @@
 #define MAX_GRAVATY 6
 #define PLAYER_SPEED 1
 #define JUMP_SPEED 10
-
+#define diff_walk 7
 struct Input
 {
     int left_;

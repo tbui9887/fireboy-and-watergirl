@@ -1,5 +1,5 @@
 #include "timer.h"
-#include "common_func.h"
+#include "header.h"
 
 LTimer::LTimer()
 {

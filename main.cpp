@@ -1,13 +1,14 @@
-#include "common_func.h"
-#include "BaseObject.h"
+#include "header.h"
+#include "character.h"
 #include "game_map.h"
-#include "MainCharact.h"
+#include "button.h"
+#include "texture.h"
 #include "timer.h"
 
 static SDL_Window* gWindow = NULL;
 static SDL_Renderer* gRenderer = NULL;
 
-BaseObject gBackground;
+LTexture gBackground;
 GameMap gMap;
 MainObject Water(0,0);
 MainObject Fire(0,64);
@@ -46,18 +47,22 @@ bool init()
 bool loadMedia()
 {
     bool success = true;
+    gBackground.loadFromFile("Data/photo/background/background.png",gRenderer);
+
     gMap.LoadMap("Data/map/update_map_easy.txt");
-    gBackground.loadImg("Data/photo/background/background.png",gRenderer);
     gMap.LoadTiles(gRenderer);
-    Water.loadImg("Data/photo/character/water_girl_stand.png", gRenderer);
+
+    Water.loadFromFile("Data/photo/character/water_girl_stand.png", gRenderer);
     Water.set_clips();
-    Fire.loadImg("Data/photo/character/fire_boy_stand.png", gRenderer);
+
+    Fire.loadFromFile("Data/photo/character/fire_boy_stand.png", gRenderer);
     Fire.set_clips();
+
     return success;
 }
 void close()
 {
-    gBackground.~BaseObject();
+    gBackground.~LTexture();
     SDL_DestroyRenderer(gRenderer);
     SDL_DestroyWindow(gWindow);
     gRenderer = NULL;
@@ -80,27 +85,32 @@ int main(int argc, char* args[])
                 fps_timer.start();
                 while (SDL_PollEvent(&event) != 0){
                     if (event.type == SDL_QUIT) quit = true;
-                    Fire.HandleInputAction(event, gRenderer, FIRE_BOY);
-                    Water.HandleInputAction(event, gRenderer, WATER_GIRL);
+                    Fire.HandleInputAction(event, gRenderer, FIREBOY);
+                    Water.HandleInputAction(event, gRenderer, WATERGIRL);
 
                 }
                 //Update screen
                 SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 0.8);
                 SDL_RenderClear(gRenderer);
-                gBackground.Render(gRenderer, NULL);
-                gMap.Drawmap(gRenderer);
 
+                gBackground.render(0, 0, NULL, gRenderer);
+
+                gMap.DrawMap(gRenderer);
                 Map map_data = gMap.getMap();
-                Fire.DoPlayer(map_data);
+                Object obj_data;
+
+                Fire.DoPlayer(map_data, obj_data);
                 Fire.Show(gRenderer);
 
-                Water.DoPlayer(map_data);
+                Water.DoPlayer(map_data, obj_data);
                 Water.Show(gRenderer);
+
                 SDL_RenderPresent(gRenderer);
 
                 int frameTicks = fps_timer.get_ticks();
                 if (frameTicks < SCREEN_TICKS_PER_FRAME){
                     SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
+
                 }
                 cout << "real time" << frameTicks << std::endl;
                 cout << " time standard" << SCREEN_TICKS_PER_FRAME << std::endl;

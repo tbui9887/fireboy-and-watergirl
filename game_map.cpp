@@ -1,75 +1,97 @@
-#include "common_func.h"
 #include "game_map.h"
 
-void GameMap::LoadMap(const char* name)
+void GameMap::LoadMap (string name)
 {
-    FILE* fp = NULL;
-    fopen_s(&fp, name, "rb"); //tải file map lên
-    if (fp == NULL){
-        return;
+    std::ifstream file_map (name);
+    if (! file_map.is_open()){
+        cout << "can't upload file map";
     }
-    for (int i = 0; i < MAX_MAP_Y; i++){
-        for (int j = 0; j < MAX_MAP_X; j++){
-            fscanf(fp, "%d", &game_map_.tile[i][j]);
-            int val = game_map_.tile[i][j];
-            cout << val << " "; //check map có hoạt động đúng không
-                if (val > 0){
-                    if (j > game_map_.max_x_) game_map_.max_x_ = j; //game_max_.max_y_ để tìm giá trị của x lớn nhất
-                    if (i > game_map_.max_y_) game_map_.max_y_ = i;
-                }
+    else{
+        for (int i = 0; i < MAX_MAP_Y; i++){
+            for (int j = 0; j < MAX_MAP_X; j++){
+                file_map >> map_game.tile[i][j];
+                cout << map_game.tile[i][j] << " "; //test
+            }
+            cout << std::endl; //test
         }
-        cout << std::endl; //check map
     }
-
-    game_map_.max_x_= (game_map_.max_x_+1)*BLOCK; //hiện tại biến đó chỉ là chỉ số của i và j => giá trị tối đa của bản đồ
-    game_map_.max_y_ = (game_map_.max_y_+1)*BLOCK;
-
-    game_map_.start_x_ = 0;
-    game_map_.start_y_ = 0;
-
-    game_map_.file_name_ = const_cast<char*>(name); //nếu có lỗi thì có thể load lại
-    fclose(fp);
 }
 
 void GameMap::LoadTiles(SDL_Renderer* screen)
 {
-    char file_img[100]; // tên của ảnh dạng char[]
-    FILE* fp = NULL;
-
     for (int i = 0; i < MAX_TILE; i++){
-        sprintf_s(file_img, "Data/photo/block/%d.png", i); //đẩy từng ảnh lên trên
-        fopen_s(&fp, file_img, "rb");
-        if (fp == NULL){
-            continue;
-        }
-        tile_map[i].loadImg(file_img,screen);
-        fclose(fp);
+        string map_name = "Data/photo/block/" + std::to_string(i) + ".png";
+        map_tile[i].loadFromFile(map_name, screen);
     }
+
+    obj.loadImg(screen);
 }
 
-void GameMap::Drawmap(SDL_Renderer* screen)
+void GameMap::DrawMap(SDL_Renderer* screen)
 {
-    int x1 = 0;
-    int x2 = SCREEN_WIDTH;
+    int x_of_file, y_of_file = 0;
 
-    int y1 = 0;
-    int y2 = SCREEN_HEIGHT;
+    for (int i = 0; i < SCREEN_WIDTH; i += BLOCK_SIZE){
+        x_of_file = 0;
+        for (int j = 0; j < SCREEN_HEIGHT; j += BLOCK_SIZE){
+            int val = map_game.tile[x_of_file][y_of_file]; //lấy giá trị của ô đó
 
-    int map_x = 0;
-    int map_y = 0; //chỉ số của nó, bên trên nhân vào, bên này lấy ra
-
-    for (int i = y1; i < y2; i+= BLOCK){
-        map_x = 0;
-        for (int j = x1; j < x2; j+=BLOCK){
-            int val = game_map_.tile[map_y][map_x];
-            if (val>0){
-                tile_map[val].setRect(j,i);
-                tile_map[val].Render(screen,NULL);
+            if (val > 0){
+                map_tile[val].render(i, j, nullptr, screen); //vẽ ra màn hình
             }
-            map_x++;
+            x_of_file++;
         }
-        map_y++;
+        y_of_file++;
     }
-    return;
+
+    obj.render(screen);
 }
 
+
+void Object::loadImg(SDL_Renderer* screen)
+{
+    if (! button.loadFromFile("Data/photo/block/button.png", screen) ){
+        cout << "can't upload button photo\n";
+    }
+    if (! barrier.loadFromFile("Data/photo/block/barrier.png", screen) ){
+        cout << "can't upload barrier photo\n";
+    }
+}
+
+Object::Object()
+{
+    x_but = X_BUTTON;
+    y_but = Y_BUTTON;
+    x_bar = X_BARRIER;
+    y_bar = Y_BARRIER;
+
+    button.inwidth(20);
+    button.inheight(10);
+
+    barrier.inwidth(7);
+    barrier.inheight(64);
+
+    button.inrect(x_but, y_but);
+    barrier.inrect(x_bar, y_bar);
+}
+
+void Object::render(SDL_Renderer* screen)
+{
+    button.render(x_but, y_but, NULL, screen);
+    barrier.render(x_bar, y_bar, NULL, screen);
+    cout << "success upload!";
+}
+
+SDL_Rect Object::ButRect()
+{
+    button.inrect(x_but, y_but);
+    SDL_Rect but = button.getRect();
+    return but;
+}
+
+SDL_Rect Object::BarRect()
+{
+    barrier.inrect(x_bar, y_bar);
+    SDL_Rect bar = barrier.getRect();
+    return bar;
+}

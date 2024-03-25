@@ -36,15 +36,18 @@
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image  -lSDL2_mixer -lSDL2_ttf" />
 			<Add directory="../mingw_dev_lib/lib" />
 		</Linker>
-		<Unit filename="BaseObject.cpp" />
-		<Unit filename="BaseObject.h" />
-		<Unit filename="Data/map/update_map_easy.txt" />
-		<Unit filename="MainCharact.cpp" />
-		<Unit filename="MainCharact.h" />
-		<Unit filename="common_func.h" />
+		<Unit filename="animation.cpp" />
+		<Unit filename="animation.h" />
+		<Unit filename="button.cpp" />
+		<Unit filename="button.h" />
+		<Unit filename="character.cpp" />
+		<Unit filename="character.h" />
 		<Unit filename="game_map.cpp" />
 		<Unit filename="game_map.h" />
+		<Unit filename="header.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="texture.cpp" />
+		<Unit filename="texture.h" />
 		<Unit filename="timer.cpp" />
 		<Unit filename="timer.h" />
 		<Extensions>

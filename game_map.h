@@ -1,47 +1,63 @@
+#ifndef GAME_MAP_H
+#define GAME_MAP_H
 
-#ifndef GAME_MAP_H_
-#define GAME_MAP_H_
+#include "header.h"
+#include "texture.h"
 
-#include "common_func.h"
-#include "BaseObject.h"
+class Object : public LTexture
+{
+private:
+    LTexture button;
+    LTexture barrier;
 
-#define MAX_TILE 10
+    int x_but, y_but;
+    int x_bar, y_bar;
 
-struct Map{
-    int start_x_;
-    int start_y_;
+public:
+    Object();
+    ~Object() { }
+    void loadImg (SDL_Renderer* screen);
+    void render (SDL_Renderer* screen);
 
-    int max_x_;
-    int max_y_;
-
-    int tile[MAX_MAP_X][MAX_MAP_Y];
-    char* file_name_;
+    SDL_Rect ButRect();
+    SDL_Rect BarRect();
 };
 
-class TileMap : public BaseObject
+
+//chứa dữ liệu file map
+struct Map
+{
+    int tile[MAX_MAP_Y][MAX_MAP_X]; //mảng hai chiều chứa dữ liệu map
+    string file_name; //lấy tên file chứa dữ liệu map
+
+};
+
+//render ảnh của map ra
+class TileMap : public LTexture //kế thừa vì thế nó sẽ lấy các phương thức của LTexture để sử dụng
 {
 public:
-
-    TileMap(){}
-    ~TileMap(){}
+    TileMap() { } //khai báo hàm (không có gì)
+    ~TileMap() { } //hủy hàm (không có gì)
 };
 
+//kết hợp hai nhiệm vụ tải map lên và render ảnh
 class GameMap
 {
 public:
     GameMap() {}
     ~GameMap() {}
 
-    void LoadMap(const char* name);
-    void LoadTiles(SDL_Renderer* screen);
-    void Drawmap(SDL_Renderer* screen);
-    Map getMap() {return game_map_;}
-
+    void LoadMap (string name); //load file map lên
+    void LoadTiles (SDL_Renderer* screen); //render ảnh của map ra
+    void DrawMap (SDL_Renderer* screen); //vẽ toàn bộ map ra màn hình
+    Map getMap() { return map_game; } //lỡ có thay đổi map thì nó sẽ lưu vào
+    Object getObj() { return obj; } //thay đổi tọa độ của barrier
 
 private:
-    Map game_map_;
-    TileMap tile_map [MAX_TILE];
+    Map map_game;
+    TileMap map_tile [MAX_TILE];
+    Object obj;
+
 };
 
-
-#endif // GAME_MAP_H_
+#endif // GAME_MAP_H

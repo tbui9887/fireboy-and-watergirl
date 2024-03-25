@@ -507,3 +507,91 @@
 
 1710496281 d:\fireboy_and_watergirl\timer.h
 
+1711352367 source:d:\fireboy-and-watergirl\baseobject.cpp
+	"common_func.h"
+	"BaseObject.h"
+
+1711352368 d:\fireboy-and-watergirl\common_func.h
+	<stdio.h>
+	<string>
+	<vector>
+	<fstream>
+	<iostream>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<SDL_mixer.h>
+
+1711352367 d:\fireboy-and-watergirl\baseobject.h
+	"common_func.h"
+
+1711373020 source:d:\fireboy-and-watergirl\game_map.cpp
+	"game_map.h"
+
+1711373114 d:\fireboy-and-watergirl\game_map.h
+	"header.h"
+	"texture.h"
+
+1711373031 source:d:\fireboy-and-watergirl\main.cpp
+	"header.h"
+	"character.h"
+	"game_map.h"
+	"button.h"
+	"texture.h"
+	"timer.h"
+
+1711352367 d:\fireboy-and-watergirl\maincharact.h
+	"common_func.h"
+	"BaseObject.h"
+	"game_map.h"
+
+1711373135 d:\fireboy-and-watergirl\timer.h
+
+1711352367 source:d:\fireboy-and-watergirl\maincharact.cpp
+	"common_func.h"
+	"MainCharact.h"
+	"game_map.h"
+
+1711373058 source:d:\fireboy-and-watergirl\timer.cpp
+	"timer.h"
+	"header.h"
+
+1711372893 source:d:\fireboy-and-watergirl\animation.cpp
+	"animation.h"
+
+1711372896 d:\fireboy-and-watergirl\animation.h
+	"header.h"
+	"texture.h"
+
+1711373121 d:\fireboy-and-watergirl\header.h
+	<iostream>
+	<stdio.h>
+	<string>
+	<cmath>
+	<fstream>
+	<vector>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<SDL_mixer.h>
+
+1711373128 d:\fireboy-and-watergirl\texture.h
+	"header.h"
+
+1711372988 source:d:\fireboy-and-watergirl\button.cpp
+	"button.h"
+
+1711373079 d:\fireboy-and-watergirl\button.h
+	"header.h"
+
+1711373004 source:d:\fireboy-and-watergirl\character.cpp
+	"character.h"
+
+1711373100 d:\fireboy-and-watergirl\character.h
+	"header.h"
+	"texture.h"
+	"game_map.h"
+
+1711373050 source:d:\fireboy-and-watergirl\texture.cpp
+	"texture.h"
+

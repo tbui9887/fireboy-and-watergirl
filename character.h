@@ -62,6 +62,8 @@ private:
 
     bool on_ground = false;
     bool on_fan = false;
+    bool on_button = false;
+    int barrier_move = 0;
 };
 
 #endif // MAIN_CHARACT_H_

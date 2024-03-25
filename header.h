@@ -64,4 +64,13 @@ enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa,
 
 #define X_BARRIER 96
 #define Y_BARRIER 288
+
+#define BUTTON_WIDTH 20
+#define BUTTON_HEIGHT 10
+
+#define BARRIER_WIDTH 7
+#define BARRIER_HEIGHT 64
+
+#define MAX_MOVE 64
+
 #endif // HEADER_H_

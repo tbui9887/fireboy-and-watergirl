@@ -63,13 +63,12 @@ Object::Object()
     x_but = X_BUTTON;
     y_but = Y_BUTTON;
     x_bar = X_BARRIER;
-    y_bar = Y_BARRIER;
 
-    button.inwidth(20);
-    button.inheight(10);
+    button.inwidth(BUTTON_WIDTH);
+    button.inheight(BUTTON_HEIGHT);
 
-    barrier.inwidth(7);
-    barrier.inheight(64);
+    barrier.inwidth(BARRIER_WIDTH);
+    barrier.inheight(BARRIER_HEIGHT);
 
     button.inrect(x_but, y_but);
     barrier.inrect(x_bar, y_bar);
@@ -80,6 +79,7 @@ void Object::render(SDL_Renderer* screen)
     button.render(x_but, y_but, NULL, screen);
     barrier.render(x_bar, y_bar, NULL, screen);
     cout << "success upload!";
+    cout << y_bar << std::endl;
 }
 
 SDL_Rect Object::ButRect()
@@ -95,3 +95,5 @@ SDL_Rect Object::BarRect()
     SDL_Rect bar = barrier.getRect();
     return bar;
 }
+
+int Object::y_bar = Y_BARRIER;

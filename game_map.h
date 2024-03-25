@@ -11,7 +11,8 @@ private:
     LTexture barrier;
 
     int x_but, y_but;
-    int x_bar, y_bar;
+    int x_bar;
+    static int y_bar;
 
 public:
     Object();
@@ -21,6 +22,12 @@ public:
 
     SDL_Rect ButRect();
     SDL_Rect BarRect();
+
+    int getXbar() { return x_bar; }
+    int getYbar() { return y_bar; }
+
+    void changeXbar(int x) { x_bar = x; }
+    void changeYbar(int y) { y_bar = y; }
 };
 
 

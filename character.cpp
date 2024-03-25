@@ -103,9 +103,18 @@ void MainObject::Show(SDL_Renderer* screen)
 bool MainObject::check_collision_horizontal(SDL_Rect bRect)
 {
     bool collision = false;
-    SDL_Rect charact = {x_pos_, y_pos_, width_frame_ - diff_walk,  height_frame_};
-    if (charact.x + charact.w > bRect.x && charact.x + charact.w < bRect.x + bRect.w) collision = true;
-    else if (charact.x > bRect.x && charact.x < bRect.x + bRect.w) collision = true;
+    SDL_Rect charact = {x_pos_, y_pos_, width_frame_,  height_frame_};
+    if (charact.x + charact.w - diff_walk >= bRect.x && charact.x + charact.w - diff_walk <= bRect.x + bRect.w){
+            cout << "collision\n";
+            collision = true;
+    }
+    else if (charact.x + diff_walk >= bRect.x && charact.x + diff_walk <= bRect.x + bRect.w){
+            cout << "collision\n";
+            collision = true;
+    }
+    //nếu chỉ có phần trên thì nó thành cửa tự động luôn :)
+    if (! (charact.y + charact.h <= bRect.y + bRect.h && charact.y + charact.h >= bRect.y ) ) collision = false;
+    else if (! (charact.y + charact.h <= bRect.y + bRect.h && charact.y + charact.h >= bRect.y ) ) collision = false;
     return collision;
 }
 
@@ -285,8 +294,21 @@ void MainObject::check_to_map(Map& map_data, Object& obj)
     //end
 
     //button
+    SDL_Rect button = obj.ButRect();
+    SDL_Rect barrier = obj.BarRect();
 
-
+    if (check_collision_horizontal(button) && barrier_move < MAX_MOVE){
+        int zy = obj.getYbar();
+        obj.changeYbar(zy - 10);
+        //example is 10
+        barrier_move += 10;
+        cout << barrier_move << std::endl;
+    }
+    else if (!check_collision_horizontal(button) && barrier_move > 0){
+        int zy = obj.getYbar();
+        obj.changeYbar(zy + 10);
+        barrier_move -= 10;
+    }
 
     //end
     x_pos_ += x_val_;
@@ -302,3 +324,5 @@ void MainObject::check_to_map(Map& map_data, Object& obj)
     }
 
 }
+
+

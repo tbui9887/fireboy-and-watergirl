@@ -22,4 +22,23 @@ b2. get hình chữ nhật của character để tiến hành check collision (f
 b3. check collision, trả về biến bool 
 b4. Nếu đúng, thì rect barrier sẽ có tung độ giảm dần tới một giá trị max nào đó thì dừng, on_button = true;
     Nếu sai thì vẫn giữ nguyên 
-b5. Nếu char đi ra khỏi nút đó thì biến count trở về 0, tăng lại tung độ về giá trị cũ
+b5. Nếu char đi ra khỏi nút đó thì biến count trở về 0, tăng lại tung độ về giá trị cũ (finished)
+
+
+------------------------------------------------
+FIXED ERROR TIME:
+
+1. 2 con cùng đứng trên nút thì nó sẽ tiếp tục nâng lên (DONE)
+=> 2 con là 2 class khác nhau nên nó sẽ như vậy, đặt giá trị bắt buộc cho thanh chắn (chỉnh sửa sẽ hơi khó khăn chút nhưng giải pháp 1 là như vậy)
+
+2. khi đi từ phải qua trái nó đi qua cái barrier luôn (DONE)
+=> xóa đi phần điều kiện sau x_val_ < 0 kia 
+=> một lỗi khác là khi nhấn đồng thời hai phím thì nó bay ra bên kia luôn 
+
+3. Không nhảy qua được thanh chắn => có thể lỗi từ code collision 
+
+
+4. đi qua phải trái vẫn bị giật
+
+
+5. 

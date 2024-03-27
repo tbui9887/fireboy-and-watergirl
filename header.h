@@ -73,4 +73,6 @@ enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa,
 
 #define MAX_MOVE 64
 
+#define Y_BARRIER_MAX  224 //= Y_BARRIER + MAX_MOVE
+
 #endif // HEADER_H_

@@ -103,7 +103,7 @@ void MainObject::Show(SDL_Renderer* screen)
 bool MainObject::check_collision_horizontal(SDL_Rect bRect)
 {
     bool collision = false;
-    SDL_Rect charact = {x_pos_, y_pos_, width_frame_,  height_frame_};
+    SDL_Rect charact = {int(x_pos_), int(y_pos_), width_frame_,  height_frame_};
     if (charact.x + charact.w - diff_walk >= bRect.x && charact.x + charact.w - diff_walk <= bRect.x + bRect.w){
             cout << "collision\n";
             collision = true;
@@ -117,6 +117,8 @@ bool MainObject::check_collision_horizontal(SDL_Rect bRect)
     else if (! (charact.y + charact.h <= bRect.y + bRect.h && charact.y + charact.h >= bRect.y ) ) collision = false;
     return collision;
 }
+
+
 
 void MainObject::HandleInputAction(SDL_Event event, SDL_Renderer* screen, CHARACTER character)
 {
@@ -143,7 +145,7 @@ if (character == FIREBOY){
                     input_type_.stand_ = 0;
                 }
                 break;
-            /*case                                                                                                     SDLK_RIGHT && SDLK_UP:
+            /*case SDLK_RIGHT && SDLK_UP:
                 input_type_.jump_ = 1;
                 input_type_.right_ = 1;
                 input_type_.left_ = 0; input_type_.stand_ = 0;
@@ -283,7 +285,7 @@ void MainObject::check_to_map(Map& map_data, Object& obj)
 
     if (map_data.tile[y2][x1] == LAVA_TILE|| map_data.tile[y2][x2] == LAVA_TILE)
         {
-          cout << "LOSE\n";
+          cout << "LOSE\n"; //test
         }
     //check fan
 
@@ -297,17 +299,29 @@ void MainObject::check_to_map(Map& map_data, Object& obj)
     SDL_Rect button = obj.ButRect();
     SDL_Rect barrier = obj.BarRect();
 
-    if (check_collision_horizontal(button) && barrier_move < MAX_MOVE){
+    if (check_collision_horizontal(button) && barrier_move < MAX_MOVE && obj.getYbar() >= Y_BARRIER_MAX && obj.getYbar() <= Y_BARRIER){
         int zy = obj.getYbar();
         obj.changeYbar(zy - 10);
         //example is 10
         barrier_move += 10;
-        cout << barrier_move << std::endl;
+        cout << barrier_move << std::endl; //test
     }
     else if (!check_collision_horizontal(button) && barrier_move > 0){
         int zy = obj.getYbar();
         obj.changeYbar(zy + 10);
         barrier_move -= 10;
+    }
+
+    if (check_collision_horizontal(barrier)){
+        if (x_val_ > 0 && (x_pos_ + x_val_ < barrier.x)){
+            x_val_ = 0;
+            x_pos_ = barrier.x - width_frame_ + 5; //5 in order to not too lag
+        }
+        else if ( x_val_ < 0 ){
+            x_val_ = 0;
+            x_pos_ = barrier.x + barrier.w;
+            cout << "can't go !\n";
+        }
     }
 
     //end

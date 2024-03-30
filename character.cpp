@@ -313,15 +313,14 @@ void MainObject::check_to_map(Map& map_data, Object& obj)
     }
 
     if (check_collision_horizontal(barrier)){
-        if (x_val_ > 0 && (x_pos_ + x_val_ < barrier.x)){
+        if (x_val_ > 0){
+            x_pos_ = barrier.x - width_frame_; //để tránh bị dính vào barrier
             x_val_ = 0;
-            x_pos_ = barrier.x - width_frame_ + 5; //5 in order to not too lag
         }
-        else if ( x_val_ < 0 ){
-            x_val_ = 0;
-            x_pos_ = barrier.x + barrier.w;
-            cout << "can't go !\n";
-        }
+        else{
+                x_pos_ = barrier.x + barrier.w; //để tránh bị dính vào barrier
+                x_val_ = 0;
+            }
     }
 
     //end

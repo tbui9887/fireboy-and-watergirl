@@ -57,7 +57,8 @@ enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa,
 #define JUMP_SPEED 10
 #define diff_walk 7
 
-#define SCREEN_TICKS_PER_FRAME 40
+#define FPS 45
+#define SCREEN_TICKS_PER_FRAME 1000/FPS
 
 #define X_BUTTON 64
 #define Y_BUTTON 120
@@ -74,5 +75,6 @@ enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa,
 #define MAX_MOVE 64
 
 #define Y_BARRIER_MAX  224 //= Y_BARRIER + MAX_MOVE
+#define diff_bar 10
 
 #endif // HEADER_H_

@@ -66,7 +66,7 @@ void LTexture::render (int x, int y, SDL_Rect* clip, SDL_Renderer* screen)
     SDL_RenderCopy(screen, mTexture, clip, &renderQuad);
 }
 
-void LTexture::inrect(int x, int y)
+void LTexture:: SetRect (int x, int y)
 {
     mRect.x = x;
     mRect.y = y;
@@ -74,12 +74,37 @@ void LTexture::inrect(int x, int y)
     mRect.h = mHeight;
 }
 
-void LTexture::inwidth(int x)
+void LTexture::SetWidth (int x)
 {
     mWidth = x;
 }
 
-void LTexture::inheight(int x)
+void LTexture::SetHeight(int x)
 {
     mHeight = x;
+}
+
+bool LTexture::loadFromRenderedText(string textureText, SDL_Color textColor, TTF_Font* gFont, SDL_Renderer* screen)
+{
+    bool success = true;
+    free();
+    SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, textureText.c_str(), textColor);
+    if (textSurface == NULL){
+        cout << TTF_GetError();
+        success = false;
+    }
+    else{
+        mTexture = SDL_CreateTextureFromSurface(screen, textSurface);
+        if (mTexture == NULL){
+            cout << SDL_GetError();
+            success = false;
+        }
+        else{
+            mWidth = textSurface->w;
+            mHeight = textSurface->h;
+        }
+
+        SDL_FreeSurface(textSurface);
+    }
+    return success;
 }

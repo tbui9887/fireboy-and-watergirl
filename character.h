@@ -38,9 +38,21 @@ public:
     void Show(SDL_Renderer* screen); //để render ra màn hình
     void HandleInputAction(SDL_Event event, SDL_Renderer* screen, CHARACTER character); //2 con khác nhau nên dùng CHARACTER để phân biệt 2 con
 
-    void DoPlayer(Map& map_data, Object& obj); //check kiểm tra va chạm
-    void check_to_map(Map& map_data, Object& obj); //check vào map
-    bool check_collision_horizontal (SDL_Rect bRect); //bRect: barrier
+    void DoPlayer(Map& map_data); //check kiểm tra va chạm
+    void check_to_map(Map& map_data); //check vào map
+    //bool check_collision_horizontal (SDL_Rect bRect); //bRect: barrier
+    SDL_Rect getRectChar();
+    void setRectchar(int, int);
+
+    int getXval() { return x_val_; }
+    int getYval() { return y_val_; }
+    int getXpos() { return x_pos_; }
+    int getYpos() { return y_pos_; }
+
+    void setXpos(int x) { x_pos_ = x; }
+    void setYpos(int y) { y_pos_ = y; }
+    void setXval(int x) { x_val_ = x; }
+    void setYval(int y) { y_val_ = y; }
 
 private:
     float x_val_; //vận tốc theo chiều ngang

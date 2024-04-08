@@ -1,0 +1,36 @@
+- Box có thể di chuyển được, không cố định tại một chỗ nào đó 
+=> cho kế thừa class Character
+
+- Luôn thiết lập gravity cho nó ở mọi thời gian (mọi frame)
+=> check va chạm với các block
+=> va chạm với block thì sẽ đứng yên
+
+- Khi va chạm với character thì nó sẽ (nếu x_char_val > 0 => x_box_val > 0) => tương tự  với x_char_val < 0
+- Ngoài ra vẫn phải check va chạm với character để nó không đi qua được cái box đấy nữa 
+
+
+
+- tạo vụ nổ đằng sau: 
+	+ ban đầu cho tại 
+
+
+- code menu: 
+	+ ban đầu 
+
+- chèn nhạc: 
+	+ youtube.com 
+
+- chèn hiệu ứng âm thanh: 
+	+ hiệu ứng khi nhảy: youtube.com
+	+ hiệu ứng khi chết: youtube.com
+
+=> chèn nhạc có hết trong lazyfoo
+=> tạo menu click vào thì nhạc tắt,không có hiệu ứng âm thanh nữa, thoát ra ngoài bảng menu bên ngoài
+
+- code kẻ thù: đi qua đi lại tại một vị trí cố định thôi, khi main chạm vào thì chết
+
+* kế thừa hàm character:
+- khởi tạo vị trí ban đầu cho nó
+- tạo animation cho nó: <<giới hạn bị trí tọa độ cho nó, hoặc cho một giá trị nào đó để nó không vượt qua>>
+- hàm va chạm với nhân vật => nhân vật chết
+

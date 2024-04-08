@@ -4,6 +4,7 @@
 #include "button.h"
 #include "texture.h"
 #include "timer.h"
+#include "object_button.h"
 
 static SDL_Window* gWindow = NULL;
 static SDL_Renderer* gRenderer = NULL;
@@ -13,6 +14,10 @@ GameMap gMap;
 MainObject Water(0,0);
 MainObject Fire(0,64);
 LTimer fps_timer;
+Object obj_data;
+
+
+bool on_button = false;
 
 bool init()
 {
@@ -39,6 +44,10 @@ bool init()
                 printf("IMG_Error: %s\n", IMG_GetError());
                 success = false;
             }
+            if (TTF_Init() == -1){
+                cout << TTF_GetError();
+                success = false;
+            }
         }
     }
     return success;
@@ -57,6 +66,8 @@ bool loadMedia()
 
     Fire.loadFromFile("Data/photo/character/fire_boy_stand.png", gRenderer);
     Fire.set_clips();
+
+    obj_data.loadImg(gRenderer);
 
     return success;
 }
@@ -97,13 +108,27 @@ int main(int argc, char* args[])
 
                 gMap.DrawMap(gRenderer);
                 Map map_data = gMap.getMap();
-                Object obj_data;
 
-                Fire.DoPlayer(map_data, obj_data);
+                obj_data.render(gRenderer);
+
+                Fire.DoPlayer(map_data);
+                SDL_Rect FireRect = Fire.getRectChar();
                 Fire.Show(gRenderer);
 
-                Water.DoPlayer(map_data, obj_data);
+                Water.DoPlayer(map_data);
+                SDL_Rect WaterRect = Water.getRectChar();
                 Water.Show(gRenderer);
+
+                SDL_Rect button = obj_data.getButRect();
+                if (check_collision(FireRect,button) || check_collision(WaterRect,button)){
+                    on_button = true;
+                }
+                else{
+                    on_button = false;
+                }
+
+                obj_data.activity(Fire,on_button);
+                obj_data.activity(Water, on_button);
 
                 SDL_RenderPresent(gRenderer);
 
@@ -112,8 +137,6 @@ int main(int argc, char* args[])
                     SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
 
                 }
-                cout << "real time" << frameTicks << std::endl;
-                cout << " time standard" << SCREEN_TICKS_PER_FRAME << std::endl;
             }
         }
     }

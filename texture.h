@@ -12,19 +12,20 @@ public:
 
     //Tải ảnh lên từ địa chỉ path
     virtual bool loadFromFile (std::string path, SDL_Renderer* screen);
-
+    bool loadFromRenderedText(string textureText, SDL_Color textColor, TTF_Font* gFont, SDL_Renderer* screen);
     void free();
 
     virtual void render (int x, int y, SDL_Rect* clip, SDL_Renderer* screen);
-    void inrect (int x, int y);
-    void inwidth (int);
-    void inheight (int);
+    void SetRect (int x, int y);
+    void SetWidth (int);
+    void SetHeight (int);
 
     int getWidth();
     int getHeight();
 
     SDL_Rect getRect() {return mRect; }
     SDL_Texture* getTexture() {return mTexture; }
+
 
 private:
     SDL_Texture* mTexture;

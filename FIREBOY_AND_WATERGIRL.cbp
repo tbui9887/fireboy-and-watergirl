@@ -42,10 +42,14 @@
 		<Unit filename="button.h" />
 		<Unit filename="character.cpp" />
 		<Unit filename="character.h" />
+		<Unit filename="enermy.cpp" />
+		<Unit filename="enermy.h" />
 		<Unit filename="game_map.cpp" />
 		<Unit filename="game_map.h" />
 		<Unit filename="header.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="object_button.cpp" />
+		<Unit filename="object_button.h" />
 		<Unit filename="texture.cpp" />
 		<Unit filename="texture.h" />
 		<Unit filename="timer.cpp" />

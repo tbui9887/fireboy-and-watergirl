@@ -1,3 +1,4 @@
+
 #include "game_map.h"
 
 void GameMap::LoadMap (string name)
@@ -24,7 +25,7 @@ void GameMap::LoadTiles(SDL_Renderer* screen)
         map_tile[i].loadFromFile(map_name, screen);
     }
 
-    obj.loadImg(screen);
+    //obj.loadImg(screen);
 }
 
 void GameMap::DrawMap(SDL_Renderer* screen)
@@ -44,56 +45,7 @@ void GameMap::DrawMap(SDL_Renderer* screen)
         y_of_file++;
     }
 
-    obj.render(screen);
+    //obj.render(screen);
 }
 
 
-void Object::loadImg(SDL_Renderer* screen)
-{
-    if (! button.loadFromFile("Data/photo/block/button.png", screen) ){
-        cout << "can't upload button photo\n";
-    }
-    if (! barrier.loadFromFile("Data/photo/block/barrier.png", screen) ){
-        cout << "can't upload barrier photo\n";
-    }
-}
-
-Object::Object()
-{
-    x_but = X_BUTTON;
-    y_but = Y_BUTTON;
-    x_bar = X_BARRIER;
-
-    button.inwidth(BUTTON_WIDTH);
-    button.inheight(BUTTON_HEIGHT);
-
-    barrier.inwidth(BARRIER_WIDTH);
-    barrier.inheight(BARRIER_HEIGHT);
-
-    button.inrect(x_but, y_but);
-    barrier.inrect(x_bar, y_bar);
-}
-
-void Object::render(SDL_Renderer* screen)
-{
-    button.render(x_but, y_but, NULL, screen);
-    barrier.render(x_bar, y_bar, NULL, screen);
-    cout << "success upload!";
-    cout << y_bar << std::endl;
-}
-
-SDL_Rect Object::ButRect()
-{
-    button.inrect(x_but, y_but);
-    SDL_Rect but = button.getRect();
-    return but;
-}
-
-SDL_Rect Object::BarRect()
-{
-    barrier.inrect(x_bar, y_bar);
-    SDL_Rect bar = barrier.getRect();
-    return bar;
-}
-
-int Object::y_bar = Y_BARRIER;

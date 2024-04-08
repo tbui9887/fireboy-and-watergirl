@@ -525,14 +525,14 @@
 1711352367 d:\fireboy-and-watergirl\baseobject.h
 	"common_func.h"
 
-1711377246 source:d:\fireboy-and-watergirl\game_map.cpp
+1712499313 source:d:\fireboy-and-watergirl\game_map.cpp
 	"game_map.h"
 
-1711377254 d:\fireboy-and-watergirl\game_map.h
+1712503492 d:\fireboy-and-watergirl\game_map.h
 	"header.h"
 	"texture.h"
 
-1711373031 source:d:\fireboy-and-watergirl\main.cpp
+1712503492 source:d:\fireboy-and-watergirl\main.cpp
 	"header.h"
 	"character.h"
 	"game_map.h"
@@ -563,7 +563,7 @@
 	"header.h"
 	"texture.h"
 
-1711625803 d:\fireboy-and-watergirl\header.h
+1712588094 d:\fireboy-and-watergirl\header.h
 	<iostream>
 	<stdio.h>
 	<string>
@@ -575,23 +575,40 @@
 	<SDL_ttf.h>
 	<SDL_mixer.h>
 
-1711373128 d:\fireboy-and-watergirl\texture.h
+1712588117 d:\fireboy-and-watergirl\texture.h
 	"header.h"
 
-1711372988 source:d:\fireboy-and-watergirl\button.cpp
+1712494472 source:d:\fireboy-and-watergirl\button.cpp
 	"button.h"
 
 1711373079 d:\fireboy-and-watergirl\button.h
 	"header.h"
 
-1711628911 source:d:\fireboy-and-watergirl\character.cpp
+1712493998 source:d:\fireboy-and-watergirl\character.cpp
 	"character.h"
 
-1711628892 d:\fireboy-and-watergirl\character.h
+1712503518 d:\fireboy-and-watergirl\character.h
 	"header.h"
 	"texture.h"
 	"game_map.h"
+	"object_button.h"
 
-1711373050 source:d:\fireboy-and-watergirl\texture.cpp
+1712493900 source:d:\fireboy-and-watergirl\texture.cpp
 	"texture.h"
+
+1712493900 d:\fireboy-and-watergirl\butbar.h
+	"header.h"
+	"texture.h"
+
+1712494251 source:d:\fireboy-and-watergirl\butbar.cpp
+	"butbar.h"
+
+1712057744 source:d:\fireboy-and-watergirl\enermy.cpp
+
+1712500934 source:d:\fireboy-and-watergirl\object_button.cpp
+
+1712567829 d:\fireboy-and-watergirl\object_button.h
+	"header.h"
+	"texture.h"
+	<vector>
 

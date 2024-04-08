@@ -4,32 +4,6 @@
 #include "header.h"
 #include "texture.h"
 
-class Object : public LTexture
-{
-private:
-    LTexture button;
-    LTexture barrier;
-
-    int x_but, y_but;
-    int x_bar;
-    static int y_bar;
-
-public:
-    Object();
-    ~Object() { }
-    void loadImg (SDL_Renderer* screen);
-    void render (SDL_Renderer* screen);
-
-    SDL_Rect ButRect();
-    SDL_Rect BarRect();
-
-    int getXbar() { return x_bar; }
-    int getYbar() { return y_bar; }
-
-    void changeXbar(int x) { x_bar = x; }
-    void changeYbar(int y) { y_bar = y; }
-};
-
 
 //chứa dữ liệu file map
 struct Map
@@ -58,13 +32,10 @@ public:
     void LoadTiles (SDL_Renderer* screen); //render ảnh của map ra
     void DrawMap (SDL_Renderer* screen); //vẽ toàn bộ map ra màn hình
     Map getMap() { return map_game; } //lỡ có thay đổi map thì nó sẽ lưu vào
-    Object getObj() { return obj; } //thay đổi tọa độ của barrier
 
 private:
     Map map_game;
     TileMap map_tile [MAX_TILE];
-    Object obj;
-
 };
 
 #endif // GAME_MAP_H

@@ -83,7 +83,7 @@ void MainObject::Show(SDL_Renderer* screen)
         frame_ = 0;
     }
 
-    LTexture::inrect(x_pos_, y_pos_);
+    LTexture::SetRect(x_pos_, y_pos_);
 
     SDL_Rect* current_clip;
     if (input_type_.stand_ == 1){
@@ -99,26 +99,6 @@ void MainObject::Show(SDL_Renderer* screen)
     SDL_Rect renderQuad = {rRect.x, rRect.y, width_frame_, height_frame_};
     SDL_RenderCopy(screen, rTexture, current_clip, &renderQuad);
 }
-
-bool MainObject::check_collision_horizontal(SDL_Rect bRect)
-{
-    bool collision = false;
-    SDL_Rect charact = {int(x_pos_), int(y_pos_), width_frame_,  height_frame_};
-    if (charact.x + charact.w - diff_walk >= bRect.x && charact.x + charact.w - diff_walk <= bRect.x + bRect.w){
-            cout << "collision\n";
-            collision = true;
-    }
-    else if (charact.x + diff_walk >= bRect.x && charact.x + diff_walk <= bRect.x + bRect.w){
-            cout << "collision\n";
-            collision = true;
-    }
-    //nếu chỉ có phần trên thì nó thành cửa tự động luôn :)
-    if (! (charact.y + charact.h <= bRect.y + bRect.h && charact.y + charact.h >= bRect.y ) ) collision = false;
-    else if (! (charact.y + charact.h <= bRect.y + bRect.h && charact.y + charact.h >= bRect.y ) ) collision = false;
-    return collision;
-}
-
-
 
 void MainObject::HandleInputAction(SDL_Event event, SDL_Renderer* screen, CHARACTER character)
 {
@@ -191,7 +171,7 @@ else{
 }
 }
 
-void MainObject::DoPlayer(Map& map_data, Object& obj)
+void MainObject::DoPlayer(Map& map_data)
 {
     x_val_ = 0;
     y_val_ += GRAVATY; //nếu không ở trên quạt thì có trọng lực
@@ -211,11 +191,10 @@ void MainObject::DoPlayer(Map& map_data, Object& obj)
         on_ground = false;
     }
 
-
-    check_to_map(map_data, obj);
+    check_to_map(map_data);
 }
 
-void MainObject::check_to_map(Map& map_data, Object& obj)
+void MainObject::check_to_map(Map& map_data)
 {
     int x1 = 0;
     int x2 = 0;
@@ -232,7 +211,6 @@ void MainObject::check_to_map(Map& map_data, Object& obj)
     y1 = y_pos_ / BLOCK_SIZE;
     y2 = (y_pos_ + height_min) / BLOCK_SIZE;
 
-   // cout << x1 << " " <<  x2 << " " <<  y1 << " " << y2 << std::endl;
 
     if (x1 >= 0 && x2 <= MAX_MAP_X && y1 >= 0 && y2 <= MAX_MAP_Y)
     {
@@ -295,35 +273,6 @@ void MainObject::check_to_map(Map& map_data, Object& obj)
 
     //end
 
-    //button
-    SDL_Rect button = obj.ButRect();
-    SDL_Rect barrier = obj.BarRect();
-
-    if (check_collision_horizontal(button) && barrier_move < MAX_MOVE && obj.getYbar() >= Y_BARRIER_MAX && obj.getYbar() <= Y_BARRIER){
-        int zy = obj.getYbar();
-        obj.changeYbar(zy - 10);
-        //example is 10
-        barrier_move += 10;
-        cout << barrier_move << std::endl; //test
-    }
-    else if (!check_collision_horizontal(button) && barrier_move > 0){
-        int zy = obj.getYbar();
-        obj.changeYbar(zy + 10);
-        barrier_move -= 10;
-    }
-
-    if (check_collision_horizontal(barrier)){
-        if (x_val_ > 0){
-            x_pos_ = barrier.x - width_frame_; //để tránh bị dính vào barrier
-            x_val_ = 0;
-        }
-        else{
-                x_pos_ = barrier.x + barrier.w; //để tránh bị dính vào barrier
-                x_val_ = 0;
-            }
-    }
-
-    //end
     x_pos_ += x_val_;
     y_pos_ += y_val_;
 
@@ -336,6 +285,22 @@ void MainObject::check_to_map(Map& map_data, Object& obj)
         x_pos_ = SCREEN_WIDTH - width_frame_ + 1;
     }
 
+}
+
+void MainObject::setRectchar(int x, int y)
+{
+    x_pos_ = x;
+    y_pos_ = y;
+}
+
+SDL_Rect MainObject::getRectChar()
+{
+    SDL_Rect character;
+    character.x = x_pos_;
+    character.y = y_pos_;
+    character.w = width_frame_;
+    character.h = height_frame_;
+    return character;
 }
 
 

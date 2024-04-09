@@ -1,17 +1,15 @@
 #include "object_button.h"
 #include "header.h"
 
-void Object::loadImg(SDL_Renderer* screen)
+void Object::loadImg(SDL_Renderer* screen, string path_button, string path_object)
 {
-    if (! button.loadFromFile("Data/photo/block/button.png", screen) ){
+    if (! button.loadFromFile(path_button, screen) ){
         cout << "can't upload button photo\n";
     }
-    if (! barrier.loadFromFile("Data/photo/block/barrier.png", screen) ){
+    if (! barrier.loadFromFile(path_object, screen) ){
         cout << "can't upload barrier photo\n";
     }
 
-    if (button.getTexture() != NULL) cout << "yes\n";
-    else cout << "no\n";
 }
 
 Object::Object()
@@ -19,13 +17,13 @@ Object::Object()
     x_but = X_BUTTON;
     y_but = Y_BUTTON;
     x_bar = X_BARRIER;
+    y_bar = Y_BARRIER;
 }
 
 void Object::render(SDL_Renderer* screen)
 {
     button.render(x_but, y_but, NULL, screen);
     barrier.render(x_bar, y_bar, NULL, screen);
-    cout << "successfully !";
 }
 
 SDL_Rect Object::getButRect()
@@ -42,8 +40,6 @@ SDL_Rect Object::getBarRect()
     return bar;
 }
 
-int Object::y_bar = Y_BARRIER;
-
 void Object::setButDimension(int w, int h)
 {
     button.SetWidth(w);
@@ -54,20 +50,6 @@ void Object::setBarDimension(int w, int h)
 {
     barrier.SetWidth(w);
     barrier.SetHeight(h);
-}
-
-bool check_collision(SDL_Rect charRect, SDL_Rect button)
-{
-    // Kiểm tra va chạm theo cả hai trục x và y
-    bool collision = (charRect.x < button.x + button.w &&
-                      charRect.x + charRect.w > button.x &&
-                      charRect.y < button.y + button.h &&
-                      charRect.y + charRect.h > button.y);
-
-    if (collision) {
-        cout << "collision ! \n";
-    }
-    return collision;
 }
 
 void Object::activity(MainObject &character, bool on_button)
@@ -83,7 +65,6 @@ void Object::activity(MainObject &character, bool on_button)
         if (barrier_move < MAX_MOVE) {
             y_bar -= 10;
             barrier_move += 10;
-            //cout << barrier_move << " " << charRect.x << "  " << charRect.y;
         }
     } else {
         if (barrier_move > 0) {
@@ -106,5 +87,7 @@ void Object::activity(MainObject &character, bool on_button)
         character.setYpos(y_pos - y_val);
     }
 }
+
+
 
 

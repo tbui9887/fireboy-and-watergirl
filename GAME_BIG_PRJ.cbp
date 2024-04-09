@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="FIREBOY_AND_WATERGIRL" />
+		<Option title="GAME_BIG_PRJ" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/FIREBOY AND WATERGIRL" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/GAME_BIG_PRJ" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -16,7 +16,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/FIREBOY AND WATERGIRL" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/GAME_BIG_PRJ" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -30,12 +30,13 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="../mingw_dev_lib/include/SDL2" />
+			<Add directory="../../mingw_dev_lib/include/SDL2" />
 		</Compiler>
 		<Linker>
-			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image  -lSDL2_mixer -lSDL2_ttf" />
-			<Add directory="../mingw_dev_lib/lib" />
+			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer" />
+			<Add directory="../../mingw_dev_lib/lib" />
 		</Linker>
+		<Unit filename="Data/map/update_map_easy.txt" />
 		<Unit filename="animation.cpp" />
 		<Unit filename="animation.h" />
 		<Unit filename="button.cpp" />

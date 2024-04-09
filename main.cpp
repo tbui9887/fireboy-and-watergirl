@@ -5,6 +5,7 @@
 #include "texture.h"
 #include "timer.h"
 #include "object_button.h"
+#include "enermy.h"
 
 static SDL_Window* gWindow = NULL;
 static SDL_Renderer* gRenderer = NULL;
@@ -15,9 +16,12 @@ MainObject Water(0,0);
 MainObject Fire(0,64);
 LTimer fps_timer;
 Object obj_data;
+Enermy enmy(100,64); //enermy
+Enermy moving_enmy(200,64);
 
 
 bool on_button = false;
+bool on_ebutton = false;
 
 bool init()
 {
@@ -67,7 +71,17 @@ bool loadMedia()
     Fire.loadFromFile("Data/photo/character/fire_boy_stand.png", gRenderer);
     Fire.set_clips();
 
-    obj_data.loadImg(gRenderer);
+    obj_data.loadImg(gRenderer, "Data/photo/block/button.png", "Data/photo/block/barrier.png");
+    obj_data.setYbar(Y_BARRIER);
+
+    //enermy
+    if ( ! enmy.loadImg("Data/photo/character/water_girl_stand.png", gRenderer) ) cout << "can't load enermy photo !\n";
+    enmy.set_clips();
+
+    if (! moving_enmy.loadImg("Data/photo/character/fire_boy_walk_left.png", gRenderer) ) cout << "can't load moving enemy photo !\n";
+    moving_enmy.set_clips();
+    moving_enmy.setTypeMove(MOVING_IN_SPACE);
+    moving_enmy.setMovingpos(200 - MAX_MOVING_ENERMY, 200);
 
     return success;
 }
@@ -119,7 +133,22 @@ int main(int argc, char* args[])
                 SDL_Rect WaterRect = Water.getRectChar();
                 Water.Show(gRenderer);
 
+                //enermy
+                enmy.DoPlayer(map_data);
+                enmy.Show(gRenderer);
+
+                moving_enmy.DoPlayer(map_data);
+                moving_enmy.controlMoving(gRenderer, "Data/photo/character/fire_boy_walk_left.png", "Data/photo/character/fire_boy_walk_right.png");
+                moving_enmy.Show(gRenderer);
+
+                SDL_Rect enmy_rect = moving_enmy.get_current_pos();
+
+                if ( check_collision(FireRect, enmy_rect) || check_collision(WaterRect, enmy_rect) ) cout << "lose \n"; //check xem neu cham vao co lose khong
+
+
+                //barrier
                 SDL_Rect button = obj_data.getButRect();
+
                 if (check_collision(FireRect,button) || check_collision(WaterRect,button)){
                     on_button = true;
                 }
@@ -128,7 +157,7 @@ int main(int argc, char* args[])
                 }
 
                 obj_data.activity(Fire,on_button);
-                obj_data.activity(Water, on_button);
+                obj_data.activity(Water,on_button);
 
                 SDL_RenderPresent(gRenderer);
 

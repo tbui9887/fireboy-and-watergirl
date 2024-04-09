@@ -72,11 +72,11 @@ enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa,
 #define BARRIER_WIDTH 7
 #define BARRIER_HEIGHT 64
 
-#define X_EBUTTON 150
-#define Y_EBUTTON 120
+#define X_EBUTTON 358
+#define Y_EBUTTON 113
 
-#define X_ELEVATOR 40
-#define Y_ELEVATOR 288
+#define X_ELEVATOR 293
+#define Y_ELEVATOR 558
 
 #define EBUT_WIDTH 20
 #define EBUT_HEIGHT 10
@@ -86,11 +86,8 @@ enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa,
 
 #define MAX_MOVE 70
 
-#define Y_BARRIER_MAX  224 //= Y_BARRIER + MAX_MOVE
-#define diff_bar 1
-
-#define OBJECT_TYPES 2
-
 static int barrier_move = 0;
+#define MAX_MOVING_ENERMY 60
+#define enermy_jet 1
 
 #endif // HEADER_H_

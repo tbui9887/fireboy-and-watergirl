@@ -66,3 +66,25 @@ bool LTimer::is_paused_()
 bool LTimer::is_started_(){
     return mStarted;
 }
+
+string set_standard_time(int ms)
+{
+    int s = ms / 1000;
+    int m = s / 60;
+    s = s % 60;
+
+    string timer;
+
+    if (m < 10) {
+        timer += '0';
+    }
+    timer += std::to_string(m) + ":";
+
+    if (s < 10) {
+        timer += '0';
+    }
+    timer += std::to_string(s);
+
+    return timer;
+}
+

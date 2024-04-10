@@ -8,6 +8,7 @@
 #include <cmath>
 #include <fstream>
 #include <vector>
+#include <sstream>
 
 #include <SDL.h>
 #include <SDL_image.h>

@@ -1,7 +1,8 @@
 
-
 #ifndef TIMER_H_
 #define TIMER_H_
+#include "header.h"
+
 class LTimer
 {
 public:
@@ -23,5 +24,7 @@ private:
     bool mStarted;
 
 };
+
+string set_standard_time (int ms);
 
 #endif // TIMER_H_

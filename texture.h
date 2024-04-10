@@ -16,9 +16,11 @@ public:
     void free();
 
     virtual void render (int x, int y, SDL_Rect* clip, SDL_Renderer* screen);
+
     void SetRect (int x, int y);
     void SetWidth (int);
     void SetHeight (int);
+    void SetTexture(SDL_Texture* temp_texture) { mTexture = temp_texture; }
 
     int getWidth();
     int getHeight();

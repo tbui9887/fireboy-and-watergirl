@@ -32,7 +32,8 @@ public:
     void LoadTiles (SDL_Renderer* screen); //render ảnh của map ra
     void DrawMap (SDL_Renderer* screen); //vẽ toàn bộ map ra màn hình
     Map getMap() { return map_game; } //lỡ có thay đổi map thì nó sẽ lưu vào
-
+    void setMap(string path_map) { map_game.file_name = path_map; }
+    void copyMap(Map MapGame) { map_game = MapGame; }
 private:
     Map map_game;
     TileMap map_tile [MAX_TILE];

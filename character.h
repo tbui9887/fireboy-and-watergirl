@@ -30,7 +30,7 @@ enum WalkType //trạng thái đi của nhân vật
 class MainObject : public LTexture
 {
 public:
-    MainObject(float x, float y);
+    MainObject();
     ~MainObject();
 
     bool loadFromFile(std::string path, SDL_Renderer* screen); //tải ảnh nhân vật lên (kế thừa từ Texture)
@@ -38,8 +38,8 @@ public:
     void Show(SDL_Renderer* screen); //để render ra màn hình
     void HandleInputAction(SDL_Event event, SDL_Renderer* screen, CHARACTER character); //2 con khác nhau nên dùng CHARACTER để phân biệt 2 con
 
-    void DoPlayer(Map& map_data); //check kiểm tra va chạm
-    void check_to_map(Map& map_data); //check vào map
+    void DoPlayer(Map& map_data, CHARACTER main_char); //check kiểm tra va chạm
+    void check_to_map(Map& map_data, CHARACTER main_char); //check vào map
     //bool check_collision_horizontal (SDL_Rect bRect); //bRect: barrier
     SDL_Rect getRectChar();
     void setRectchar(int, int);

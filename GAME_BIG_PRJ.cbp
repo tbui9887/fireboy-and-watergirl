@@ -51,6 +51,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="object_button.cpp" />
 		<Unit filename="object_button.h" />
+		<Unit filename="select_menu.cpp" />
+		<Unit filename="select_menu.h" />
 		<Unit filename="text.cpp" />
 		<Unit filename="text.h" />
 		<Unit filename="texture.cpp" />

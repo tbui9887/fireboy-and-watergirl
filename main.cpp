@@ -7,25 +7,25 @@
 #include "object_button.h"
 #include "enermy.h"
 #include "text.h"
+#include "select_menu.h"
 
 static SDL_Window* gWindow = NULL;
 static SDL_Renderer* gRenderer = NULL;
-
-TTF_Font* gFont = NULL;
+static TTF_Font* gFont = NULL;
 
 LTexture gBackground;
-GameMap gMap;
-MainObject Water(0,0);
-MainObject Fire(0,64);
-LTimer fps_timer;
-Object obj_data;
-Enermy enmy(100,64); //enermy
-Enermy moving_enmy(200,64);
 
+GameMap gMap;
+
+MainObject Water;
+MainObject Fire;
+vector<Object> obj;
+vector<Enermy> enemy;
+
+LTimer fps_timer;
 Text time_count;
 
 bool on_button = false;
-bool on_ebutton = false;
 
 bool init()
 {
@@ -72,11 +72,7 @@ bool loadMedia()
 {
     bool success = true;
     //load background
-    gBackground.loadFromFile("Data/photo/background/background.png",gRenderer);
-
-    //load map
-    gMap.LoadMap("Data/map/update_map_easy.txt");
-    gMap.LoadTiles(gRenderer);
+    gBackground.loadFromFile("Data/photo/background/brick_background.png",gRenderer);
 
     //load watergirl character
     Water.loadFromFile("Data/photo/character/water_girl_stand.png", gRenderer);
@@ -85,20 +81,6 @@ bool loadMedia()
     //load fireboy character
     Fire.loadFromFile("Data/photo/character/fire_boy_stand.png", gRenderer);
     Fire.set_clips();
-
-    //load object barrier and button
-    obj_data.loadImg(gRenderer, "Data/photo/block/button.png", "Data/photo/block/barrier.png");
-    obj_data.setYbar(Y_BARRIER);
-
-    //load enemy just standing
-    if ( ! enmy.loadImg("Data/photo/character/water_girl_stand.png", gRenderer) ) cout << "can't load enermy photo !\n";
-    enmy.set_clips();
-
-    //load enemy can move
-    if (! moving_enmy.loadImg("Data/photo/character/fire_boy_walk_left.png", gRenderer) ) cout << "can't load moving enemy photo !\n";
-    moving_enmy.set_clips();
-    moving_enmy.setTypeMove(MOVING_IN_SPACE);
-    moving_enmy.setMovingpos(200 - MAX_MOVING_ENERMY, 200);
 
     return success;
 }
@@ -124,7 +106,6 @@ int main(int argc, char* args[])
 {
     if (!init()) return -1;
     else{
-
         if (!loadMedia()) return -1;
         else{
             bool quit = false;
@@ -133,6 +114,12 @@ int main(int argc, char* args[])
             int startTime = 0;
 
             std::stringstream timeText;
+
+            string path_map = LevelMap(Fire, Water, obj, enemy); //set map link
+            cout << path_map << std::endl;
+            gMap.LoadMap(path_map);
+            gMap.LoadTiles(gRenderer);
+            Map map_data = gMap.getMap();
 
             while (!quit){
                 fps_timer.start();
@@ -154,50 +141,50 @@ int main(int argc, char* args[])
                 SDL_RenderClear(gRenderer);
 
                 //render background
-                gBackground.render(0, 0, NULL, gRenderer);
-
+                gBackground.render(0,0, NULL, gRenderer);
                 //render map
                 gMap.DrawMap(gRenderer);
-                Map map_data = gMap.getMap();
-
+                gMap.copyMap(map_data);
                 //render barrier and button
-                obj_data.render(gRenderer);
+                for (int i = 0; i < int(obj.size()); i++){
+                    obj[i].render(gRenderer);
+                }
 
                 //main character
-                Fire.DoPlayer(map_data);
+                Fire.DoPlayer(map_data,FIREBOY);
                 SDL_Rect FireRect = Fire.getRectChar();
                 Fire.Show(gRenderer);
 
-                Water.DoPlayer(map_data);
+                Water.DoPlayer(map_data,WATERGIRL);
                 SDL_Rect WaterRect = Water.getRectChar();
                 Water.Show(gRenderer);
 
                 //enemy and check collision of it
-                enmy.DoPlayer(map_data);
-                enmy.Show(gRenderer);
-
-                moving_enmy.DoPlayer(map_data);
-                moving_enmy.controlMoving(gRenderer, "Data/photo/character/fire_boy_walk_left.png", "Data/photo/character/fire_boy_walk_right.png");
-                moving_enmy.Show(gRenderer);
-
-                SDL_Rect enmy_rect = moving_enmy.get_current_pos();
-
-                if ( check_collision(FireRect, enmy_rect) || check_collision(WaterRect, enmy_rect) ) cout << "lose \n"; //check xem neu cham vao co lose khong
-
+                SDL_Rect enemy_rect[int(enemy.size())];
+                for (int i = 0; i < int(enemy.size()); i++){
+                    enemy[i].DoPlayer(map_data);
+                    enemy[i].controlMoving(gRenderer, "Data/photo/character/red_slime.png", "Data/photo/character/red_slime.png");
+                    enemy[i].Show(gRenderer);
+                    enemy_rect[i] = enemy[i].get_current_pos();
+                    if ( check_collision(FireRect, enemy_rect[i]) || check_collision(WaterRect, enemy_rect[i]) ) cout << "lose \n"; //check xem neu cham vao co lose khong
+                }
 
                 //check collision of button
-                SDL_Rect button = obj_data.getButRect();
+                for (int i = 0; i < int(obj.size()); i++){
+                    SDL_Rect button = obj[i].getButRect();
 
-                if (check_collision(FireRect,button) || check_collision(WaterRect,button)){
-                    on_button = true;
-                }
-                else{
-                    on_button = false;
+                    if (check_collision(FireRect,button) || check_collision(WaterRect,button)){
+                        on_button = true;
+                    }
+                    else{
+                        on_button = false;
+                    }
+
+                    //activity related to button, barrier and character
+                    obj[i].activity(Fire,on_button);
+                    obj[i].activity(Water,on_button);
                 }
 
-                //activity related to button, barrier and character
-                obj_data.activity(Fire,on_button);
-                obj_data.activity(Water,on_button);
 
                 //render time_count
                 if ( ! time_count.CreateGameText(gFont, gRenderer, ( SCREEN_WIDTH - time_count.getWidth() ) / 2, 0 ) ) {
@@ -212,6 +199,9 @@ int main(int argc, char* args[])
                     SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
 
                 }
+
+                cout << "score of fireboy: " << YellowCoin << std::endl;
+                cout << "score of watergirl: " << BlueCoin << std::endl;
             }
         }
     }

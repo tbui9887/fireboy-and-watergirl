@@ -21,7 +21,7 @@ void GameMap::LoadMap (string name)
 void GameMap::LoadTiles(SDL_Renderer* screen)
 {
     for (int i = 0; i < MAX_TILE; i++){
-        string map_name = "Data/photo/block/" + std::to_string(i) + ".png";
+        string map_name = "Data/new_tiles/image_part_0" + std::to_string(i) + ".png";
         map_tile[i].loadFromFile(map_name, screen);
     }
 

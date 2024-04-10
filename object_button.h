@@ -22,7 +22,7 @@ public:
     Object();
     Object(int, int, int);
     ~Object() { }
-    void loadImg (SDL_Renderer* screen, string path_button, string path_object);
+    void loadImg (SDL_Renderer* screen);
     void render (SDL_Renderer* screen);
 
     SDL_Rect getButRect();

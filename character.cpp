@@ -1,11 +1,11 @@
 
 #include "character.h"
 
-MainObject::MainObject(float x, float y)
+MainObject::MainObject()
 {
     frame_ = 0;
-    x_pos_ = x;
-    y_pos_ = y;
+    x_pos_ = 0;
+    y_pos_ = 0;
     x_val_ = 0;
     y_val_ = 0;
 
@@ -171,7 +171,7 @@ else{
 }
 }
 
-void MainObject::DoPlayer(Map& map_data)
+void MainObject::DoPlayer(Map& map_data, CHARACTER main_char)
 {
     x_val_ = 0;
     y_val_ += GRAVATY; //nếu không ở trên quạt thì có trọng lực
@@ -191,10 +191,10 @@ void MainObject::DoPlayer(Map& map_data)
         on_ground = false;
     }
 
-    check_to_map(map_data);
+    check_to_map(map_data, main_char);
 }
 
-void MainObject::check_to_map(Map& map_data)
+void MainObject::check_to_map(Map& map_data, CHARACTER main_char)
 {
     int x1 = 0;
     int x2 = 0;
@@ -216,7 +216,22 @@ void MainObject::check_to_map(Map& map_data)
     {
         if (x_val_ > 0)
         {
-            if (map_data.tile[y1][x2] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
+            int value_1 = map_data.tile[y1][x2], value_2 = map_data.tile[y2][x2];
+
+        if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && main_char == FIREBOY){
+            map_data.tile[y1][x2] = BLANK_TILE;
+            map_data.tile[y2][x2] = BLANK_TILE;
+            YellowCoin++;
+        }
+
+        if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && main_char == WATERGIRL) {
+            map_data.tile[y1][x2] = BLANK_TILE;
+            map_data.tile[y2][x2] = BLANK_TILE;
+            BlueCoin++;
+        }
+
+        if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ) ||
+            !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN))
             {
                 x_pos_ = x1 * BLOCK_SIZE;
                 x_val_ = 0;
@@ -224,7 +239,22 @@ void MainObject::check_to_map(Map& map_data)
         }
         else if (x_val_ < 0)
         {
-            if (map_data.tile[y1][x1] != BLANK_TILE || map_data.tile[y2][x1] != BLANK_TILE)
+            int value_1 = map_data.tile[y1][x1], value_2 = map_data.tile[y2][x1];
+
+        if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && main_char == FIREBOY){
+            map_data.tile[y1][x1] = BLANK_TILE;
+            map_data.tile[y2][x1] = BLANK_TILE;
+            YellowCoin++;
+        }
+
+        if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && main_char == WATERGIRL) {
+            map_data.tile[y1][x1] = BLANK_TILE;
+            map_data.tile[y2][x1] = BLANK_TILE;
+            BlueCoin++;
+        }
+
+        if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ) ||
+            !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN))
             {
                 x_pos_ = (x1 + 1) * BLOCK_SIZE;
                 x_val_ = 0;
@@ -244,7 +274,22 @@ void MainObject::check_to_map(Map& map_data)
     {
         if (y_val_ > 0)
         {
-            if (map_data.tile[y2][x1] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
+            int value_1 = map_data.tile[y2][x1], value_2 = map_data.tile[y2][x2];
+
+        if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && main_char == FIREBOY){
+            map_data.tile[y2][x1] = BLANK_TILE;
+            map_data.tile[y2][x2] = BLANK_TILE;
+            YellowCoin++;
+        }
+
+        if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && main_char == WATERGIRL) {
+            map_data.tile[y2][x1] = BLANK_TILE;
+            map_data.tile[y2][x2] = BLANK_TILE;
+            BlueCoin++;
+        }
+
+        if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ) ||
+            !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN))
             {
                 y_pos_ = y2 * BLOCK_SIZE - height_frame_;
                 y_val_ = 0;
@@ -253,18 +298,28 @@ void MainObject::check_to_map(Map& map_data)
         }
         else if (y_val_ < 0)
         {
-            if (map_data.tile[y1][x1] != BLANK_TILE || map_data.tile[y1][x2] != BLANK_TILE)
-            {
+            int value_1 = map_data.tile[y1][x1], value_2 = map_data.tile[y1][x2];
+
+        if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && main_char == FIREBOY){
+            map_data.tile[y1][x1] = BLANK_TILE;
+            map_data.tile[y1][x2] = BLANK_TILE;
+            YellowCoin++;
+        }
+
+        if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && main_char == WATERGIRL) {
+            map_data.tile[y1][x1] = BLANK_TILE;
+            map_data.tile[y1][x2] = BLANK_TILE;
+            BlueCoin++;
+        }
+
+        if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ) ||
+            !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN)){
                 y_pos_ = (y1 + 1) * BLOCK_SIZE;
                 y_val_ = 0;
             }
         }
     }
 
-    if (map_data.tile[y2][x1] == LAVA_TILE|| map_data.tile[y2][x2] == LAVA_TILE)
-        {
-          cout << "LOSE\n"; //test
-        }
     //check fan
 
     if (map_data.tile[y2][x1] == 5|| map_data.tile[y2][x2] == 5){ //nếu chỉ có cái này, nó chỉ check ở dưới chân của nó có block kia khôgn thì mới giảm thôi (thích hợp để làm cái nhún)

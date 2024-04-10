@@ -9,6 +9,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <ctime>
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -20,8 +21,8 @@ using std::cin;
 using std::string;
 using std::vector;
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 640;
+const int SCREEN_WIDTH = 960;
+const int SCREEN_HEIGHT = 800;
 
 const int TRANSPARENT_RED = 255;
 const int TRANSPARENT_GREEN = 0;
@@ -31,13 +32,19 @@ const int DEFAULT_RED = 255;
 const int DEFAULT_GREEN = 255;
 const int DEFAULT_BLUE = 255;
 
-#define MAX_TILE 10
-#define MAX_MAP_X 20
-#define MAX_MAP_Y 20
+#define MAX_TILE 100
+
+#define MAX_MAP_X 30
+#define MAX_MAP_Y 25
 #define BLOCK_SIZE 32
 
 #define BLANK_TILE 0
-#define LAVA_TILE 4
+#define FLOWER_TILE 46
+#define SMALL_ROCK 47
+#define BIG_ROCK 48
+#define BUSH 49
+#define YELLOW_COIN 55
+#define BLUE_COIN 62
 
 #define MAX_CLIPS 10
 
@@ -88,7 +95,13 @@ enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa,
 #define MAX_MOVE 70
 
 static int barrier_move = 0;
+
+static int YellowCoin = 0;
+static int BlueCoin = 0;
+
 #define MAX_MOVING_ENERMY 60
 #define enermy_jet 1
+
+#define MAX_LEVEL 3
 
 #endif // HEADER_H_

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="9">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="11">
  <tileset firstgid="1" source="nature-paltformer-tileset-16x16.tsx"/>
  <layer id="1" name="Tile Layer 1" width="30" height="25">
   <data encoding="csv">
@@ -35,5 +35,7 @@
   <object id="5" name="bot2" x="506.667" y="94.6667" width="41.3333" height="62.6667"/>
   <object id="6" name="bot3" x="130.667" y="512" width="45.3333" height="60"/>
   <object id="7" name="bot4" x="670.667" y="382.667" width="42.6667" height="62.6667"/>
+  <object id="9" name="water_girl" x="64.5614" y="608.187" width="30.8772" height="63.6257"/>
+  <object id="10" name="fireboy" x="63.6257" y="703.626" width="29.9415" height="64.5614"/>
  </objectgroup>
 </map>

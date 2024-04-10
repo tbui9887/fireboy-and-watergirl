@@ -1,12 +1,12 @@
 #include "object_button.h"
 #include "header.h"
 
-void Object::loadImg(SDL_Renderer* screen, string path_button, string path_object)
+void Object::loadImg(SDL_Renderer* screen)
 {
-    if (! button.loadFromFile(path_button, screen) ){
+    if (! button.loadFromFile("Data/photo/block/button.png", screen) ){
         cout << "can't upload button photo\n";
     }
-    if (! barrier.loadFromFile(path_object, screen) ){
+    if (! barrier.loadFromFile("Data/photo/block/barrier.png", screen) ){
         cout << "can't upload barrier photo\n";
     }
 

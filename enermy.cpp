@@ -36,7 +36,7 @@ bool Enermy::loadImg(string path, SDL_Renderer* screen)
 void Enermy::set_clips()
 {
     if (width_frame_ > 0 && height_frame_ > 0){
-            for (int i = 0; i < 8; i++){
+            for (int i = 0; i < 7; i++){
                 frame_clip_[i].x = width_frame_*i;
                 frame_clip_[i].y = 0;
                 frame_clip_[i].w = width_frame_;

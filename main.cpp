@@ -200,8 +200,8 @@ int main(int argc, char* args[])
 
                 }
 
-                cout << "score of fireboy: " << YellowCoin << std::endl;
-                cout << "score of watergirl: " << BlueCoin << std::endl;
+                cout << "score of fireboy: " << Fire.get_coin() << std::endl;
+                cout << "score of watergirl: " << Water.get_coin() << std::endl;
             }
         }
     }

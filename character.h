@@ -54,6 +54,9 @@ public:
     void setXval(int x) { x_val_ = x; }
     void setYval(int y) { y_val_ = y; }
 
+    void coin_increase() { coin++; }
+    int get_coin() { return coin; }
+
 private:
     float x_val_; //vận tốc theo chiều ngang
     float y_val_; //vận tốc theo chiều dọc
@@ -76,6 +79,8 @@ private:
     bool on_fan = false;
     bool on_button = false;
     int barrier_move = 0;
+
+    int coin;
 };
 
 #endif // MAIN_CHARACT_H_

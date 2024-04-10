@@ -221,13 +221,13 @@ void MainObject::check_to_map(Map& map_data, CHARACTER main_char)
         if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && main_char == FIREBOY){
             map_data.tile[y1][x2] = BLANK_TILE;
             map_data.tile[y2][x2] = BLANK_TILE;
-            YellowCoin++;
+            coin_increase();
         }
 
         if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && main_char == WATERGIRL) {
             map_data.tile[y1][x2] = BLANK_TILE;
             map_data.tile[y2][x2] = BLANK_TILE;
-            BlueCoin++;
+            coin_increase();
         }
 
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ) ||
@@ -244,13 +244,13 @@ void MainObject::check_to_map(Map& map_data, CHARACTER main_char)
         if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && main_char == FIREBOY){
             map_data.tile[y1][x1] = BLANK_TILE;
             map_data.tile[y2][x1] = BLANK_TILE;
-            YellowCoin++;
+            coin_increase();
         }
 
         if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && main_char == WATERGIRL) {
             map_data.tile[y1][x1] = BLANK_TILE;
             map_data.tile[y2][x1] = BLANK_TILE;
-            BlueCoin++;
+            coin_increase();
         }
 
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ) ||
@@ -279,13 +279,13 @@ void MainObject::check_to_map(Map& map_data, CHARACTER main_char)
         if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && main_char == FIREBOY){
             map_data.tile[y2][x1] = BLANK_TILE;
             map_data.tile[y2][x2] = BLANK_TILE;
-            YellowCoin++;
+            coin_increase();
         }
 
         if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && main_char == WATERGIRL) {
             map_data.tile[y2][x1] = BLANK_TILE;
             map_data.tile[y2][x2] = BLANK_TILE;
-            BlueCoin++;
+            coin_increase();
         }
 
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ) ||
@@ -303,13 +303,13 @@ void MainObject::check_to_map(Map& map_data, CHARACTER main_char)
         if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && main_char == FIREBOY){
             map_data.tile[y1][x1] = BLANK_TILE;
             map_data.tile[y1][x2] = BLANK_TILE;
-            YellowCoin++;
+            coin_increase();
         }
 
         if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && main_char == WATERGIRL) {
             map_data.tile[y1][x1] = BLANK_TILE;
             map_data.tile[y1][x2] = BLANK_TILE;
-            BlueCoin++;
+            coin_increase();
         }
 
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ) ||

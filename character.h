@@ -6,6 +6,8 @@
 #include "texture.h"
 #include "game_map.h"
 
+const int max_below_liquid = 10;
+
 struct Input
 {
     int left_;
@@ -81,6 +83,7 @@ private:
     int barrier_move = 0;
 
     int coin;
+    int below_liquid = 0;
 };
 
 #endif // MAIN_CHARACT_H_

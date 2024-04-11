@@ -45,6 +45,15 @@ const int DEFAULT_BLUE = 255;
 #define BUSH 49
 #define YELLOW_COIN 55
 #define BLUE_COIN 62
+#define WATER_FRONT_LIQUID 78
+#define FIRE_FRONT_LIDQUID 81
+#define TOXIC_FRONT_LIQUID 85
+#define WATER_MIDDLE_LIQUID 79
+#define FIRE_MIDDLE_LIQUID 82
+#define TOXIC_MIDDLE_LIQUID 86
+#define WATER_END_LIQUID 80
+#define FIRE_END_LIQUID 83
+#define TOXIC_END_LIQUID 87
 
 #define MAX_CLIPS 10
 
@@ -96,8 +105,8 @@ enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa,
 
 static int barrier_move = 0;
 
-static int YellowCoin = 0;
-static int BlueCoin = 0;
+//static int YellowCoin = 0;
+//static int BlueCoin = 0;
 
 #define MAX_MOVING_ENERMY 60
 #define enermy_jet 1

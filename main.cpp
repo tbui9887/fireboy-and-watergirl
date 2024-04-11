@@ -142,9 +142,7 @@ int main(int argc, char* args[])
 
                 //render background
                 gBackground.render(0,0, NULL, gRenderer);
-                //render map
-                gMap.DrawMap(gRenderer);
-                gMap.copyMap(map_data);
+
                 //render barrier and button
                 for (int i = 0; i < int(obj.size()); i++){
                     obj[i].render(gRenderer);
@@ -158,6 +156,10 @@ int main(int argc, char* args[])
                 Water.DoPlayer(map_data,WATERGIRL);
                 SDL_Rect WaterRect = Water.getRectChar();
                 Water.Show(gRenderer);
+
+                //render map
+                gMap.DrawMap(gRenderer);
+                gMap.copyMap(map_data);
 
                 //enemy and check collision of it
                 SDL_Rect enemy_rect[int(enemy.size())];

@@ -20,7 +20,7 @@ GameMap gMap;
 MainObject Water;
 MainObject Fire;
 vector<Object> obj;
-vector<Enermy> enemy;
+vector<Enermy> enemies_list;
 
 LTimer fps_timer;
 Text time_count;
@@ -115,8 +115,50 @@ int main(int argc, char* args[])
 
             std::stringstream timeText;
 
-            string path_map = LevelMap(Fire, Water, obj, enemy); //set map link
-            cout << path_map << std::endl;
+            string path_map = LevelMap(Fire, Water); //set map link
+
+            if (path_map == "Data/map/MapLevel1.txt"){
+                enemies_list.push_back(Enermy(266, 273));
+                enemies_list.push_back(Enermy(507, 114));
+                enemies_list.push_back(Enermy(130, 532));
+                enemies_list.push_back(Enermy(670, 402));
+            }
+            else if (path_map == "Data/map/MapLevel2.txt"){
+                enemies_list.push_back(Enermy(631, 675));
+                enemies_list.push_back(Enermy(571, 112));
+                enemies_list.push_back(Enermy(312, 336));
+
+                Object obj1, obj2;
+                obj1.setXbut(864); obj1.setYbut(786);
+                obj1.setXbar(546); obj1.setYbar(322);
+
+                obj2.setXbut(495); obj1.setYbut(177);
+                obj2.setXbar(224); obj1.setYbar(33);
+
+                obj.push_back(obj1); obj.push_back(obj2);
+            }
+            else if (path_map == "Data/map/MapLevel3.txt"){
+                enemies_list.push_back(Enermy(152, 93));
+                enemies_list.push_back(Enermy(488, 397));
+
+                Object obj1;
+                obj1.setXbut(141); obj1.setYbut(500);
+                obj1.setXbar(461); obj1.setYbar(702);
+
+                obj.push_back(obj1);
+            }
+
+            for (int i = 0; i < int(enemies_list.size()); i++){
+                enemies_list[i].setTypeMove(MOVING_IN_SPACE);
+                enemies_list[i].setMovingpos( enemies_list[i].get_x_pos() - MAX_MOVING_ENERMY, enemies_list[i].get_y_pos() + MAX_MOVING_ENERMY);
+                enemies_list[i].loadImg("Data/photo/character/red_slime_left.png", gRenderer);
+                enemies_list[i].set_clips();
+            }
+
+            for (int i = 0; i < int(obj.size()); i++){
+                obj[i].loadImg(gRenderer);
+            }
+
             gMap.LoadMap(path_map);
             gMap.LoadTiles(gRenderer);
             Map map_data = gMap.getMap();
@@ -162,13 +204,15 @@ int main(int argc, char* args[])
                 gMap.copyMap(map_data);
 
                 //enemy and check collision of it
-                SDL_Rect enemy_rect[int(enemy.size())];
-                for (int i = 0; i < int(enemy.size()); i++){
-                    enemy[i].DoPlayer(map_data);
-                    enemy[i].controlMoving(gRenderer, "Data/photo/character/red_slime.png", "Data/photo/character/red_slime.png");
-                    enemy[i].Show(gRenderer);
-                    enemy_rect[i] = enemy[i].get_current_pos();
-                    if ( check_collision(FireRect, enemy_rect[i]) || check_collision(WaterRect, enemy_rect[i]) ) cout << "lose \n"; //check xem neu cham vao co lose khong
+                SDL_Rect enemy_rect[int(enemies_list.size())];
+
+                for (int i = 0; i < int(enemies_list.size()); i++){
+                    enemies_list[i].DoPlayer(map_data);
+                    enemies_list[i].controlMoving(gRenderer, "Data/photo/character/red_slime_left.png", "Data/photo/character/red_slime_right.png");
+                    enemies_list[i].Show(gRenderer);
+                    enemy_rect[i] = enemies_list[i].get_current_pos();
+                    if ( check_collision(FireRect, enemy_rect[i]) || check_collision(WaterRect, enemy_rect[i]) )
+                        cout << "lose \n"; //check xem neu cham vao co lose khong
                 }
 
                 //check collision of button

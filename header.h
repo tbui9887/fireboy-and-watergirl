@@ -68,8 +68,8 @@ enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa,
 #define frame_main_character_walk 9
 #define frame_main_character_stand 7
 
-#define GRAVATY 0.5
-#define MAX_GRAVATY 6
+#define GRAVITY 0.5
+#define MAX_GRAVITY 6
 #define PLAYER_SPEED 2
 #define JUMP_SPEED 10
 #define diff_walk 7
@@ -108,9 +108,14 @@ static int barrier_move = 0;
 //static int YellowCoin = 0;
 //static int BlueCoin = 0;
 
-#define MAX_MOVING_ENERMY 60
+#define MAX_MOVING_ENERMY 20
 #define enermy_jet 1
 
 #define MAX_LEVEL 3
+
+#define ENEMY_WIDTH 39
+#define ENEMY_HEIGHT 32
+
+#define ENEMY_CLIPS 7
 
 #endif // HEADER_H_

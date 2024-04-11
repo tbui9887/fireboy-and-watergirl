@@ -23,7 +23,7 @@ int ChooseGamePlayMode();
 int RandomLevel();
 int ChooseLevel();
 
-string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj, vector<Enermy> &enmy);
+string LevelMap (MainObject &player_1, MainObject &player_2);
 
 
 #endif // SELECT_MENU_H

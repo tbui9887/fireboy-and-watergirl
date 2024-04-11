@@ -27,8 +27,8 @@ bool Enermy::loadImg(string path, SDL_Renderer* screen)
 {
     bool ret = LTexture::loadFromFile(path, screen);
     if (ret){
-        width_frame_ = CHARACTER_WIDTH;
-        height_frame_ = CHARACTER_HEIGHT;
+        width_frame_ = ENEMY_WIDTH;
+        height_frame_ = ENEMY_HEIGHT;
     }
     return ret;
 }
@@ -36,7 +36,7 @@ bool Enermy::loadImg(string path, SDL_Renderer* screen)
 void Enermy::set_clips()
 {
     if (width_frame_ > 0 && height_frame_ > 0){
-            for (int i = 0; i < 7; i++){
+            for (int i = 0; i < ENEMY_CLIPS; i++){
                 frame_clip_[i].x = width_frame_*i;
                 frame_clip_[i].y = 0;
                 frame_clip_[i].w = width_frame_;
@@ -50,14 +50,14 @@ void Enermy::Show(SDL_Renderer* screen)
     LTexture::SetRect(x_pos_, y_pos_);
 
     frame_++;
-    if (frame_ >= 8*10){
+    if (frame_ >= ENEMY_CLIPS*10){
         frame_ = 0;
     }
 
     SDL_Rect* current_clip = &frame_clip_[frame_ / 10];
 
     SDL_Rect rRect = LTexture::getRect();
-    rRect.w /= 8;
+    rRect.w /= ENEMY_CLIPS;
     SDL_Texture* rTexture = LTexture::getTexture();
 
     SDL_Rect renderQuad = {rRect.x, rRect.y, rRect.w, rRect.h};
@@ -100,23 +100,31 @@ void Enermy::CheckToMap(Map& map_data)
     {
         if (x_val_ > 0)
         {
-            if (map_data.tile[y1][x2] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
-            {
-                x_pos_ = x1 * BLOCK_SIZE;
-                input_type_.left_ = 1; //khi va chạm thì nó tự động quay lại
-                input_type_.right_ = 0;
-                x_val_ = 0;
-            }
+            int value_1 = map_data.tile[y1][x2], value_2 = map_data.tile[y2][x2];
+            if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
+                  value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIDQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
+                  value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ) ||
+                !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN ||
+                  value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIDQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
+                  value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
+                {
+                    x_pos_ = x1 * BLOCK_SIZE;
+                    x_val_ = 0;
+                }
         }
         else if (x_val_ < 0)
         {
-            if (map_data.tile[y1][x1] != BLANK_TILE || map_data.tile[y2][x1] != BLANK_TILE)
-            {
-                x_pos_ = (x1 + 1) * BLOCK_SIZE;
-                input_type_.left_ = 0; //khi va chạm nó sẽ tự động quay lại
-                input_type_.right_ = 1;
-                x_val_ = 0;
-            }
+            int value_1 = map_data.tile[y1][x1], value_2 = map_data.tile[y2][x1];
+            if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
+                  value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIDQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
+                  value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ) ||
+                !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN ||
+                  value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIDQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
+                  value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
+                {
+                    x_pos_ = (x1 + 1) * BLOCK_SIZE;
+                    x_val_ = 0;
+                }
         }
     }
 
@@ -132,19 +140,31 @@ void Enermy::CheckToMap(Map& map_data)
     {
         if (y_val_ > 0)
         {
-            if (map_data.tile[y2][x1] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
-            {
-                y_pos_ = y2 * BLOCK_SIZE - height_frame_;
-                y_val_ = 0;
-                on_ground_ = true;
-            }
+            int value_1 = map_data.tile[y2][x1], value_2 = map_data.tile[y2][x2];
+            if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
+                  value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIDQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
+                  value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ) ||
+                !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN ||
+                  value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIDQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
+                  value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
+                {
+                    y_pos_ = y2 * BLOCK_SIZE - height_frame_;
+                    y_val_ = 0;
+                    on_ground_ = true;
+                }
         }
         else if (y_val_ < 0)
         {
-            if (map_data.tile[y1][x1] != BLANK_TILE || map_data.tile[y1][x2] != BLANK_TILE)
+            int value_1 = map_data.tile[y1][x1], value_2 = map_data.tile[y1][x2];
+            if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
+                  value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIDQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
+                  value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ) ||
+                !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN ||
+                  value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIDQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
+                  value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
             {
-                y_pos_ = (y1 + 1) * BLOCK_SIZE;
-                y_val_ = 0;
+                    y_pos_ = (y1 + 1) * BLOCK_SIZE;
+                    y_val_ = 0;
             }
         }
     }
@@ -199,5 +219,3 @@ bool check_collision(SDL_Rect charRect, SDL_Rect button)
                       charRect.y + charRect.h > button.y);
     return collision;
 }
-
-

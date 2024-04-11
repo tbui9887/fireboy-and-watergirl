@@ -36,6 +36,9 @@
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer" />
 			<Add directory="../../mingw_dev_lib/lib" />
 		</Linker>
+		<Unit filename="Data/map/MapLevel1.txt" />
+		<Unit filename="Data/map/MapLevel2.txt" />
+		<Unit filename="Data/map/MapLevel3.txt" />
 		<Unit filename="Data/map/update_map_easy.txt" />
 		<Unit filename="animation.cpp" />
 		<Unit filename="animation.h" />

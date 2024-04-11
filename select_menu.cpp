@@ -1,4 +1,5 @@
 #include "select_menu.h"
+#include "enermy.h"
 
 int ChooseGamePlayMode()
 {
@@ -21,8 +22,10 @@ int Randomlevel()
     return level;
 }
 
-string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj, vector<Enermy> &enmy)
+string LevelMap (MainObject &player_1, MainObject &player_2)
 {
+    string map_path;
+
     int mode = ChooseGamePlayMode();
     int level;
     if (mode == CHOOSE_LEVEL){
@@ -31,7 +34,6 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
     else{
         level = Randomlevel();
     }
-    string map_path;
 
     switch(level)
     {
@@ -45,18 +47,28 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
            player_2.setXpos(64);
            player_2.setYpos(703);
 
-           Enermy enemy1(266,253), enemy2(507,94) , enemy3(130,512) , enemy4(670,382);
-           enmy.push_back(enemy1);
-           enmy.push_back(enemy2);
-           enmy.push_back(enemy3);
-           enmy.push_back(enemy4);
-
-           for (int i = 0; i < int(enmy.size()); i++){
-                enmy[i].setTypeMove(MOVING_IN_SPACE);
-
-           }
-           cout << "successfully load map !\n";
            break;
+        }
+    case LEVEL2:
+        {
+            map_path = "Data/map/MapLevel2.txt";
+            player_1.setXpos(130);
+            player_1.setYpos(672);
+
+            player_2.setXpos(63);
+            player_2.setYpos(672);
+
+            break;
+
+        }
+    case LEVEL3:
+        {
+            map_path = "Data/map/MapLevel3.txt";
+            player_1.setXpos(250);
+            player_1.setYpos(93);
+
+            player_2.setXpos(141);
+            player_2.setYpos(360);
         }
     }
     return map_path;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="8">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="10">
  <tileset firstgid="1" source="nature-paltformer-tileset-16x16.tsx"/>
+ <tileset firstgid="99" source="../../../GAME_BIG_PRJ/Data/map/nature-paltformer-tileset-16x16.tsx"/>
  <layer id="1" name="Tile Layer 1" width="30" height="25">
   <data encoding="csv">
 33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,
@@ -15,7 +16,7 @@
 33,0,0,0,44,0,0,0,0,0,0,44,44,85,86,86,86,86,86,86,87,26,0,0,0,0,0,0,0,33,
 33,0,0,0,0,0,0,0,0,0,0,0,26,26,26,26,26,26,26,26,26,26,0,0,0,0,0,0,0,33,
 33,0,0,0,0,0,0,44,44,0,0,0,26,0,0,0,0,0,0,26,26,26,26,26,26,0,0,0,0,33,
-33,0,0,51,0,0,44,44,44,0,0,26,26,0,62,0,0,0,0,0,0,0,26,0,0,0,0,0,0,33,
+33,190,191,51,0,0,44,44,44,0,0,26,26,0,62,0,0,0,0,0,0,0,26,0,0,0,0,0,0,33,
 33,44,44,44,44,44,44,0,0,0,0,26,0,0,0,0,0,0,0,0,0,0,26,0,70,0,55,0,0,33,
 33,0,0,0,0,0,44,0,0,0,0,26,26,26,26,26,26,26,26,0,0,0,26,0,77,0,0,0,0,33,
 33,0,0,0,0,0,44,0,0,0,26,26,26,26,26,26,0,0,26,26,0,0,26,26,26,26,26,0,0,33,
@@ -35,5 +36,7 @@
   <object id="3" name="button1" gid="84" x="141.333" y="529.333" width="32" height="32"/>
   <object id="5" name="bot 1" x="152" y="93.3333" width="41.3333" height="64"/>
   <object id="6" name="bot 2" x="488" y="397.333" width="38.6667" height="48"/>
+  <object id="8" name="fireboy" x="275" y="706" width="39" height="59"/>
+  <object id="9" name="watergirl" x="141" y="360" width="41" height="56"/>
  </objectgroup>
 </map>

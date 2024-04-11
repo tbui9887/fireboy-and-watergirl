@@ -174,10 +174,10 @@ else{
 void MainObject::DoPlayer(Map& map_data, CHARACTER main_char)
 {
     x_val_ = 0;
-    y_val_ += GRAVATY; //nếu không ở trên quạt thì có trọng lực
+    y_val_ += GRAVITY; //nếu không ở trên quạt thì có trọng lực
 
-    if (y_val_ > MAX_GRAVATY){
-        y_val_ = MAX_GRAVATY;
+    if (y_val_ > MAX_GRAVITY){
+        y_val_ = MAX_GRAVITY;
     }
 
     if (input_type_.left_ == 1){
@@ -346,9 +346,9 @@ void MainObject::check_to_map(Map& map_data, CHARACTER main_char)
         block_below_1 == FIRE_FRONT_LIDQUID || block_below_2 == FIRE_FRONT_LIDQUID ||
         block_below_1 == TOXIC_FRONT_LIQUID || block_below_2 == TOXIC_FRONT_LIQUID){
             if (below_liquid < max_below_liquid){
-                y_val_ += GRAVATY;
-                x_val_ += GRAVATY;
-                below_liquid += GRAVATY * 2;
+                y_val_ += GRAVITY;
+                x_val_ += GRAVITY;
+                below_liquid += GRAVITY * 2;
             }
         }
     if (block_below_1 == WATER_MIDDLE_LIQUID || block_below_2 == WATER_MIDDLE_LIQUID ||
@@ -360,8 +360,8 @@ void MainObject::check_to_map(Map& map_data, CHARACTER main_char)
         block_below_1 == FIRE_END_LIQUID || block_below_2 == FIRE_END_LIQUID ||
         block_below_1 == TOXIC_END_LIQUID || block_below_2 == TOXIC_END_LIQUID){
             if (below_liquid > 0){
-                y_val_ += GRAVATY;
-                below_liquid -= GRAVATY * 2;
+                y_val_ += GRAVITY;
+                below_liquid -= GRAVITY * 2;
             }
         }*/
 

@@ -32,8 +32,8 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="14" name="button 1" gid="84" x="864" y="786" width="32" height="32"/>
-  <object id="23" name="barrier 1" x="546" y="322" width="13" height="60"/>
+  <object id="14" name="button 1" gid="84" x="826" y="786" width="32" height="32"/>
+  <object id="23" name="barrier 1" x="546" y="321" width="13" height="60"/>
   <object id="24" name="barrier 2" x="224" y="33" width="16" height="63"/>
   <object id="31" name="button 2" gid="84" x="495" y="177" width="32" height="32"/>
   <object id="34" name="bot1" x="631" y="675" width="45" height="60"/>

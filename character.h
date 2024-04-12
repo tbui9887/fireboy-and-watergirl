@@ -61,6 +61,7 @@ public:
     bool check_liquid(int val_1, int val_2, CHARACTER char_main);
 
     void setCharacter(CHARACTER charact) { character = charact; }
+    CHARACTER getCharacter() { return character; }
     void check_collision_between_two_character(MainObject& main_char_2);
 
 private:

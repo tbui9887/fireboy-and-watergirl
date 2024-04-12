@@ -6,6 +6,8 @@
 #include "texture.h"
 #include "character.h"
 
+#define MAX_MOVE 64
+
 class Object : public LTexture
 {
 private:
@@ -15,6 +17,9 @@ private:
     int x_but, y_but;
     int x_bar;
     int y_bar;
+    int barrier_move;
+
+    bool on_button;
 
 public:
     int y_barrier = 0;
@@ -42,7 +47,9 @@ public:
     void setButDimension(int, int);
     void setBarDimension(int, int);
 
-    void activity(MainObject &character, bool on_button);
+    void activity(MainObject &character);
+
+    void setOnButton(bool b) { on_button = b; }
 
 };
 

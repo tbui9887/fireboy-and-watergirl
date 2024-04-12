@@ -3,10 +3,10 @@
 
 void Object::loadImg(SDL_Renderer* screen)
 {
-    if (! button.loadFromFile("Data/photo/block/button.png", screen) ){
+    if (! button.loadFromFile("Data/photo/block/button_blue.png", screen) ){
         cout << "can't upload button photo\n";
     }
-    if (! barrier.loadFromFile("Data/photo/block/barrier.png", screen) ){
+    if (! barrier.loadFromFile("Data/photo/block/barrier_blue.png", screen) ){
         cout << "can't upload barrier photo\n";
     }
 
@@ -18,6 +18,9 @@ Object::Object()
     y_but = Y_BUTTON;
     x_bar = X_BARRIER;
     y_bar = Y_BARRIER;
+
+    on_button = false;
+    barrier_move = 0;
 }
 
 void Object::render(SDL_Renderer* screen)
@@ -52,7 +55,7 @@ void Object::setBarDimension(int w, int h)
     barrier.SetHeight(h);
 }
 
-void Object::activity(MainObject &character, bool on_button)
+void Object::activity(MainObject &character)
 {
     SDL_Rect charRect = character.getRectChar();
 
@@ -73,6 +76,8 @@ void Object::activity(MainObject &character, bool on_button)
         }
     }
 
+    cout << "barrier_move: " << barrier_move << " - charater: " << character.getCharacter() << std::endl;
+
     SDL_Rect barRect = getBarRect();
     int x_val = character.getXval();
     int y_val = character.getYval();
@@ -87,6 +92,8 @@ void Object::activity(MainObject &character, bool on_button)
         character.setYpos(y_pos - y_val);
     }
 }
+
+//int Object::barrier_move = 0;
 
 
 

@@ -27,8 +27,6 @@ Text time_count;
 Text water_coin;
 Text fire_coin;
 
-bool on_button = false;
-
 bool init()
 {
     bool success = true;
@@ -131,13 +129,17 @@ int main(int argc, char* args[])
                 enemies_list.push_back(Enermy(312, 336));
 
                 Object obj1, obj2;
-                obj1.setXbut(864); obj1.setYbut(786);
-                obj1.setXbar(546); obj1.setYbar(322);
+                obj1.setXbut(864); obj1.setYbut(753);
+                obj1.setXbar(546); obj1.setYbar(320);
+                obj.push_back(obj1);
 
-                obj2.setXbut(495); obj1.setYbut(177);
-                obj2.setXbar(224); obj1.setYbar(33);
+                obj2.setXbut(495); obj2.setYbut(145);
+                obj2.setXbar(224); obj2.setYbar(32);
+                obj.push_back(obj2);
 
-                obj.push_back(obj1); obj.push_back(obj2);
+                for (int i = 0; i < obj.size(); i++){
+                    cout << obj[i].getXbut() << " " << obj[i].getYbut() << " " << obj[i].getXbar() << " " << obj[i].getYbar() << std::endl;
+                }
             }
             else if (path_map == "Data/map/MapLevel3.txt"){
                 enemies_list.push_back(Enermy(152, 93));
@@ -190,11 +192,6 @@ int main(int argc, char* args[])
                 //render background
                 gBackground.render(0,0, NULL, gRenderer);
 
-                //render barrier and button
-                for (int i = 0; i < int(obj.size()); i++){
-                    obj[i].render(gRenderer);
-                }
-
                 //main character
                 Fire.DoPlayer(map_data);
                 SDL_Rect FireRect = Fire.getRectChar();
@@ -212,8 +209,8 @@ int main(int argc, char* args[])
                 SDL_Rect enemy_rect[int(enemies_list.size())];
 
                 for (int i = 0; i < int(enemies_list.size()); i++){
-                    enemies_list[i].DoPlayer(map_data);
                     enemies_list[i].controlMoving(gRenderer, "Data/photo/character/red_slime_left.png", "Data/photo/character/red_slime_right.png");
+                    enemies_list[i].DoPlayer(map_data);
                     enemies_list[i].Show(gRenderer);
                     enemy_rect[i] = enemies_list[i].get_current_pos();
                     if ( check_collision(FireRect, enemy_rect[i]) || check_collision(WaterRect, enemy_rect[i]) )
@@ -223,20 +220,26 @@ int main(int argc, char* args[])
                    //cout << enemies_list[i].get_x_pos() << " " << enemies_list[i].get_y_pos() << " " << enemies_list[i].get_width_frame() << " " << enemies_list[i].get_height_frame() << std::endl;
                 }
 
+                cout << enemies_list[0].get_x_pos() << " " << enemies_list[0].get_y_pos() << " " << enemies_list[0].get_width_frame() << " " << enemies_list[0].get_height_frame() << std::endl;
+
+                //render barrier and button
+                for (int i = 0; i < int(obj.size()); i++){
+                    obj[i].render(gRenderer);
+                }
                 //check collision of button
                 for (int i = 0; i < int(obj.size()); i++){
                     SDL_Rect button = obj[i].getButRect();
 
                     if (check_collision(FireRect,button) || check_collision(WaterRect,button)){
-                        on_button = true;
+                        obj[i].setOnButton(true);
                     }
                     else{
-                        on_button = false;
+                        obj[i].setOnButton(false);
                     }
 
                     //activity related to button, barrier and character
-                    obj[i].activity(Fire,on_button);
-                    obj[i].activity(Water,on_button);
+                    obj[i].activity(Fire);
+                    obj[i].activity(Water);
                 }
 
 
@@ -245,14 +248,15 @@ int main(int argc, char* args[])
                     cout << "can't create time count !\n";
                 }
 
-                /*string show_f_coin = "FIRE'S COIN: " + std::to_string(Fire.get_coin()) ; fire_coin.setText(show_f_coin);
+                //show coin
+                string show_f_coin = "FIRE'S COIN: " + std::to_string(Fire.get_coin()) ; fire_coin.setText(show_f_coin);
                 string show_w_coin = "WATER'S COIN: " + std::to_string(Water.get_coin()) ; water_coin.setText(show_w_coin);
                 fire_coin.setTextColor(WHITE_TEXT) ; water_coin.setTextColor(WHITE_TEXT);
                 if ( ! ( fire_coin.CreateGameText(gFont, gRenderer, 0, 0) && water_coin.CreateGameText(gFont, gRenderer, SCREEN_WIDTH - water_coin.getWidth(), 0) ) ) {
                     cout << "can't create game text of coin !\n";
                 }
-                */
-                SDL_RenderPresent(gRenderer); //show to screen
+                //show to screen
+                SDL_RenderPresent(gRenderer);
 
                 //set fps
                 int frameTicks = fps_timer.get_ticks();
@@ -260,9 +264,6 @@ int main(int argc, char* args[])
                     SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
 
                 }
-
-                //cout << "score of fireboy: " << Fire.get_coin() << std::endl;
-                //cout << "score of watergirl: " << Water.get_coin() << std::endl;
             }
         }
     }

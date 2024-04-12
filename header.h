@@ -46,7 +46,7 @@ const int DEFAULT_BLUE = 255;
 #define YELLOW_COIN 55
 #define BLUE_COIN 62
 #define WATER_FRONT_LIQUID 78
-#define FIRE_FRONT_LIDQUID 81
+#define FIRE_FRONT_LIQUID 81
 #define TOXIC_FRONT_LIQUID 85
 #define WATER_MIDDLE_LIQUID 79
 #define FIRE_MIDDLE_LIQUID 82
@@ -61,8 +61,8 @@ const int CHARACTER_WIDTH = 32;
 const int CHARACTER_HEIGHT = 52;
 
 enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa, hoặc tương tác với cái khác
-    FIREBOY,
-    WATERGIRL
+    FIREBOY = 0,
+    WATERGIRL = 1,
 };
 
 #define frame_main_character_walk 9

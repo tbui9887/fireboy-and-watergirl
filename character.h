@@ -40,8 +40,8 @@ public:
     void Show(SDL_Renderer* screen); //để render ra màn hình
     void HandleInputAction(SDL_Event event, SDL_Renderer* screen, CHARACTER character); //2 con khác nhau nên dùng CHARACTER để phân biệt 2 con
 
-    void DoPlayer(Map& map_data, CHARACTER main_char); //check kiểm tra va chạm
-    void check_to_map(Map& map_data, CHARACTER main_char); //check vào map
+    void DoPlayer(Map& map_data); //check kiểm tra va chạm
+    void check_to_map(Map& map_data); //check vào map
     //bool check_collision_horizontal (SDL_Rect bRect); //bRect: barrier
     SDL_Rect getRectChar();
     void setRectchar(int, int);
@@ -58,6 +58,10 @@ public:
 
     void coin_increase() { coin++; }
     int get_coin() { return coin; }
+    bool check_liquid(int val_1, int val_2, CHARACTER char_main);
+
+    void setCharacter(CHARACTER charact) { character = charact; }
+    void check_collision_between_two_character(MainObject& main_char_2);
 
 private:
     float x_val_; //vận tốc theo chiều ngang

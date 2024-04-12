@@ -8,7 +8,7 @@
 #include "character.h"
 
 #define ENERMY_GRAVITY_SPEED 0.8
-#define ENERMY_MOVING_SPEED 1
+#define ENERMY_MOVING_SPEED 2
 
 enum TypeMove
 {

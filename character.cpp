@@ -171,7 +171,7 @@ else{
 }
 }
 
-void MainObject::DoPlayer(Map& map_data, CHARACTER main_char)
+void MainObject::DoPlayer(Map& map_data)
 {
     x_val_ = 0;
     y_val_ += GRAVITY; //nếu không ở trên quạt thì có trọng lực
@@ -190,11 +190,10 @@ void MainObject::DoPlayer(Map& map_data, CHARACTER main_char)
         y_val_ -= JUMP_SPEED;
         on_ground = false;
     }
-
-    check_to_map(map_data, main_char);
+    check_to_map(map_data);
 }
 
-void MainObject::check_to_map(Map& map_data, CHARACTER main_char)
+void MainObject::check_to_map(Map& map_data)
 {
     int x1 = 0;
     int x2 = 0;
@@ -211,60 +210,64 @@ void MainObject::check_to_map(Map& map_data, CHARACTER main_char)
     y1 = y_pos_ / BLOCK_SIZE;
     y2 = (y_pos_ + height_min) / BLOCK_SIZE;
 
-
     if (x1 >= 0 && x2 <= MAX_MAP_X && y1 >= 0 && y2 <= MAX_MAP_Y)
     {
         if (x_val_ > 0)
         {
-            int value_1 = map_data.tile[y1][x2], value_2 = map_data.tile[y2][x2];
-
-        if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && main_char == FIREBOY){
+        int value_1 = map_data.tile[y1][x2], value_2 = map_data.tile[y2][x2];
+        if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && character == FIREBOY){
             map_data.tile[y1][x2] = BLANK_TILE;
             map_data.tile[y2][x2] = BLANK_TILE;
             coin_increase();
         }
 
-        if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && main_char == WATERGIRL) {
+        if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && character == WATERGIRL) {
             map_data.tile[y1][x2] = BLANK_TILE;
             map_data.tile[y2][x2] = BLANK_TILE;
             coin_increase();
         }
 
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
-              value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIDQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
+              value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
               value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ) ||
             !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN ||
-              value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIDQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
+              value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
               value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
             {
                 x_pos_ = x1 * BLOCK_SIZE;
                 x_val_ = 0;
             }
+        if (check_liquid (value_1, value_2, character)){
+            cout << "LOSE !\n";
+        }
         }
         else if (x_val_ < 0)
         {
-            int value_1 = map_data.tile[y1][x1], value_2 = map_data.tile[y2][x1];
+        int value_1 = map_data.tile[y1][x1], value_2 = map_data.tile[y2][x1];
 
-        if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && main_char == FIREBOY){
+        if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && character == FIREBOY){
             map_data.tile[y1][x1] = BLANK_TILE;
             map_data.tile[y2][x1] = BLANK_TILE;
             coin_increase();
         }
 
-        if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && main_char == WATERGIRL) {
+        if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && character == WATERGIRL) {
             map_data.tile[y1][x1] = BLANK_TILE;
             map_data.tile[y2][x1] = BLANK_TILE;
             coin_increase();
         }
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
-              value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIDQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
+              value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
               value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ) ||
             !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN ||
-              value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIDQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
+              value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
               value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
             {
                 x_pos_ = (x1 + 1) * BLOCK_SIZE;
                 x_val_ = 0;
+            }
+            if (check_liquid (value_1, value_2, character)){
+                cout << "LOSE !\n";
             }
         }
     }
@@ -283,88 +286,73 @@ void MainObject::check_to_map(Map& map_data, CHARACTER main_char)
         {
             int value_1 = map_data.tile[y2][x1], value_2 = map_data.tile[y2][x2];
 
-        if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && main_char == FIREBOY){
+        if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && character == FIREBOY){
             map_data.tile[y2][x1] = BLANK_TILE;
             map_data.tile[y2][x2] = BLANK_TILE;
             coin_increase();
         }
 
-        if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && main_char == WATERGIRL) {
+        if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && character == WATERGIRL) {
             map_data.tile[y2][x1] = BLANK_TILE;
             map_data.tile[y2][x2] = BLANK_TILE;
             coin_increase();
         }
 
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
-              value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIDQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
+              value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
               value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ) ||
             !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN ||
-              value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIDQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
+              value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
               value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
             {
                 y_pos_ = y2 * BLOCK_SIZE - height_frame_;
                 y_val_ = 0;
                 on_ground = true;
             }
+
+            if (check_liquid (value_1, value_2, character)){
+                cout << "LOSE !\n";
+            }
         }
         else if (y_val_ < 0)
         {
             int value_1 = map_data.tile[y1][x1], value_2 = map_data.tile[y1][x2];
 
-        if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && main_char == FIREBOY){
+        if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && character == FIREBOY){
             map_data.tile[y1][x1] = BLANK_TILE;
             map_data.tile[y1][x2] = BLANK_TILE;
             coin_increase();
         }
 
-        if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && main_char == WATERGIRL) {
+        if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && character == WATERGIRL) {
             map_data.tile[y1][x1] = BLANK_TILE;
             map_data.tile[y1][x2] = BLANK_TILE;
             coin_increase();
         }
 
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
-              value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIDQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
+              value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
               value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ) ||
             !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN ||
-              value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIDQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
+              value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
               value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
         {
                 y_pos_ = (y1 + 1) * BLOCK_SIZE;
                 y_val_ = 0;
+        }
+        if (check_liquid (value_1, value_2, character)){
+            cout << "LOSE !\n";
         }
     }
 
     //check fan
     int block_below_1 = map_data.tile[y2][x1];
     int block_below_2 = map_data.tile[y2][x2];
+
     if (block_below_1 == 5|| block_below_2 == 5){ //nếu chỉ có cái này, nó chỉ check ở dưới chân của nó có block kia khôgn thì mới giảm thôi (thích hợp để làm cái nhún)
         y_val_ -= BLOCK_SIZE/3;
     }
     //end
-    /*if (block_below_1 == WATER_FRONT_LIQUID || block_below_2 == WATER_FRONT_LIQUID ||
-        block_below_1 == FIRE_FRONT_LIDQUID || block_below_2 == FIRE_FRONT_LIDQUID ||
-        block_below_1 == TOXIC_FRONT_LIQUID || block_below_2 == TOXIC_FRONT_LIQUID){
-            if (below_liquid < max_below_liquid){
-                y_val_ += GRAVITY;
-                x_val_ += GRAVITY;
-                below_liquid += GRAVITY * 2;
-            }
-        }
-    if (block_below_1 == WATER_MIDDLE_LIQUID || block_below_2 == WATER_MIDDLE_LIQUID ||
-        block_below_1 == FIRE_MIDDLE_LIQUID || block_below_2 == FIRE_MIDDLE_LIQUID ||
-        block_below_1 == TOXIC_MIDDLE_LIQUID || block_below_2 == TOXIC_MIDDLE_LIQUID){
-             y_val_ = 0;
-        }
-    if (block_below_1 == WATER_END_LIQUID || block_below_2 == WATER_END_LIQUID ||
-        block_below_1 == FIRE_END_LIQUID || block_below_2 == FIRE_END_LIQUID ||
-        block_below_1 == TOXIC_END_LIQUID || block_below_2 == TOXIC_END_LIQUID){
-            if (below_liquid > 0){
-                y_val_ += GRAVITY;
-                below_liquid -= GRAVITY * 2;
-            }
-        }*/
-
     x_pos_ += x_val_;
     y_pos_ += y_val_;
 
@@ -394,4 +382,32 @@ SDL_Rect MainObject::getRectChar()
     return character;
 }
 
+bool MainObject::check_liquid(int val_1, int val_2, CHARACTER char_main)
+{
+    bool lose = false;
+
+    if ( (val_1 == WATER_FRONT_LIQUID || val_2 == WATER_FRONT_LIQUID ||
+          val_1 == WATER_MIDDLE_LIQUID || val_2 == WATER_MIDDLE_LIQUID ||
+          val_1 == WATER_END_LIQUID || val_2 == WATER_END_LIQUID)
+        && char_main == FIREBOY ){
+        cout << "lose from fireboy when stand in water\n";
+        lose = true;
+    }
+    if ( (val_1 == FIRE_FRONT_LIQUID || val_2 == FIRE_FRONT_LIQUID ||
+          val_1 == FIRE_MIDDLE_LIQUID || val_2 == FIRE_MIDDLE_LIQUID ||
+          val_1 == FIRE_END_LIQUID || val_2 == FIRE_END_LIQUID)
+        && char_main == WATERGIRL ){
+        cout << "lose from watergirl when stand in fire\n";
+        lose = true;
+    }
+    if ( (val_1 == TOXIC_FRONT_LIQUID || val_2 == TOXIC_FRONT_LIQUID ||
+          val_1 == TOXIC_MIDDLE_LIQUID || val_2 == TOXIC_MIDDLE_LIQUID ||
+          val_1 == TOXIC_END_LIQUID || val_2 == TOXIC_END_LIQUID) )
+    {
+        cout << "lose when fall on toxic\n";
+        lose = true;
+    }
+
+    return lose;
+}
 

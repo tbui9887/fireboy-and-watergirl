@@ -24,6 +24,8 @@ vector<Enermy> enemies_list;
 
 LTimer fps_timer;
 Text time_count;
+Text water_coin;
+Text fire_coin;
 
 bool on_button = false;
 
@@ -163,6 +165,9 @@ int main(int argc, char* args[])
             gMap.LoadTiles(gRenderer);
             Map map_data = gMap.getMap();
 
+            Fire.setCharacter(FIREBOY);
+            Water.setCharacter(WATERGIRL);
+
             while (!quit){
                 fps_timer.start();
                 while (SDL_PollEvent(&event) != 0){ //event click quit and key related to main character
@@ -191,11 +196,11 @@ int main(int argc, char* args[])
                 }
 
                 //main character
-                Fire.DoPlayer(map_data,FIREBOY);
+                Fire.DoPlayer(map_data);
                 SDL_Rect FireRect = Fire.getRectChar();
                 Fire.Show(gRenderer);
 
-                Water.DoPlayer(map_data,WATERGIRL);
+                Water.DoPlayer(map_data);
                 SDL_Rect WaterRect = Water.getRectChar();
                 Water.Show(gRenderer);
 
@@ -213,6 +218,9 @@ int main(int argc, char* args[])
                     enemy_rect[i] = enemies_list[i].get_current_pos();
                     if ( check_collision(FireRect, enemy_rect[i]) || check_collision(WaterRect, enemy_rect[i]) )
                         cout << "lose \n"; //check xem neu cham vao co lose khong
+
+                    //test
+                   //cout << enemies_list[i].get_x_pos() << " " << enemies_list[i].get_y_pos() << " " << enemies_list[i].get_width_frame() << " " << enemies_list[i].get_height_frame() << std::endl;
                 }
 
                 //check collision of button
@@ -237,6 +245,13 @@ int main(int argc, char* args[])
                     cout << "can't create time count !\n";
                 }
 
+                /*string show_f_coin = "FIRE'S COIN: " + std::to_string(Fire.get_coin()) ; fire_coin.setText(show_f_coin);
+                string show_w_coin = "WATER'S COIN: " + std::to_string(Water.get_coin()) ; water_coin.setText(show_w_coin);
+                fire_coin.setTextColor(WHITE_TEXT) ; water_coin.setTextColor(WHITE_TEXT);
+                if ( ! ( fire_coin.CreateGameText(gFont, gRenderer, 0, 0) && water_coin.CreateGameText(gFont, gRenderer, SCREEN_WIDTH - water_coin.getWidth(), 0) ) ) {
+                    cout << "can't create game text of coin !\n";
+                }
+                */
                 SDL_RenderPresent(gRenderer); //show to screen
 
                 //set fps
@@ -246,11 +261,12 @@ int main(int argc, char* args[])
 
                 }
 
-                cout << "score of fireboy: " << Fire.get_coin() << std::endl;
-                cout << "score of watergirl: " << Water.get_coin() << std::endl;
+                //cout << "score of fireboy: " << Fire.get_coin() << std::endl;
+                //cout << "score of watergirl: " << Water.get_coin() << std::endl;
             }
         }
     }
     close();
     return 0;
 }
+

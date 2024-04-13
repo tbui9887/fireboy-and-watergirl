@@ -108,3 +108,4 @@ bool LTexture::loadFromRenderedText(string textureText, SDL_Color textColor, TTF
     }
     return success;
 }
+

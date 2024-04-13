@@ -102,73 +102,68 @@ void MainObject::Show(SDL_Renderer* screen)
 
 void MainObject::HandleInputAction(SDL_Event event, SDL_Renderer* screen, CHARACTER character)
 {
-if (character == FIREBOY){
-    if (event.type == SDL_KEYDOWN){
-        switch (event.key.keysym.sym)
-        {
-            case SDLK_RIGHT:
-                status_ = FIRE_WALK_RIGHT;
-                input_type_.right_ = 1;
-                input_type_.left_ = 0; // Chắc chắn rằng khi đi sang phải thì không di chuyển sang trái
-                input_type_.stand_ = 0;
-                break;
-            case SDLK_LEFT:
-                status_ = FIRE_WALK_LEFT;
-                input_type_.left_ = 1;
-                input_type_.right_ = 0; // Chắc chắn rằng khi đi sang trái thì không di chuyển sang phải.
-                input_type_.stand_ = 0;
-                break;
-            case SDLK_UP:
-                if (on_ground){
-                    status_ = FIRE_JUMP;
-                    input_type_.jump_ = 1;
+    if (character == FIREBOY){
+        if (event.type == SDL_KEYDOWN){
+            switch (event.key.keysym.sym)
+            {
+                case SDLK_RIGHT:
+                    status_ = FIRE_WALK_RIGHT;
+                    input_type_.right_ = 1;
+                    input_type_.left_ = 0; // Chắc chắn rằng khi đi sang phải thì không di chuyển sang trái
                     input_type_.stand_ = 0;
-                }
-                break;
-            /*case SDLK_RIGHT && SDLK_UP:
-                input_type_.jump_ = 1;
-                input_type_.right_ = 1;
-                input_type_.left_ = 0; input_type_.stand_ = 0;
-                break;*/
-        }
-    }
-    else if (event.type == SDL_KEYUP) {
-        input_type_.stand_ = 1;
-        input_type_.left_ = 0; input_type_.right_ = 0; input_type_.jump_ = 0;
-        status_ = FIRE_STAND;
-        }
-}
-else{
-    if (event.type == SDL_KEYDOWN){
-        switch (event.key.keysym.sym)
-        {
-            case SDLK_a:
-                status_ = WATER_WALK_LEFT;
-                input_type_.left_ = 1;
-                input_type_.right_ = 0; // Chắc chắn rằng khi đi sang trái thì không di chuyển sang phải
-                input_type_.stand_ = 0;
-                break;
-            case SDLK_d:
-                status_ = WATER_WALK_RIGHT;
-                input_type_.right_ = 1;
-                input_type_.left_ = 0; // Chắc chắn rằng khi đi sang phải thì không di chuyển sang trái
-                input_type_.stand_ = 0;
-                break;
-            case SDLK_w:
-                if (on_ground){
-                    status_ = WATER_JUMP;
-                    input_type_.jump_ = 1;
+                    break;
+                case SDLK_LEFT:
+                    status_ = FIRE_WALK_LEFT;
+                    input_type_.left_ = 1;
+                    input_type_.right_ = 0; // Chắc chắn rằng khi đi sang trái thì không di chuyển sang phải.
                     input_type_.stand_ = 0;
-                }
-                break;
+                    break;
+                case SDLK_UP:
+                    if (on_ground){
+                        status_ = FIRE_JUMP;
+                        input_type_.jump_ = 1;
+                        input_type_.stand_ = 0;
+                    }
+                    break;
+            }
+        }
+        else if (event.type == SDL_KEYUP) {
+            input_type_.stand_ = 1;
+            input_type_.left_ = 0; input_type_.right_ = 0; input_type_.jump_ = 0;
+            status_ = FIRE_STAND;
+            }
+    }
+    else{
+        if (event.type == SDL_KEYDOWN){
+            switch (event.key.keysym.sym)
+            {
+                case SDLK_a:
+                    status_ = WATER_WALK_LEFT;
+                    input_type_.left_ = 1;
+                    input_type_.right_ = 0; // Chắc chắn rằng khi đi sang trái thì không di chuyển sang phải
+                    input_type_.stand_ = 0;
+                    break;
+                case SDLK_d:
+                    status_ = WATER_WALK_RIGHT;
+                    input_type_.right_ = 1;
+                    input_type_.left_ = 0; // Chắc chắn rằng khi đi sang phải thì không di chuyển sang trái
+                    input_type_.stand_ = 0;
+                    break;
+                case SDLK_w:
+                    if (on_ground){
+                        status_ = WATER_JUMP;
+                        input_type_.jump_ = 1;
+                        input_type_.stand_ = 0;
+                    }
+                    break;
+            }
+        }
+        else if (event.type == SDL_KEYUP) {
+            input_type_.stand_ = 1;
+            input_type_.left_ = 0; input_type_.right_ = 0; input_type_.jump_ = 0;
+            status_ = WATER_STAND;
         }
     }
-    else if (event.type == SDL_KEYUP) {
-        input_type_.stand_ = 1;
-        input_type_.left_ = 0; input_type_.right_ = 0; input_type_.jump_ = 0;
-        status_ = WATER_STAND;
-    }
-}
 }
 
 void MainObject::DoPlayer(Map& map_data)
@@ -411,11 +406,4 @@ bool MainObject::check_liquid(int val_1, int val_2, CHARACTER char_main)
     return lose;
 }
 
-void MainObject::check_collision_between_two_character(MainObject& main_char_2)
-{
-    SDL_Rect main_1_rect = getRect();
-    SDL_Rect main_2_rect = getRect();
-
-
-}
 

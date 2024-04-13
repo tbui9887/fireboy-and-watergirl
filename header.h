@@ -114,6 +114,9 @@ enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa,
 #define ENEMY_WIDTH 39
 #define ENEMY_HEIGHT 32
 
+#define MENU_BUTTON_WIDTH 300
+#define MENU_BUTTON_HEIGHT 150
+
 #define ENEMY_CLIPS 7
 
 #endif // HEADER_H_

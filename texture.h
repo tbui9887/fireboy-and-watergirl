@@ -28,7 +28,6 @@ public:
     SDL_Rect getRect() {return mRect; }
     SDL_Texture* getTexture() {return mTexture; }
 
-
 private:
     SDL_Texture* mTexture;
     SDL_Rect mRect;

@@ -62,7 +62,6 @@ public:
 
     void setCharacter(CHARACTER charact) { character = charact; }
     CHARACTER getCharacter() { return character; }
-    void check_collision_between_two_character(MainObject& main_char_2);
 
 private:
     float x_val_; //vận tốc theo chiều ngang

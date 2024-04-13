@@ -110,57 +110,15 @@ int main(int argc, char* args[])
         else{
             bool quit = false;
             SDL_Event event;
+           // Map map_data;
 
             int startTime = 0;
-
             std::stringstream timeText;
+            string path_map;
 
-            string path_map = LevelMap(Fire, Water); //set map link
-
-            if (path_map == "Data/map/MapLevel1.txt"){
-                enemies_list.push_back(Enermy(266, 273));
-                enemies_list.push_back(Enermy(507, 114));
-                enemies_list.push_back(Enermy(130, 532));
-                enemies_list.push_back(Enermy(670, 402));
-            }
-            else if (path_map == "Data/map/MapLevel2.txt"){
-                enemies_list.push_back(Enermy(631, 675));
-                enemies_list.push_back(Enermy(571, 112));
-                enemies_list.push_back(Enermy(312, 336));
-
-                Object obj1, obj2;
-                obj1.setXbut(864); obj1.setYbut(753);
-                obj1.setXbar(546); obj1.setYbar(320);
-                obj.push_back(obj1);
-
-                obj2.setXbut(495); obj2.setYbut(145);
-                obj2.setXbar(224); obj2.setYbar(32);
-                obj.push_back(obj2);
-
-                for (int i = 0; i < obj.size(); i++){
-                    cout << obj[i].getXbut() << " " << obj[i].getYbut() << " " << obj[i].getXbar() << " " << obj[i].getYbar() << std::endl;
-                }
-            }
-            else if (path_map == "Data/map/MapLevel3.txt"){
-                enemies_list.push_back(Enermy(152, 93));
-                enemies_list.push_back(Enermy(488, 397));
-
-                Object obj1;
-                obj1.setXbut(141); obj1.setYbut(500);
-                obj1.setXbar(461); obj1.setYbar(702);
-
-                obj.push_back(obj1);
-            }
-
-            for (int i = 0; i < int(enemies_list.size()); i++){
-                enemies_list[i].setTypeMove(MOVING_IN_SPACE);
-                enemies_list[i].setMovingpos( enemies_list[i].get_x_pos() - MAX_MOVING_ENERMY, enemies_list[i].get_y_pos() + MAX_MOVING_ENERMY);
-                enemies_list[i].loadImg("Data/photo/character/red_slime_left.png", gRenderer);
-                enemies_list[i].set_clips();
-            }
-
-            for (int i = 0; i < int(obj.size()); i++){
-                obj[i].loadImg(gRenderer);
+            int ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map);
+            if (ret_menu == 1){
+                quit = true;
             }
 
             gMap.LoadMap(path_map);
@@ -200,6 +158,9 @@ int main(int argc, char* args[])
                 Water.DoPlayer(map_data);
                 SDL_Rect WaterRect = Water.getRectChar();
                 Water.Show(gRenderer);
+
+                //can stand on another head
+                //Fire.check_collision_between_two_character(Water);
 
                 //render map
                 gMap.DrawMap(gRenderer);
@@ -264,6 +225,7 @@ int main(int argc, char* args[])
                     SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
 
                 }
+                cout << "come here !\n";
             }
         }
     }

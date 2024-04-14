@@ -153,7 +153,7 @@ int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> 
                     path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, level);
                     return 0;
                 }
-                else{
+                else if (CheckFocusWithRect(x_mouse, y_mouse, select_button[2].getRect())){
                     return 1;
                 }
                 break;
@@ -232,8 +232,8 @@ int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, Mai
                 }
                 break;
 
-            default:
-                break;
+            //default:
+                //break;
             }
         }
         SDL_RenderPresent(screen);

@@ -2,44 +2,14 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="character.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="enermy.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="704" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1867" topLine="57" />
+			<Cursor1 position="7590" topLine="87" />
 		</Cursor>
 	</File>
-	<File name="game_map.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1160" topLine="11" />
-		</Cursor>
-	</File>
-	<File name="header.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2253" topLine="38" />
-		</Cursor>
-	</File>
-	<File name="game_map.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1101" topLine="16" />
-		</Cursor>
-	</File>
-	<File name="button.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="animation.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="timer.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="395" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="animation.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Data\map\MapLevel1.txt" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1567" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="texture.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
@@ -52,6 +22,41 @@
 			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="header.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2253" topLine="38" />
+		</Cursor>
+	</File>
+	<File name="object_button.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="336" topLine="8" />
+		</Cursor>
+	</File>
+	<File name="enermy.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="197" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="select_menu.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="327" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="button.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="game_map.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1160" topLine="11" />
+		</Cursor>
+	</File>
+	<File name="animation.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
 	<File name="Data\map\update_map_easy.txt" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="300" topLine="0" />
@@ -59,64 +64,19 @@
 	</File>
 	<File name="select_menu.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="8730" topLine="0" />
+			<Cursor1 position="5554" topLine="48" />
 		</Cursor>
 		<Folding>
 			<Collapse line="3" />
 			<Collapse line="10" />
 			<Collapse line="17" />
 			<Collapse line="24" />
-			<Collapse line="104" />
-			<Collapse line="175" />
 			<Collapse line="244" />
 		</Folding>
 	</File>
-	<File name="object_button.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="Data\map\MapLevel2.txt" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="336" topLine="8" />
-		</Cursor>
-	</File>
-	<File name="object_button.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="536" topLine="4" />
-		</Cursor>
-		<Folding>
-			<Collapse line="4" />
-			<Collapse line="32" />
-			<Collapse line="39" />
-			<Collapse line="46" />
-			<Collapse line="52" />
-			<Collapse line="58" />
-		</Folding>
-	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3459" topLine="42" />
-		</Cursor>
-		<Folding>
-			<Collapse line="30" />
-			<Collapse line="71" />
-			<Collapse line="87" />
-		</Folding>
-	</File>
-	<File name="enermy.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="197" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="enermy.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="704" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="7590" topLine="87" />
-		</Cursor>
-	</File>
-	<File name="animation.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="button.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="271" topLine="0" />
+			<Cursor1 position="516" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="timer.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -124,9 +84,29 @@
 			<Cursor1 position="1229" topLine="53" />
 		</Cursor>
 	</File>
+	<File name="texture.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1587" topLine="0" />
+		</Cursor>
+	</File>
 	<File name="Data\map\MapLevel3.txt" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1376" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="text.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="465" topLine="19" />
+		</Cursor>
+	</File>
+	<File name="character.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1867" topLine="57" />
+		</Cursor>
+	</File>
+	<File name="game_map.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1101" topLine="16" />
 		</Cursor>
 	</File>
 	<File name="character.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
@@ -141,24 +121,42 @@
 			<Collapse line="53" />
 		</Folding>
 	</File>
-	<File name="texture.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+	<File name="main.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1587" topLine="0" />
+			<Cursor1 position="3459" topLine="42" />
+		</Cursor>
+		<Folding>
+			<Collapse line="30" />
+			<Collapse line="71" />
+			<Collapse line="87" />
+		</Folding>
+	</File>
+	<File name="object_button.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="536" topLine="4" />
+		</Cursor>
+		<Folding>
+			<Collapse line="4" />
+			<Collapse line="32" />
+			<Collapse line="39" />
+			<Collapse line="46" />
+			<Collapse line="52" />
+			<Collapse line="58" />
+		</Folding>
+	</File>
+	<File name="button.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="271" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="text.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Data\map\MapLevel1.txt" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="465" topLine="19" />
+			<Cursor1 position="1567" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="select_menu.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+	<File name="timer.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="327" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Data\map\MapLevel2.txt" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="516" topLine="0" />
+			<Cursor1 position="395" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

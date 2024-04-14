@@ -229,8 +229,9 @@ void MainObject::check_to_map(Map& map_data)
               value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
               value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
             {
-                x_pos_ = x1 * BLOCK_SIZE;
-                x_val_ = 0;
+                    x_pos_ = x2 * BLOCK_SIZE;
+                    x_pos_ -= width_frame_ + 1;
+                    x_val_ = 0;
             }
         if (check_liquid (value_1, value_2, character)){
             cout << "LOSE !\n";
@@ -300,9 +301,10 @@ void MainObject::check_to_map(Map& map_data)
               value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
               value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
             {
-                y_pos_ = y2 * BLOCK_SIZE - height_frame_;
-                y_val_ = 0;
-                on_ground = true;
+                    y_pos_ = y2 * BLOCK_SIZE;
+                    y_pos_ -= (height_frame_+1);
+                    y_val_ = 0;
+                    on_ground = true;
             }
 
             if (check_liquid (value_1, value_2, character)){

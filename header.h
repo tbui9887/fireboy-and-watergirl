@@ -111,8 +111,8 @@ enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa,
 
 #define MAX_LEVEL 3
 
-#define ENEMY_WIDTH 39
-#define ENEMY_HEIGHT 32
+#define ENEMY_WIDTH 35
+#define ENEMY_HEIGHT 30
 
 #define MENU_BUTTON_WIDTH 300
 #define MENU_BUTTON_HEIGHT 150

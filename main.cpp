@@ -126,7 +126,7 @@ int main(int argc, char* args[])
             Map map_data = gMap.getMap();
 
             Fire.setCharacter(FIREBOY);
-            Water.setCharacter(WATERGIRL);
+            Water.setCharacter(WATERGIRL); Water.SetHeight(50);
 
             while (!quit){
                 fps_timer.start();

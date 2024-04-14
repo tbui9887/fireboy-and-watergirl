@@ -90,8 +90,8 @@ void Enermy::CheckToMap(Map& map_data)
     // Check horizontally
     int height_min = height_frame_ < BLOCK_SIZE ? height_frame_ : BLOCK_SIZE;
 
-    x1 = (x_pos_ + x_val_) / BLOCK_SIZE;
-    x2 = (x_pos_ + x_val_ + width_frame_) / BLOCK_SIZE;
+    x1 = (x_pos_ + x_val_) / BLOCK_SIZE; //vi tri cua character tuong ung voi block tren ban do (phan ben trai)
+    x2 = (x_pos_ + x_val_ + width_frame_) / BLOCK_SIZE; //tuong tu nhung phan ben phai
 
     y1 = y_pos_ / BLOCK_SIZE;
     y2 = (y_pos_ + height_min) / BLOCK_SIZE;
@@ -109,7 +109,8 @@ void Enermy::CheckToMap(Map& map_data)
                   value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
                   value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
                 {
-                    x_pos_ = x1 * BLOCK_SIZE;
+                    x_pos_ = x2 * BLOCK_SIZE;
+                    x_pos_ -= width_frame_ + 1;
                     x_val_ = 0;
                 }
         }
@@ -131,11 +132,11 @@ void Enermy::CheckToMap(Map& map_data)
 
     // Check vertically
     int width_min = width_frame_ < BLOCK_SIZE ? width_frame_ : BLOCK_SIZE;
-    x1 = (x_pos_ + diff_walk) / BLOCK_SIZE;
-    x2 = (x_pos_ + width_min - diff_walk) / BLOCK_SIZE;
+    x1 = (x_pos_) / BLOCK_SIZE;
+    x2 = (x_pos_ + width_min) / BLOCK_SIZE;
 
     y1 = (y_pos_ + y_val_) / BLOCK_SIZE;
-    y2 = (y_pos_ + y_val_ + height_frame_) / BLOCK_SIZE;
+    y2 = (y_pos_ + y_val_ + height_frame_ - 1) / BLOCK_SIZE;
 
     if (x1 >= 0 && x2 < MAX_MAP_X && y1 >= 0 && y2 < MAX_MAP_Y)
     {
@@ -149,7 +150,8 @@ void Enermy::CheckToMap(Map& map_data)
                   value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
                   value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
                 {
-                    y_pos_ = y2 * BLOCK_SIZE - height_frame_;
+                    y_pos_ = y2 * BLOCK_SIZE;
+                    y_pos_ -= (height_frame_+1);
                     y_val_ = 0;
                     on_ground_ = true;
                 }

@@ -90,7 +90,7 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
     }
                 for (int i = 0; i < int(enemies_list.size()); i++){
                     enemies_list[i].setTypeMove(MOVING_IN_SPACE);
-                    enemies_list[i].setMovingpos( enemies_list[i].get_x_pos() - MAX_MOVING_ENERMY, enemies_list[i].get_y_pos() + MAX_MOVING_ENERMY);
+                    enemies_list[i].setMovingpos( enemies_list[i].get_x_pos() - MAX_MOVING_ENERMY, enemies_list[i].get_x_pos() + MAX_MOVING_ENERMY);
                     enemies_list[i].loadImg("Data/photo/character/red_slime_left.png", screen);
                     enemies_list[i].set_clips();
                 }
@@ -245,9 +245,7 @@ bool CheckFocusWithRect(const int& x, const int& y, const SDL_Rect& rect)
 {
     if (x >= rect.x && x <= rect.x + rect.w &&
         y >= rect.y && y <= rect.y + rect.h){
-            cout << "if click button, i appear\n";
             return true;
         }
-    cout << "do you see me \n";
     return false;
 }

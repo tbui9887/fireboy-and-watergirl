@@ -159,9 +159,6 @@ int main(int argc, char* args[])
                 SDL_Rect WaterRect = Water.getRectChar();
                 Water.Show(gRenderer);
 
-                //can stand on another head
-                //Fire.check_collision_between_two_character(Water);
-
                 //render map
                 gMap.DrawMap(gRenderer);
                 gMap.copyMap(map_data);
@@ -174,15 +171,10 @@ int main(int argc, char* args[])
                     enemies_list[i].DoPlayer(map_data);
                     enemies_list[i].Show(gRenderer);
                     enemy_rect[i] = enemies_list[i].get_current_pos();
-                    if ( check_collision(FireRect, enemy_rect[i]) || check_collision(WaterRect, enemy_rect[i]) )
-                        cout << "lose \n"; //check xem neu cham vao co lose khong
-
-                    //test
-                   //cout << enemies_list[i].get_x_pos() << " " << enemies_list[i].get_y_pos() << " " << enemies_list[i].get_width_frame() << " " << enemies_list[i].get_height_frame() << std::endl;
+                    if ( check_collision(FireRect, enemy_rect[i]) || check_collision(WaterRect, enemy_rect[i]) ){
+                        Fire.setLose(); Water.getLose();
+                    }
                 }
-
-                cout << enemies_list[0].get_x_pos() << " " << enemies_list[0].get_y_pos() << " " << enemies_list[0].get_width_frame() << " " << enemies_list[0].get_height_frame() << std::endl;
-
                 //render barrier and button
                 for (int i = 0; i < int(obj.size()); i++){
                     obj[i].render(gRenderer);
@@ -225,7 +217,13 @@ int main(int argc, char* args[])
                     SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
 
                 }
-                cout << "come here !\n";
+                if ( Water.getLose() || Fire.getLose() ){
+                    cout << "LOSE";
+                }
+
+                if ( Water.getWin() && Fire.getWin() ){
+                    cout << "WIN";
+                }
             }
         }
     }

@@ -1,4 +1,3 @@
-
 #include "character.h"
 
 MainObject::MainObject()
@@ -222,19 +221,31 @@ void MainObject::check_to_map(Map& map_data)
             coin_increase();
         }
 
+        if ( (value_1 == ABOVE_FIRE_DOOR || value_1 == END_FIRE_DOOR ||
+              value_2 == ABOVE_FIRE_DOOR || value_2 == END_FIRE_DOOR ) && character == FIREBOY){
+                setWin();
+        }
+
+        if ( (value_1 == ABOVE_WATER_DOOR || value_1 == END_WATER_DOOR ||
+              value_2 == ABOVE_WATER_DOOR || value_2 == END_WATER_DOOR ) && character == WATERGIRL){
+                setWin();
+        }
+
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
               value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
-              value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ) ||
+              value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ||
+              value_1 == ABOVE_FIRE_DOOR || value_1 == ABOVE_WATER_DOOR || value_1 == END_FIRE_DOOR || value_1 == END_WATER_DOOR) ||
             !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN ||
               value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
-              value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
+              value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID ||
+              value_2 == ABOVE_FIRE_DOOR || value_2 == ABOVE_WATER_DOOR || value_2 == END_FIRE_DOOR || value_2 == END_WATER_DOOR) )
             {
                     x_pos_ = x2 * BLOCK_SIZE;
                     x_pos_ -= width_frame_ + 1;
                     x_val_ = 0;
             }
         if (check_liquid (value_1, value_2, character)){
-            cout << "LOSE !\n";
+            setLose();
         }
         }
         else if (x_val_ < 0)
@@ -252,18 +263,31 @@ void MainObject::check_to_map(Map& map_data)
             map_data.tile[y2][x1] = BLANK_TILE;
             coin_increase();
         }
+
+        if ( (value_1 == ABOVE_FIRE_DOOR || value_1 == END_FIRE_DOOR ||
+              value_2 == ABOVE_FIRE_DOOR || value_2 == END_FIRE_DOOR ) && character == FIREBOY){
+                setWin();
+        }
+
+        if ( (value_1 == ABOVE_WATER_DOOR || value_1 == END_WATER_DOOR ||
+              value_2 == ABOVE_WATER_DOOR || value_2 == END_WATER_DOOR ) && character == WATERGIRL){
+                setWin();
+        }
+
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
               value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
-              value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ) ||
+              value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ||
+              value_1 == ABOVE_FIRE_DOOR || value_1 == ABOVE_WATER_DOOR || value_1 == END_FIRE_DOOR || value_1 == END_WATER_DOOR) ||
             !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN ||
               value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
-              value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
+              value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID ||
+              value_2 == ABOVE_FIRE_DOOR || value_2 == ABOVE_WATER_DOOR || value_2 == END_FIRE_DOOR || value_2 == END_WATER_DOOR) )
             {
                 x_pos_ = (x1 + 1) * BLOCK_SIZE;
                 x_val_ = 0;
             }
             if (check_liquid (value_1, value_2, character)){
-                cout << "LOSE !\n";
+                setLose();
             }
         }
     }
@@ -294,12 +318,24 @@ void MainObject::check_to_map(Map& map_data)
             coin_increase();
         }
 
+        if ( (value_1 == ABOVE_FIRE_DOOR || value_1 == END_FIRE_DOOR ||
+              value_2 == ABOVE_FIRE_DOOR || value_2 == END_FIRE_DOOR ) && character == FIREBOY){
+                setWin();
+        }
+
+        if ( (value_1 == ABOVE_WATER_DOOR || value_1 == END_WATER_DOOR ||
+              value_2 == ABOVE_WATER_DOOR || value_2 == END_WATER_DOOR ) && character == WATERGIRL){
+                setWin();
+        }
+
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
               value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
-              value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ) ||
+              value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ||
+              value_1 == ABOVE_FIRE_DOOR || value_1 == ABOVE_WATER_DOOR || value_1 == END_FIRE_DOOR || value_1 == END_WATER_DOOR) ||
             !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN ||
               value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
-              value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
+              value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID ||
+              value_2 == ABOVE_FIRE_DOOR || value_2 == ABOVE_WATER_DOOR || value_2 == END_FIRE_DOOR || value_2 == END_WATER_DOOR) )
             {
                     y_pos_ = y2 * BLOCK_SIZE;
                     y_pos_ -= (height_frame_+1);
@@ -308,7 +344,7 @@ void MainObject::check_to_map(Map& map_data)
             }
 
             if (check_liquid (value_1, value_2, character)){
-                cout << "LOSE !\n";
+                setLose();
             }
         }
         else if (y_val_ < 0)
@@ -327,18 +363,30 @@ void MainObject::check_to_map(Map& map_data)
             coin_increase();
         }
 
+        if ( (value_1 == ABOVE_FIRE_DOOR || value_1 == END_FIRE_DOOR ||
+              value_2 == ABOVE_FIRE_DOOR || value_2 == END_FIRE_DOOR ) && character == FIREBOY){
+                setWin();
+        }
+
+        if ( (value_1 == ABOVE_WATER_DOOR || value_1 == END_WATER_DOOR ||
+              value_2 == ABOVE_WATER_DOOR || value_2 == END_WATER_DOOR ) && character == WATERGIRL){
+                setWin();
+        }
+
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
               value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
-              value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ) ||
+              value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ||
+              value_1 == ABOVE_FIRE_DOOR || value_1 == ABOVE_WATER_DOOR || value_1 == END_FIRE_DOOR || value_1 == END_WATER_DOOR) ||
             !(value_2 == BLANK_TILE || value_2 == FLOWER_TILE || value_2 == SMALL_ROCK || value_2 == BIG_ROCK || value_2 == BUSH || value_2 == YELLOW_COIN || value_2 == BLUE_COIN ||
               value_2 == WATER_FRONT_LIQUID || value_2 == FIRE_FRONT_LIQUID || value_2 == TOXIC_FRONT_LIQUID || value_2 == WATER_MIDDLE_LIQUID || value_2 == FIRE_MIDDLE_LIQUID ||
-              value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID) )
+              value_2 == TOXIC_MIDDLE_LIQUID || value_2 == FIRE_END_LIQUID || value_2 == WATER_END_LIQUID || value_2 == TOXIC_END_LIQUID ||
+              value_2 == ABOVE_FIRE_DOOR || value_2 == ABOVE_WATER_DOOR || value_2 == END_FIRE_DOOR || value_2 == END_WATER_DOOR) )
         {
                 y_pos_ = (y1 + 1) * BLOCK_SIZE;
                 y_val_ = 0;
         }
         if (check_liquid (value_1, value_2, character)){
-            cout << "LOSE !\n";
+            setLose();
         }
     }
 
@@ -407,5 +455,7 @@ bool MainObject::check_liquid(int val_1, int val_2, CHARACTER char_main)
 
     return lose;
 }
+
+
 
 

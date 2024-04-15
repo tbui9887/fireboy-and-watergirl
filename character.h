@@ -56,6 +56,11 @@ public:
     void setXval(int x) { x_val_ = x; }
     void setYval(int y) { y_val_ = y; }
 
+    void setLose() { lose = true; }
+    bool getLose() { return lose; }
+    void setWin() { win = true; }
+    bool getWin() { return win; }
+
     void coin_increase() { coin++; }
     int get_coin() { return coin; }
     bool check_liquid(int val_1, int val_2, CHARACTER char_main);
@@ -88,6 +93,8 @@ private:
 
     int coin;
     int below_liquid = 0;
+
+    bool lose = false, win = false;
 };
 
 #endif // MAIN_CHARACT_H_

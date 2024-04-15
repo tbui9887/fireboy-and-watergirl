@@ -54,6 +54,10 @@ const int DEFAULT_BLUE = 255;
 #define WATER_END_LIQUID 80
 #define FIRE_END_LIQUID 83
 #define TOXIC_END_LIQUID 87
+#define ABOVE_FIRE_DOOR 70
+#define END_FIRE_DOOR 77
+#define ABOVE_WATER_DOOR 69
+#define END_WATER_DOOR 76
 
 #define MAX_CLIPS 10
 
@@ -71,7 +75,7 @@ enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa,
 #define GRAVITY 0.5
 #define MAX_GRAVITY 6
 #define PLAYER_SPEED 2
-#define JUMP_SPEED 10
+#define JUMP_SPEED 20
 #define diff_walk 7
 
 #define FPS 40
@@ -101,12 +105,7 @@ enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa,
 #define ELEVATOR_WIDTH 60
 #define ELEVATOR_HEIGHT 7
 
-//static int barrier_move = 0;
-
-//static int YellowCoin = 0;
-//static int BlueCoin = 0;
-
-#define MAX_MOVING_ENERMY 20
+#define MAX_MOVING_ENERMY 50
 #define enermy_jet 1
 
 #define MAX_LEVEL 3

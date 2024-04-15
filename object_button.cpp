@@ -76,8 +76,7 @@ void Object::activity(MainObject &character)
         }
     }
 
-    cout << "barrier_move: " << barrier_move << " - charater: " << character.getCharacter() << std::endl;
-
+    //cập nhật lại vị trí của barrier khi đứng trên button
     SDL_Rect barRect = getBarRect();
     int x_val = character.getXval();
     int y_val = character.getYval();

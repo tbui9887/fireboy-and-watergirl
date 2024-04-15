@@ -1,7 +1,24 @@
 
-#include "enermy.h"
+#include "enemy.h"
 
-Enermy::Enermy(int x, int y)
+Enemy::Enemy()
+{
+    width_frame_ = 0;
+    height_frame_ = 0;
+    x_pos_ = 0;
+    y_pos_ = 0;
+    x_val_ = 0;
+    y_val_ = 0;
+    frame_ = 0;
+    on_ground_ = 0;
+
+    start_move = 0;
+    end_move = 0;
+    input_type_.left_ = 1;
+    type_move_ = STANDING_ENEMY;
+}
+
+Enemy::Enemy(int x, int y)
 {
     width_frame_ = 0;
     height_frame_ = 0;
@@ -15,15 +32,15 @@ Enermy::Enermy(int x, int y)
     start_move = 0;
     end_move = 0;
     input_type_.left_ = 1;
-    type_move_ = STANDING_ENERMY;
+    type_move_ = STANDING_ENEMY;
 }
 
-Enermy::~Enermy()
+Enemy::~Enemy()
 {
 
 }
 
-bool Enermy::loadImg(string path, SDL_Renderer* screen)
+bool Enemy::loadImg(string path, SDL_Renderer* screen)
 {
     bool ret = LTexture::loadFromFile(path, screen);
     if (ret){
@@ -33,7 +50,7 @@ bool Enermy::loadImg(string path, SDL_Renderer* screen)
     return ret;
 }
 
-void Enermy::set_clips()
+void Enemy::set_clips()
 {
     if (width_frame_ > 0 && height_frame_ > 0){
             for (int i = 0; i < ENEMY_CLIPS; i++){
@@ -45,7 +62,7 @@ void Enermy::set_clips()
     }
 }
 
-void Enermy::Show(SDL_Renderer* screen)
+void Enemy::Show(SDL_Renderer* screen)
 {
     LTexture::SetRect(x_pos_, y_pos_);
 
@@ -64,22 +81,22 @@ void Enermy::Show(SDL_Renderer* screen)
     SDL_RenderCopy(screen, rTexture, current_clip, &renderQuad);
 }
 
-void Enermy::DoPlayer(Map& gMap)
+void Enemy::DoPlayer(Map& gMap)
 {
     x_val_ = 0;
-    y_val_ += ENERMY_GRAVITY_SPEED;
+    y_val_ += ENEMY_GRAVITY_SPEED;
 
     if (input_type_.left_ == 1 && type_move_ == MOVING_IN_SPACE){
-        x_val_ -= ENERMY_MOVING_SPEED;
+        x_val_ -= ENEMY_MOVING_SPEED;
     }
     else if (input_type_.right_ == 1 && type_move_ == MOVING_IN_SPACE){
-        x_val_ += ENERMY_MOVING_SPEED;
+        x_val_ += ENEMY_MOVING_SPEED;
     }
 
     CheckToMap(gMap);
 }
 
-void Enermy::CheckToMap(Map& map_data)
+void Enemy::CheckToMap(Map& map_data)
 {
     int x1 = 0;
     int x2 = 0;
@@ -116,7 +133,7 @@ void Enermy::CheckToMap(Map& map_data)
                     x_val_ = 0;
                     //smarter bot
                     int end_pos_ = x2*BLOCK_SIZE - width_frame_ + 1;
-                    setMovingpos(end_pos_ - MAX_MOVING_ENERMY * 2, end_pos_);
+                    setMovingpos(end_pos_ - MAX_MOVING_ENEMY * 2, end_pos_);
                 }
         }
         else if (x_val_ < 0)
@@ -135,7 +152,7 @@ void Enermy::CheckToMap(Map& map_data)
                     x_val_ = 0;
                     //smarter bot
                     int start_pos_ = (x1 + 1) * BLOCK_SIZE;
-                    setMovingpos(start_pos_, start_pos_ + MAX_MOVING_ENERMY * 2);
+                    setMovingpos(start_pos_, start_pos_ + MAX_MOVING_ENEMY * 2);
                 }
         }
     }
@@ -200,9 +217,9 @@ void Enermy::CheckToMap(Map& map_data)
 
 }
 
-void Enermy::controlMoving(SDL_Renderer* screen, string left_animation_enermy, string right_animation_enermy)
+void Enemy::controlMoving(SDL_Renderer* screen, string left_animation_Enemy, string right_animation_Enemy)
 {
-    if (type_move_ == STANDING_ENERMY){
+    if (type_move_ == STANDING_ENEMY){
         ;
     }
     else{
@@ -219,10 +236,10 @@ void Enermy::controlMoving(SDL_Renderer* screen, string left_animation_enermy, s
     }
 
     if ( input_type_.left_ == 1 ){
-        loadImg(left_animation_enermy, screen);//tai anh quay ve ben trai len
+        loadImg(left_animation_Enemy, screen);//tai anh quay ve ben trai len
     }
     else if ( input_type_.right_ == 1 ){
-        loadImg(right_animation_enermy, screen); //tai anh quay ben phai
+        loadImg(right_animation_Enemy, screen); //tai anh quay ben phai
     }
 
 }

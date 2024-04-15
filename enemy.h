@@ -19,6 +19,7 @@ enum TypeMove
 class Enemy : public LTexture
 {
 public:
+    Enemy();
     Enemy(int x, int y);
     ~Enemy();
 
@@ -31,8 +32,8 @@ public:
     float get_y_pos() const { return y_pos_; }
 
     void set_clips();
-    bool loadImg(string path, SDL_Renderer* screen);
-    void Show (SDL_Renderer* screen);
+    virtual bool loadImg(string path, SDL_Renderer* screen);
+    virtual void Show (SDL_Renderer* screen);
     int get_width_frame() const { return width_frame_; }
     int get_height_frame() const { return height_frame_; }
 

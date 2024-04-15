@@ -8,6 +8,7 @@
 #include "enermy.h"
 #include "text.h"
 #include "select_menu.h"
+#include "box.h"
 
 static SDL_Window* gWindow = NULL;
 static SDL_Renderer* gRenderer = NULL;
@@ -20,7 +21,8 @@ GameMap gMap;
 MainObject Water;
 MainObject Fire;
 vector<Object> obj;
-vector<Enermy> enemies_list;
+vector<Enemy> enemies_list;
+vector<Box> boxes_list;
 
 LTimer fps_timer;
 Text time_count;
@@ -116,7 +118,7 @@ int main(int argc, char* args[])
             std::stringstream timeText;
             string path_map;
 
-            int ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map);
+            int ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, boxes_list);
             if (ret_menu == 1){
                 quit = true;
             }
@@ -175,6 +177,15 @@ int main(int argc, char* args[])
                         Fire.setLose(); Water.getLose();
                     }
                 }
+
+                //box and check collision of it
+                SDL_Rect boxes_rect [int(boxes_list.size())];
+
+                for (int i = 0; i < int(boxes_list.size()); i++){
+                    boxes_list[i].DoPlayer(map_data);
+                    boxes_list[i].Show(gRenderer);
+                }
+
                 //render barrier and button
                 for (int i = 0; i < int(obj.size()); i++){
                     obj[i].render(gRenderer);

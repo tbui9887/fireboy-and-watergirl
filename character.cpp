@@ -198,6 +198,7 @@ void MainObject::check_to_map(Map& map_data)
     // Check horizontally
     int height_min = height_frame_ < BLOCK_SIZE ? height_frame_ : BLOCK_SIZE;
 
+    //block lân cận vị trí của main character
     x1 = (x_pos_ + x_val_) / BLOCK_SIZE;
     x2 = (x_pos_ + x_val_ + width_frame_) / BLOCK_SIZE;
 
@@ -231,6 +232,7 @@ void MainObject::check_to_map(Map& map_data)
                 setWin();
         }
 
+        //không đi qua các ô này
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
               value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
               value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ||
@@ -244,6 +246,7 @@ void MainObject::check_to_map(Map& map_data)
                     x_pos_ -= width_frame_ + 1;
                     x_val_ = 0;
             }
+        //check khi vào liquid không hợp lí thì thua
         if (check_liquid (value_1, value_2, character)){
             setLose();
         }
@@ -274,6 +277,7 @@ void MainObject::check_to_map(Map& map_data)
                 setWin();
         }
 
+        //không đi qua các ô này
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
               value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
               value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ||
@@ -286,13 +290,16 @@ void MainObject::check_to_map(Map& map_data)
                 x_pos_ = (x1 + 1) * BLOCK_SIZE;
                 x_val_ = 0;
             }
-            if (check_liquid (value_1, value_2, character)){
-                setLose();
-            }
+
+        //check khi vào liquid không hợp lí thì thua
+        if (check_liquid (value_1, value_2, character)){
+            setLose();
+        }
         }
     }
 
     // Check vertically
+    //block lân cận vị trí của main character
     int width_min = width_frame_ < BLOCK_SIZE ? width_frame_ : BLOCK_SIZE;
     x1 = (x_pos_ + diff_walk) / BLOCK_SIZE;
     x2 = (x_pos_ + width_min - diff_walk) / BLOCK_SIZE;
@@ -306,6 +313,7 @@ void MainObject::check_to_map(Map& map_data)
         {
             int value_1 = map_data.tile[y2][x1], value_2 = map_data.tile[y2][x2];
 
+        //coin: khi chạm vào thì chuyển về blank_block
         if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && character == FIREBOY){
             map_data.tile[y2][x1] = BLANK_TILE;
             map_data.tile[y2][x2] = BLANK_TILE;
@@ -318,6 +326,7 @@ void MainObject::check_to_map(Map& map_data)
             coin_increase();
         }
 
+        //đi vào cửa thì set thành win
         if ( (value_1 == ABOVE_FIRE_DOOR || value_1 == END_FIRE_DOOR ||
               value_2 == ABOVE_FIRE_DOOR || value_2 == END_FIRE_DOOR ) && character == FIREBOY){
                 setWin();
@@ -328,6 +337,7 @@ void MainObject::check_to_map(Map& map_data)
                 setWin();
         }
 
+        //không đi qua các ô này
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
               value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
               value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ||
@@ -343,6 +353,7 @@ void MainObject::check_to_map(Map& map_data)
                     on_ground = true;
             }
 
+            //check khi vào liquid không hợp lí thì thua
             if (check_liquid (value_1, value_2, character)){
                 setLose();
             }
@@ -351,6 +362,7 @@ void MainObject::check_to_map(Map& map_data)
         {
             int value_1 = map_data.tile[y1][x1], value_2 = map_data.tile[y1][x2];
 
+        //coin: khi chạm vào thì chuyển về blank_block
         if ( (value_1 == YELLOW_COIN || value_2 == YELLOW_COIN ) && character == FIREBOY){
             map_data.tile[y1][x1] = BLANK_TILE;
             map_data.tile[y1][x2] = BLANK_TILE;
@@ -363,6 +375,7 @@ void MainObject::check_to_map(Map& map_data)
             coin_increase();
         }
 
+        //đi vào cửa thì set thành win
         if ( (value_1 == ABOVE_FIRE_DOOR || value_1 == END_FIRE_DOOR ||
               value_2 == ABOVE_FIRE_DOOR || value_2 == END_FIRE_DOOR ) && character == FIREBOY){
                 setWin();
@@ -373,6 +386,7 @@ void MainObject::check_to_map(Map& map_data)
                 setWin();
         }
 
+        //không đi qua các ô này
         if (!(value_1 == BLANK_TILE || value_1 == FLOWER_TILE || value_1 == SMALL_ROCK || value_1 == BIG_ROCK || value_1 == BUSH || value_1 == YELLOW_COIN || value_1 == BLUE_COIN ||
               value_1 == WATER_FRONT_LIQUID || value_1 == FIRE_FRONT_LIQUID || value_1 == TOXIC_FRONT_LIQUID || value_1 == WATER_MIDDLE_LIQUID || value_1 == FIRE_MIDDLE_LIQUID ||
               value_1 == TOXIC_MIDDLE_LIQUID || value_1 == FIRE_END_LIQUID || value_1 == WATER_END_LIQUID || value_1 == TOXIC_END_LIQUID ||
@@ -385,6 +399,7 @@ void MainObject::check_to_map(Map& map_data)
                 y_pos_ = (y1 + 1) * BLOCK_SIZE;
                 y_val_ = 0;
         }
+        //check khi vào liquid không hợp lí thì thua
         if (check_liquid (value_1, value_2, character)){
             setLose();
         }
@@ -397,7 +412,7 @@ void MainObject::check_to_map(Map& map_data)
     if (block_below_1 == 5|| block_below_2 == 5){ //nếu chỉ có cái này, nó chỉ check ở dưới chân của nó có block kia khôgn thì mới giảm thôi (thích hợp để làm cái nhún)
         y_val_ -= BLOCK_SIZE/3;
     }
-    //end
+    //cập nhật lại vị trí của main character
     x_pos_ += x_val_;
     y_pos_ += y_val_;
 

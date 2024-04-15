@@ -105,7 +105,7 @@ enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa,
 #define ELEVATOR_WIDTH 60
 #define ELEVATOR_HEIGHT 7
 
-#define MAX_MOVING_ENERMY 50
+#define MAX_MOVING_ENEMY 50
 #define enermy_jet 1
 
 #define MAX_LEVEL 3

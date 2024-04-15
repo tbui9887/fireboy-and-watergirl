@@ -21,7 +21,7 @@ int Randomlevel()
     return level;
 }
 
-string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj, vector<Enermy> &enemies_list, SDL_Renderer* screen, const int& level)
+string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj, vector<Enemy> &enemies_list, SDL_Renderer* screen, const int& level, vector<Box> &boxes_list)
 {
     string map_path;
 
@@ -37,10 +37,15 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
            player_2.setXpos(64);
            player_2.setYpos(703);
 
-                    enemies_list.push_back(Enermy(266, 273));
-                    enemies_list.push_back(Enermy(507, 114));
-                    enemies_list.push_back(Enermy(130, 532));
-                    enemies_list.push_back(Enermy(670, 402));
+           enemies_list.push_back(Enemy(266, 273));
+           enemies_list.push_back(Enemy(507, 114));
+           enemies_list.push_back(Enemy(130, 532));
+           enemies_list.push_back(Enemy(670, 402));
+
+            //set position and create for box
+            boxes_list.push_back(Box(352, 130));
+            boxes_list.push_back(Box(193,640));
+            boxes_list.push_back(Box(288,710));
 
            break;
         }
@@ -53,18 +58,18 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
             player_2.setXpos(63);
             player_2.setYpos(672);
 
-                    enemies_list.push_back(Enermy(631, 675));
-                    enemies_list.push_back(Enermy(571, 112));
-                    enemies_list.push_back(Enermy(312, 336));
+            enemies_list.push_back(Enemy(631, 675));
+            enemies_list.push_back(Enemy(571, 112));
+            enemies_list.push_back(Enemy(312, 336));
 
-                    Object obj1, obj2;
-                    obj1.setXbut(864); obj1.setYbut(753);
-                    obj1.setXbar(546); obj1.setYbar(320);
-                    obj.push_back(obj1);
+            Object obj1, obj2;
+            obj1.setXbut(864); obj1.setYbut(753);
+            obj1.setXbar(546); obj1.setYbar(320);
+            obj.push_back(obj1);
 
-                    obj2.setXbut(495); obj2.setYbut(145);
-                    obj2.setXbar(224); obj2.setYbar(32);
-                    obj.push_back(obj2);
+            obj2.setXbut(495); obj2.setYbut(145);
+            obj2.setXbar(224); obj2.setYbar(32);
+            obj.push_back(obj2);
 
             break;
 
@@ -72,36 +77,49 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
     case LEVEL3:
         {
             map_path = "Data/map/MapLevel3.txt";
+            //set position for water and fire in start game
             player_1.setXpos(250);
             player_1.setYpos(93);
 
             player_2.setXpos(141);
             player_2.setYpos(360);
 
-                    enemies_list.push_back(Enermy(152, 93));
-                    enemies_list.push_back(Enermy(488, 397));
+            //create enemies and set position for enemies
+            enemies_list.push_back(Enemy(152, 93));
+            enemies_list.push_back(Enemy(488, 397));
 
-                    Object obj1;
-                    obj1.setXbut(141); obj1.setYbut(500);
-                    obj1.setXbar(461); obj1.setYbar(702);
+            //set position for obj
+            Object obj1;
+            obj1.setXbut(141); obj1.setYbut(500);
+            obj1.setXbar(461); obj1.setYbar(702);
+            obj.push_back(obj1);
 
-                    obj.push_back(obj1);
         }
     }
+                //load enemy, set position, set clips
                 for (int i = 0; i < int(enemies_list.size()); i++){
                     enemies_list[i].setTypeMove(MOVING_IN_SPACE);
-                    enemies_list[i].setMovingpos( enemies_list[i].get_x_pos() - MAX_MOVING_ENERMY, enemies_list[i].get_x_pos() + MAX_MOVING_ENERMY);
+                    enemies_list[i].setMovingpos( enemies_list[i].get_x_pos() - MAX_MOVING_ENEMY, enemies_list[i].get_x_pos() + MAX_MOVING_ENEMY);
                     enemies_list[i].loadImg("Data/photo/character/red_slime_left.png", screen);
                     enemies_list[i].set_clips();
                 }
-
+                //load box, setMoving into Standing, not need to setclips
+                for (int i = 0; i < int(boxes_list.size()); i++){
+                    boxes_list[i].setTypeMove(STANDING_ENEMY);
+                    boxes_list[i].loadImg("Data/new_tiles/image_part_050.png", screen);
+                    boxes_list[i].SetWidth(BLOCK_SIZE);
+                    boxes_list[i].SetHeight(BLOCK_SIZE);
+                    //test
+                    cout << boxes_list[i].get_x_pos() << boxes_list[i].get_y_pos() << boxes_list[i].get_width_frame() << boxes_list[i].get_height_frame();
+                }
+                //load obj
                 for (int i = 0; i < int(obj.size()); i++){
                     obj[i].loadImg(screen);
                 }
     return map_path;
 }
 
-int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enermy> &enemies_list, SDL_Renderer* screen, SDL_Event event, string &path_map) //tí nữa code phần khi bấm vào từng phần lựa chọn thì show ra một cửa sổ mới
+int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enemy> &enemies_list, SDL_Renderer* screen, SDL_Event event, string &path_map, vector<Box> &boxes_list) //tí nữa code phần khi bấm vào từng phần lựa chọn thì show ra một cửa sổ mới
 {
     LTexture StartMenu;
     if ( ! StartMenu.loadFromFile("Data/photo/background/brick_background.png", screen) ){
@@ -145,12 +163,12 @@ int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> 
                 y_mouse = event.motion.y;
 
                 if (CheckFocusWithRect(x_mouse, y_mouse,select_button[0].getRect())){
-                    int if_choose = ShowSelectLevel(screen, event, path_map, Player1, Player2, obj, enemies_list);
+                    int if_choose = ShowSelectLevel(screen, event, path_map, Player1, Player2, obj, enemies_list, boxes_list);
                     return if_choose;
                 }
                 else if (CheckFocusWithRect(x_mouse, y_mouse, select_button[1].getRect())){
                     int level = Randomlevel();
-                    path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, level);
+                    path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, level, boxes_list);
                     return 0;
                 }
                 else if (CheckFocusWithRect(x_mouse, y_mouse, select_button[2].getRect())){
@@ -172,7 +190,7 @@ int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> 
     return 1;
 }
 
-int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enermy> &enemies_list)
+int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enemy> &enemies_list, vector<Box> &boxes_list)
 {
     //if (ShowMenuStartOrNot(Player1, Player2, obj, enemies_list, screen, event, path_map) == 1) return 1;
     //free luon texture kia luon
@@ -220,7 +238,7 @@ int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, Mai
 
                 for (int i = 0; i < level_num; i++){
                     if (CheckFocusWithRect(x_mouse, y_mouse, level_button[i].getRect()) ){
-                        path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, i); //lay path roi return ve 0 luon (thoat khoi vong lap
+                        path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, i, boxes_list); //lay path roi return ve 0 luon (thoat khoi vong lap
                         return 0; //0 là không quit
                     }
                 }

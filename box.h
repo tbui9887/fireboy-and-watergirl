@@ -3,12 +3,16 @@
 #define BOX_H_
 
 #include "header.h"
-#include "enemy.h"
+#include "texture.h"
+#include "game_map.h"
 
-class Box : public Enemy
+class Box : public LTexture
 {
 private:
-    int x_box, y_box, w_box, h_box;
+    float x_pos, y_pos;
+    int box_width, box_height;
+    float x_val, y_val;
+
     bool on_ground_ = false;
 public:
     Box(int x, int y);
@@ -16,6 +20,9 @@ public:
 
     bool loadImg(string path, SDL_Renderer* screen);
     void Show(SDL_Renderer* screen);
+
+    void DoPlayer(Map& gMap);
+    void CheckToMap(Map& gMap);
 };
 
 

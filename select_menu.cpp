@@ -105,12 +105,7 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
                 }
                 //load box, setMoving into Standing, not need to setclips
                 for (int i = 0; i < int(boxes_list.size()); i++){
-                    boxes_list[i].setTypeMove(STANDING_ENEMY);
                     boxes_list[i].loadImg("Data/new_tiles/image_part_050.png", screen);
-                    boxes_list[i].SetWidth(BLOCK_SIZE);
-                    boxes_list[i].SetHeight(BLOCK_SIZE);
-                    //test
-                    cout << boxes_list[i].get_x_pos() << boxes_list[i].get_y_pos() << boxes_list[i].get_width_frame() << boxes_list[i].get_height_frame();
                 }
                 //load obj
                 for (int i = 0; i < int(obj.size()); i++){

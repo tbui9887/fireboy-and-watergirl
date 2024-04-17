@@ -673,3 +673,122 @@
 	"header.h"
 	"enemy.h"
 
+1713325517 source:c:\fireboy-and-watergirl\animation.cpp
+	"animation.h"
+
+1713325517 c:\fireboy-and-watergirl\animation.h
+	"header.h"
+	"texture.h"
+
+1713325517 c:\fireboy-and-watergirl\header.h
+	<iostream>
+	<stdio.h>
+	<string>
+	<cmath>
+	<fstream>
+	<vector>
+	<sstream>
+	<ctime>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<SDL_mixer.h>
+
+1713325517 c:\fireboy-and-watergirl\texture.h
+	"header.h"
+
+1713326284 source:c:\fireboy-and-watergirl\box.cpp
+	"box.h"
+
+1713325843 c:\fireboy-and-watergirl\box.h
+	"header.h"
+	"texture.h"
+	"game_map.h"
+
+1713325517 c:\fireboy-and-watergirl\enemy.h
+	"header.h"
+	"texture.h"
+	"game_map.h"
+	"character.h"
+
+1713325517 c:\fireboy-and-watergirl\game_map.h
+	"header.h"
+	"texture.h"
+
+1713325517 c:\fireboy-and-watergirl\character.h
+	"header.h"
+	"texture.h"
+	"game_map.h"
+
+1713325517 source:c:\fireboy-and-watergirl\button.cpp
+	"button.h"
+
+1713325517 c:\fireboy-and-watergirl\button.h
+	"header.h"
+
+1713325517 source:c:\fireboy-and-watergirl\character.cpp
+	"character.h"
+
+1713325517 source:c:\fireboy-and-watergirl\enemy.cpp
+	"enemy.h"
+
+1713325517 source:c:\fireboy-and-watergirl\game_map.cpp
+	"game_map.h"
+
+1713325517 source:c:\fireboy-and-watergirl\main.cpp
+	"header.h"
+	"character.h"
+	"game_map.h"
+	"button.h"
+	"texture.h"
+	"timer.h"
+	"object_button.h"
+	"enermy.h"
+	"text.h"
+	"select_menu.h"
+	"box.h"
+
+1713325517 c:\fireboy-and-watergirl\timer.h
+	"header.h"
+
+1713325517 c:\fireboy-and-watergirl\object_button.h
+	"header.h"
+	"texture.h"
+	"character.h"
+
+1713325517 c:\fireboy-and-watergirl\enermy.h
+	"header.h"
+	"texture.h"
+	"game_map.h"
+	"character.h"
+
+1713325517 c:\fireboy-and-watergirl\text.h
+	"header.h"
+	"texture.h"
+
+1713325517 c:\fireboy-and-watergirl\select_menu.h
+	"header.h"
+	"character.h"
+	"object_button.h"
+	"enermy.h"
+	"texture.h"
+	"text.h"
+	"box.h"
+
+1713325517 source:c:\fireboy-and-watergirl\object_button.cpp
+	"object_button.h"
+	"header.h"
+
+1713325990 source:c:\fireboy-and-watergirl\select_menu.cpp
+	"select_menu.h"
+
+1713325517 source:c:\fireboy-and-watergirl\text.cpp
+	"text.h"
+
+1713325517 source:c:\fireboy-and-watergirl\texture.cpp
+	"texture.h"
+
+1713325517 source:c:\fireboy-and-watergirl\timer.cpp
+	"timer.h"
+	"header.h"
+

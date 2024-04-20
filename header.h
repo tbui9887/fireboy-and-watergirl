@@ -20,6 +20,7 @@ using std::cout;
 using std::cin;
 using std::string;
 using std::vector;
+using std::endl;
 
 const int SCREEN_WIDTH = 960;
 const int SCREEN_HEIGHT = 800;

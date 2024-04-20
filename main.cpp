@@ -59,7 +59,7 @@ bool init()
                 cout << "can't init ttf\n";
                 success = false;
             }
-            if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0){
+            if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 6, 2048) < 0){
                 cout << "error in mix_openaudio: " << Mix_GetError() << std::endl;
                 success = false;
             }
@@ -90,14 +90,26 @@ bool loadMedia()
     Fire.set_clips();
 
     //load music
-    gMusic = Mix_LoadMUS("Data/sound/Level Music.wav");
+    gMusic = Mix_LoadMUS("Data/sound/Fireboy and Watergirl Playthrough Soundtrack.mp3");
     if (gMusic == NULL){
-        cout << "can't open soundtrack!";
+        cout << "Error loading music: " << Mix_GetError() << endl;
+        success = false;
+    }
+    else {
+        cout << "Music loaded successfully!" << endl;
     }
     death = Mix_LoadWAV("Data/sound/Death.wav");
+    if (death == NULL){
+        cout << "Error loading sound effect: " << Mix_GetError() << endl;
+        success = false;
+    }
+    else {
+        cout << "Sound effect loaded successfully!" << endl;
+    }
 
     return success;
 }
+
 void close()
 {
     gBackground.~LTexture();
@@ -140,11 +152,11 @@ int main(int argc, char* args[])
 
                 Fire.setCharacter(FIREBOY);
                 Water.setCharacter(WATERGIRL); Water.SetHeight(50);
+                if (Mix_PlayMusic(gMusic, -1) == -1){
+                    cout << "can't play music! \n";
+                }
 
                 while (!quit){
-                    if (Mix_PlayMusic(gMusic, -1) == -1){
-                        cout << "can't play music! \n";
-                    }
                     fps_timer.start();
                     while (SDL_PollEvent(&event) != 0){ //event click quit and key related to main character
                         if (event.type == SDL_QUIT) quit = true;
@@ -238,6 +250,7 @@ int main(int argc, char* args[])
                         Mix_PlayChannel(-1, death, 0);
                         cout << "LOSE";
                         SDL_Delay(2000);
+
                         Water.setLose(false);
                         Fire.setLose(false);
                         Water.~MainObject();
@@ -250,6 +263,7 @@ int main(int argc, char* args[])
 
                     if ( Water.getWin() && Fire.getWin() ){
                         SDL_Delay(2000);
+
                         Water.setWin(false);
                         Fire.setWin(false);
                         Water.~MainObject();

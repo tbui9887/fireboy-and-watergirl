@@ -40,12 +40,6 @@
 		<Unit filename="Data/map/MapLevel2.txt" />
 		<Unit filename="Data/map/MapLevel3.txt" />
 		<Unit filename="Data/map/update_map_easy.txt" />
-		<Unit filename="animation.cpp" />
-		<Unit filename="animation.h" />
-		<Unit filename="box.cpp" />
-		<Unit filename="box.h" />
-		<Unit filename="button.cpp" />
-		<Unit filename="button.h" />
 		<Unit filename="character.cpp" />
 		<Unit filename="character.h" />
 		<Unit filename="enemy.cpp" />

@@ -1,14 +1,12 @@
 #include "header.h"
 #include "character.h"
 #include "game_map.h"
-#include "button.h"
 #include "texture.h"
 #include "timer.h"
 #include "object_button.h"
 #include "enermy.h"
 #include "text.h"
 #include "select_menu.h"
-#include "box.h"
 
 static SDL_Window* gWindow = NULL;
 static SDL_Renderer* gRenderer = NULL;
@@ -22,7 +20,7 @@ MainObject Water;
 MainObject Fire;
 vector<Object> obj;
 vector<Enemy> enemies_list;
-vector<Box> boxes_list;
+
 
 LTimer fps_timer;
 Text time_count;
@@ -111,130 +109,137 @@ int main(int argc, char* args[])
         if (!loadMedia()) return -1;
         else{
             bool quit = false;
-            SDL_Event event;
-           // Map map_data;
-
-            int startTime = 0;
             std::stringstream timeText;
             string path_map;
+                int startTime = 0;
+                SDL_Event event;
+                int ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit);
 
-            int ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, boxes_list);
-            if (ret_menu == 1){
-                quit = true;
-            }
+                while (1){
+                gMap.LoadMap(path_map);
+                gMap.LoadTiles(gRenderer);
+                Map map_data = gMap.getMap();
 
-            gMap.LoadMap(path_map);
-            gMap.LoadTiles(gRenderer);
-            Map map_data = gMap.getMap();
+                Fire.setCharacter(FIREBOY);
+                Water.setCharacter(WATERGIRL); Water.SetHeight(50);
 
-            Fire.setCharacter(FIREBOY);
-            Water.setCharacter(WATERGIRL); Water.SetHeight(50);
+                while (!quit){
+                    fps_timer.start();
+                    while (SDL_PollEvent(&event) != 0){ //event click quit and key related to main character
+                        if (event.type == SDL_QUIT) quit = true;
+                        Fire.HandleInputAction(event, gRenderer, FIREBOY);
+                        Water.HandleInputAction(event, gRenderer, WATERGIRL);
 
-            while (!quit){
-                fps_timer.start();
-                while (SDL_PollEvent(&event) != 0){ //event click quit and key related to main character
-                    if (event.type == SDL_QUIT) quit = true;
-                    Fire.HandleInputAction(event, gRenderer, FIREBOY);
-                    Water.HandleInputAction(event, gRenderer, WATERGIRL);
-
-                }
-                //time counting
-                timeText.str("");
-                timeText << "TIME: " << set_standard_time( SDL_GetTicks() - startTime );
-                time_count.setText(timeText.str());
-                //set color for time_count
-                time_count.setTextColor(WHITE_TEXT);
-
-                //Update screen
-                SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 0.8);
-                SDL_RenderClear(gRenderer);
-
-                //render background
-                gBackground.render(0,0, NULL, gRenderer);
-
-                //main character
-                Fire.DoPlayer(map_data);
-                SDL_Rect FireRect = Fire.getRectChar();
-                Fire.Show(gRenderer);
-
-                Water.DoPlayer(map_data);
-                SDL_Rect WaterRect = Water.getRectChar();
-                Water.Show(gRenderer);
-
-                //render map
-                gMap.DrawMap(gRenderer);
-                gMap.copyMap(map_data);
-
-                //enemy and check collision of it
-                SDL_Rect enemy_rect[int(enemies_list.size())];
-
-                for (int i = 0; i < int(enemies_list.size()); i++){
-                    enemies_list[i].controlMoving(gRenderer, "Data/photo/character/red_slime_left.png", "Data/photo/character/red_slime_right.png");
-                    enemies_list[i].DoPlayer(map_data);
-                    enemies_list[i].Show(gRenderer);
-                    enemy_rect[i] = enemies_list[i].get_current_pos();
-                    if ( check_collision(FireRect, enemy_rect[i]) || check_collision(WaterRect, enemy_rect[i]) ){
-                        Fire.setLose(); Water.getLose();
                     }
-                }
+                    //time counting
+                    timeText.str("");
+                    timeText << "TIME: " << set_standard_time( SDL_GetTicks() - startTime );
+                    time_count.setText(timeText.str());
+                    //set color for time_count
+                    time_count.setTextColor(WHITE_TEXT);
 
-                //box and check collision of it
-                SDL_Rect boxes_rect [int(boxes_list.size())];
+                    //Update screen
+                    SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 0.8);
+                    SDL_RenderClear(gRenderer);
 
-                for (int i = 0; i < int(boxes_list.size()); i++){
-                    boxes_list[i].DoPlayer(map_data);
-                    boxes_list[i].Show(gRenderer);
-                }
+                    //render background
+                    gBackground.render(0,0, NULL, gRenderer);
 
-                //render barrier and button
-                for (int i = 0; i < int(obj.size()); i++){
-                    obj[i].render(gRenderer);
-                }
-                //check collision of button
-                for (int i = 0; i < int(obj.size()); i++){
-                    SDL_Rect button = obj[i].getButRect();
+                    //main character
+                    Fire.DoPlayer(map_data);
+                    SDL_Rect FireRect = Fire.getRectChar();
+                    Fire.Show(gRenderer);
 
-                    if (check_collision(FireRect,button) || check_collision(WaterRect,button)){
-                        obj[i].setOnButton(true);
-                    }
-                    else{
-                        obj[i].setOnButton(false);
+                    Water.DoPlayer(map_data);
+                    SDL_Rect WaterRect = Water.getRectChar();
+                    Water.Show(gRenderer);
+
+                    //render map
+                    gMap.DrawMap(gRenderer);
+                    gMap.copyMap(map_data);
+
+                    //enemy and check collision of it
+                    SDL_Rect enemy_rect[int(enemies_list.size())];
+
+                    for (int i = 0; i < int(enemies_list.size()); i++){
+                        enemies_list[i].controlMoving(gRenderer, "Data/photo/character/red_slime_left.png", "Data/photo/character/red_slime_right.png");
+                        enemies_list[i].DoPlayer(map_data);
+                        enemies_list[i].Show(gRenderer);
+                        enemy_rect[i] = enemies_list[i].get_current_pos();
+                        if ( check_collision(FireRect, enemy_rect[i]) || check_collision(WaterRect, enemy_rect[i]) ){
+                            Fire.setLose(true); Water.setLose(true);
+                        }
                     }
 
-                    //activity related to button, barrier and character
-                    obj[i].activity(Fire);
-                    obj[i].activity(Water);
-                }
+                    //render barrier and button
+                    for (int i = 0; i < int(obj.size()); i++){
+                        obj[i].render(gRenderer);
+                    }
+                    //check collision of button
+                    for (int i = 0; i < int(obj.size()); i++){
+                        SDL_Rect button = obj[i].getButRect();
+
+                        if (check_collision(FireRect,button) || check_collision(WaterRect,button)){
+                            obj[i].setOnButton(true);
+                        }
+                        else{
+                            obj[i].setOnButton(false);
+                        }
+
+                        //activity related to button, barrier and character
+                        obj[i].activity(Fire);
+                        obj[i].activity(Water);
+                    }
 
 
-                //render time_count
-                if ( ! time_count.CreateGameText(gFont, gRenderer, ( SCREEN_WIDTH - time_count.getWidth() ) / 2, 0 ) ) {
-                    cout << "can't create time count !\n";
-                }
+                    //render time_count
+                    if ( ! time_count.CreateGameText(gFont, gRenderer, ( SCREEN_WIDTH - time_count.getWidth() ) / 2, 0 ) ) {
+                        cout << "can't create time count !\n";
+                    }
 
-                //show coin
-                string show_f_coin = "FIRE'S COIN: " + std::to_string(Fire.get_coin()) ; fire_coin.setText(show_f_coin);
-                string show_w_coin = "WATER'S COIN: " + std::to_string(Water.get_coin()) ; water_coin.setText(show_w_coin);
-                fire_coin.setTextColor(WHITE_TEXT) ; water_coin.setTextColor(WHITE_TEXT);
-                if ( ! ( fire_coin.CreateGameText(gFont, gRenderer, 0, 0) && water_coin.CreateGameText(gFont, gRenderer, SCREEN_WIDTH - water_coin.getWidth(), 0) ) ) {
-                    cout << "can't create game text of coin !\n";
-                }
-                //show to screen
-                SDL_RenderPresent(gRenderer);
+                    //show coin
+                    string show_f_coin = "FIRE'S COIN: " + std::to_string(Fire.get_coin()) ; fire_coin.setText(show_f_coin);
+                    string show_w_coin = "WATER'S COIN: " + std::to_string(Water.get_coin()) ; water_coin.setText(show_w_coin);
+                    fire_coin.setTextColor(WHITE_TEXT) ; water_coin.setTextColor(WHITE_TEXT);
+                    if ( ! ( fire_coin.CreateGameText(gFont, gRenderer, 0, 0) && water_coin.CreateGameText(gFont, gRenderer, SCREEN_WIDTH - water_coin.getWidth(), 0) ) ) {
+                        cout << "can't create game text of coin !\n";
+                    }
+                    //show to screen
+                    SDL_RenderPresent(gRenderer);
 
-                //set fps
-                int frameTicks = fps_timer.get_ticks();
-                if (frameTicks < SCREEN_TICKS_PER_FRAME){
-                    SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
+                    //set fps
+                    int frameTicks = fps_timer.get_ticks();
+                    if (frameTicks < SCREEN_TICKS_PER_FRAME){
+                        SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
 
-                }
-                if ( Water.getLose() || Fire.getLose() ){
-                    cout << "LOSE";
-                }
+                    }
+                    if ( Water.getLose() || Fire.getLose() ){
+                        cout << "LOSE";
+                        SDL_Delay(2000);
+                        Water.setLose(false);
+                        Fire.setLose(false);
+                        Water.~MainObject();
+                        Fire.~MainObject();
+                        obj.clear();
+                        enemies_list.clear();
+                        ret_menu = ShowMenuStartOrNot(Water, Fire, obj, enemies_list, gRenderer, event, path_map, quit);
+                        break;
+                    }
 
-                if ( Water.getWin() && Fire.getWin() ){
-                    cout << "WIN";
+                    if ( Water.getWin() && Fire.getWin() ){
+                        cout << "WIN";
+                        SDL_Delay(2000);
+                        Water.setWin(false);
+                        Fire.setWin(false);
+                        Water.~MainObject();
+                        Fire.~MainObject();
+                        obj.clear();
+                        enemies_list.clear();
+                        ret_menu = ShowMenuStartOrNot(Water, Fire, obj, enemies_list, gRenderer, event, path_map, quit);
+                        break;
+                    }
                 }
+            if (quit == true) break;
             }
         }
     }

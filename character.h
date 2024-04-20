@@ -56,13 +56,14 @@ public:
     void setXval(int x) { x_val_ = x; }
     void setYval(int y) { y_val_ = y; }
 
-    void setLose() { lose = true; }
+    void setLose(bool boo) { lose = boo; }
     bool getLose() { return lose; }
-    void setWin() { win = true; }
+    void setWin(bool boo) { win = boo; }
     bool getWin() { return win; }
 
     void coin_increase() { coin++; }
     int get_coin() { return coin; }
+    int set_coin() { coin = 0; }
     bool check_liquid(int val_1, int val_2, CHARACTER char_main);
 
     void setCharacter(CHARACTER charact) { character = charact; }

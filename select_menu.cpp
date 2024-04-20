@@ -21,7 +21,7 @@ int Randomlevel()
     return level;
 }
 
-string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj, vector<Enemy> &enemies_list, SDL_Renderer* screen, const int& level, vector<Box> &boxes_list)
+string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj, vector<Enemy> &enemies_list, SDL_Renderer* screen, const int& level)
 {
     string map_path;
 
@@ -41,11 +41,6 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
            enemies_list.push_back(Enemy(507, 114));
            enemies_list.push_back(Enemy(130, 532));
            enemies_list.push_back(Enemy(670, 402));
-
-            //set position and create for box
-            boxes_list.push_back(Box(352, 130));
-            boxes_list.push_back(Box(193,640));
-            boxes_list.push_back(Box(288,710));
 
            break;
         }
@@ -103,10 +98,7 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
                     enemies_list[i].loadImg("Data/photo/character/red_slime_left.png", screen);
                     enemies_list[i].set_clips();
                 }
-                //load box, setMoving into Standing, not need to setclips
-                for (int i = 0; i < int(boxes_list.size()); i++){
-                    boxes_list[i].loadImg("Data/new_tiles/image_part_050.png", screen);
-                }
+
                 //load obj
                 for (int i = 0; i < int(obj.size()); i++){
                     obj[i].loadImg(screen);
@@ -114,7 +106,7 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
     return map_path;
 }
 
-int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enemy> &enemies_list, SDL_Renderer* screen, SDL_Event event, string &path_map, vector<Box> &boxes_list) //tí nữa code phần khi bấm vào từng phần lựa chọn thì show ra một cửa sổ mới
+int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enemy> &enemies_list, SDL_Renderer* screen, SDL_Event event, string &path_map, bool &quit) //tí nữa code phần khi bấm vào từng phần lựa chọn thì show ra một cửa sổ mới
 {
     LTexture StartMenu;
     if ( ! StartMenu.loadFromFile("Data/photo/background/brick_background.png", screen) ){
@@ -148,7 +140,8 @@ int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> 
             switch (event.type)
             {
             case SDL_QUIT:
-                return 1;
+                    quit = 1;
+                    return 0;
             case SDL_MOUSEMOTION:
                 x_mouse = event.motion.x;
                 y_mouse = event.motion.y;
@@ -158,21 +151,23 @@ int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> 
                 y_mouse = event.motion.y;
 
                 if (CheckFocusWithRect(x_mouse, y_mouse,select_button[0].getRect())){
-                    int if_choose = ShowSelectLevel(screen, event, path_map, Player1, Player2, obj, enemies_list, boxes_list);
+                    int if_choose = ShowSelectLevel(screen, event, path_map, Player1, Player2, obj, enemies_list, quit);
                     return if_choose;
                 }
                 else if (CheckFocusWithRect(x_mouse, y_mouse, select_button[1].getRect())){
                     int level = Randomlevel();
-                    path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, level, boxes_list);
+                    path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, level);
                     return 0;
                 }
                 else if (CheckFocusWithRect(x_mouse, y_mouse, select_button[2].getRect())){
-                    return 1;
+                    quit = true;
+                    return 0;
                 }
                 break;
             case SDL_KEYDOWN:
                 if (event.key.keysym.sym == SDLK_ESCAPE){
-                    return 1;
+                    quit = 1;
+                    return 0;
                 }
                 break;
             default:
@@ -185,7 +180,7 @@ int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> 
     return 1;
 }
 
-int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enemy> &enemies_list, vector<Box> &boxes_list)
+int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enemy> &enemies_list, bool &quit)
 {
     //if (ShowMenuStartOrNot(Player1, Player2, obj, enemies_list, screen, event, path_map) == 1) return 1;
     //free luon texture kia luon
@@ -220,7 +215,8 @@ int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, Mai
             switch (event.type)
             {
             case SDL_QUIT:
-                return 1; //1 là quit ra ngoài
+                    quit = 1;
+                    return 0; //1 là quit ra ngoài
 
             case SDL_MOUSEMOTION:
                 x_mouse = event.motion.x;
@@ -233,7 +229,7 @@ int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, Mai
 
                 for (int i = 0; i < level_num; i++){
                     if (CheckFocusWithRect(x_mouse, y_mouse, level_button[i].getRect()) ){
-                        path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, i, boxes_list); //lay path roi return ve 0 luon (thoat khoi vong lap
+                        path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, i); //lay path roi return ve 0 luon (thoat khoi vong lap
                         return 0; //0 là không quit
                     }
                 }
@@ -241,7 +237,8 @@ int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, Mai
 
             case SDL_KEYDOWN:
                 if (event.key.keysym.sym == SDLK_ESCAPE){
-                    return 1; //1 là quit ra ngoài
+                    quit = 1;
+                    return 0; //1 là quit ra ngoài
                 }
                 break;
 

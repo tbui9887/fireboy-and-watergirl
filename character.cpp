@@ -22,6 +22,18 @@ MainObject::MainObject()
 
 MainObject::~MainObject()
 {
+    x_pos_ = 0;
+    y_pos_ = 0;
+    x_val_ = 0;
+    y_val_ = 0;
+    coin = 0;
+
+    input_type_.jump_ = 0;
+    input_type_.left_ = 0;
+    input_type_.right_ = 0;
+    input_type_.stand_ = 0;
+    input_type_.up_ = 0;
+    //defaut
     free();
 }
 
@@ -224,12 +236,12 @@ void MainObject::check_to_map(Map& map_data)
 
         if ( (value_1 == ABOVE_FIRE_DOOR || value_1 == END_FIRE_DOOR ||
               value_2 == ABOVE_FIRE_DOOR || value_2 == END_FIRE_DOOR ) && character == FIREBOY){
-                setWin();
+                setWin(true);
         }
 
         if ( (value_1 == ABOVE_WATER_DOOR || value_1 == END_WATER_DOOR ||
               value_2 == ABOVE_WATER_DOOR || value_2 == END_WATER_DOOR ) && character == WATERGIRL){
-                setWin();
+                setWin(true);
         }
 
         //không đi qua các ô này
@@ -248,7 +260,7 @@ void MainObject::check_to_map(Map& map_data)
             }
         //check khi vào liquid không hợp lí thì thua
         if (check_liquid (value_1, value_2, character)){
-            setLose();
+            setLose(true);
         }
         }
         else if (x_val_ < 0)
@@ -269,12 +281,12 @@ void MainObject::check_to_map(Map& map_data)
 
         if ( (value_1 == ABOVE_FIRE_DOOR || value_1 == END_FIRE_DOOR ||
               value_2 == ABOVE_FIRE_DOOR || value_2 == END_FIRE_DOOR ) && character == FIREBOY){
-                setWin();
+                setWin(true);
         }
 
         if ( (value_1 == ABOVE_WATER_DOOR || value_1 == END_WATER_DOOR ||
               value_2 == ABOVE_WATER_DOOR || value_2 == END_WATER_DOOR ) && character == WATERGIRL){
-                setWin();
+                setWin(true);
         }
 
         //không đi qua các ô này
@@ -293,7 +305,7 @@ void MainObject::check_to_map(Map& map_data)
 
         //check khi vào liquid không hợp lí thì thua
         if (check_liquid (value_1, value_2, character)){
-            setLose();
+            setLose(true);
         }
         }
     }
@@ -329,12 +341,12 @@ void MainObject::check_to_map(Map& map_data)
         //đi vào cửa thì set thành win
         if ( (value_1 == ABOVE_FIRE_DOOR || value_1 == END_FIRE_DOOR ||
               value_2 == ABOVE_FIRE_DOOR || value_2 == END_FIRE_DOOR ) && character == FIREBOY){
-                setWin();
+                setWin(true);
         }
 
         if ( (value_1 == ABOVE_WATER_DOOR || value_1 == END_WATER_DOOR ||
               value_2 == ABOVE_WATER_DOOR || value_2 == END_WATER_DOOR ) && character == WATERGIRL){
-                setWin();
+                setWin(true);
         }
 
         //không đi qua các ô này
@@ -355,7 +367,7 @@ void MainObject::check_to_map(Map& map_data)
 
             //check khi vào liquid không hợp lí thì thua
             if (check_liquid (value_1, value_2, character)){
-                setLose();
+                setLose(true);
             }
         }
         else if (y_val_ < 0)
@@ -378,12 +390,12 @@ void MainObject::check_to_map(Map& map_data)
         //đi vào cửa thì set thành win
         if ( (value_1 == ABOVE_FIRE_DOOR || value_1 == END_FIRE_DOOR ||
               value_2 == ABOVE_FIRE_DOOR || value_2 == END_FIRE_DOOR ) && character == FIREBOY){
-                setWin();
+                setWin(true);
         }
 
         if ( (value_1 == ABOVE_WATER_DOOR || value_1 == END_WATER_DOOR ||
               value_2 == ABOVE_WATER_DOOR || value_2 == END_WATER_DOOR ) && character == WATERGIRL){
-                setWin();
+                setWin(true);
         }
 
         //không đi qua các ô này
@@ -401,7 +413,7 @@ void MainObject::check_to_map(Map& map_data)
         }
         //check khi vào liquid không hợp lí thì thua
         if (check_liquid (value_1, value_2, character)){
-            setLose();
+            setLose(true);
         }
     }
 
@@ -409,8 +421,8 @@ void MainObject::check_to_map(Map& map_data)
     int block_below_1 = map_data.tile[y2][x1];
     int block_below_2 = map_data.tile[y2][x2];
 
-    if (block_below_1 == 5|| block_below_2 == 5){ //nếu chỉ có cái này, nó chỉ check ở dưới chân của nó có block kia khôgn thì mới giảm thôi (thích hợp để làm cái nhún)
-        y_val_ -= BLOCK_SIZE/3;
+    if (block_below_1 == 1 || block_below_2 == 1 || block_below_1 == 2 || block_below_2 == 2){ //nếu chỉ có cái này, nó chỉ check ở dưới chân của nó có block kia khôgn thì mới giảm thôi (thích hợp để làm cái nhún)
+        y_val_ -= BLOCK_SIZE/2;
     }
     //cập nhật lại vị trí của main character
     x_pos_ += x_val_;

@@ -72,10 +72,10 @@ enum CHARACTER{ //có thể sẽ phát triển animation của cái khác nữa,
 #define frame_main_character_walk 9
 #define frame_main_character_stand 7
 
-#define GRAVITY 0.5
+#define GRAVITY 0.8
 #define MAX_GRAVITY 6
-#define PLAYER_SPEED 2
-#define JUMP_SPEED 20
+#define PLAYER_SPEED 4
+#define JUMP_SPEED 15
 #define diff_walk 7
 
 #define FPS 40

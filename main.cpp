@@ -12,6 +12,9 @@ static SDL_Window* gWindow = NULL;
 static SDL_Renderer* gRenderer = NULL;
 static TTF_Font* gFont = NULL;
 
+Mix_Music* gMusic = NULL;
+Mix_Chunk *death = NULL;
+
 LTexture gBackground;
 
 GameMap gMap;
@@ -30,7 +33,7 @@ Text fire_coin;
 bool init()
 {
     bool success = true;
-    if (SDL_Init(SDL_INIT_VIDEO) < 0){
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0){
         printf("SDL_Error: %s\n", SDL_GetError());
         success = false;
     }
@@ -56,6 +59,10 @@ bool init()
                 cout << "can't init ttf\n";
                 success = false;
             }
+            if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0){
+                cout << "error in mix_openaudio: " << Mix_GetError() << std::endl;
+                success = false;
+            }
         }
     }
 
@@ -72,7 +79,7 @@ bool loadMedia()
 {
     bool success = true;
     //load background
-    gBackground.loadFromFile("Data/photo/background/brick_background.png",gRenderer);
+    gBackground.loadFromFile("Data/photo/background/background.png",gRenderer);
 
     //load watergirl character
     Water.loadFromFile("Data/photo/character/water_girl_stand.png", gRenderer);
@@ -81,6 +88,13 @@ bool loadMedia()
     //load fireboy character
     Fire.loadFromFile("Data/photo/character/fire_boy_stand.png", gRenderer);
     Fire.set_clips();
+
+    //load music
+    gMusic = Mix_LoadMUS("Data/sound/Level Music.wav");
+    if (gMusic == NULL){
+        cout << "can't open soundtrack!";
+    }
+    death = Mix_LoadWAV("Data/sound/Death.wav");
 
     return success;
 }
@@ -96,6 +110,10 @@ void close()
 
     gRenderer = NULL;
     gWindow = NULL;
+
+    //free music
+    Mix_FreeMusic(gMusic);
+    gMusic = NULL;
 
     SDL_Quit();
     IMG_Quit();
@@ -124,6 +142,9 @@ int main(int argc, char* args[])
                 Water.setCharacter(WATERGIRL); Water.SetHeight(50);
 
                 while (!quit){
+                    if (Mix_PlayMusic(gMusic, -1) == -1){
+                        cout << "can't play music! \n";
+                    }
                     fps_timer.start();
                     while (SDL_PollEvent(&event) != 0){ //event click quit and key related to main character
                         if (event.type == SDL_QUIT) quit = true;
@@ -214,6 +235,7 @@ int main(int argc, char* args[])
 
                     }
                     if ( Water.getLose() || Fire.getLose() ){
+                        Mix_PlayChannel(-1, death, 0);
                         cout << "LOSE";
                         SDL_Delay(2000);
                         Water.setLose(false);
@@ -227,7 +249,6 @@ int main(int argc, char* args[])
                     }
 
                     if ( Water.getWin() && Fire.getWin() ){
-                        cout << "WIN";
                         SDL_Delay(2000);
                         Water.setWin(false);
                         Fire.setWin(false);
@@ -236,6 +257,7 @@ int main(int argc, char* args[])
                         obj.clear();
                         enemies_list.clear();
                         ret_menu = ShowMenuStartOrNot(Water, Fire, obj, enemies_list, gRenderer, event, path_map, quit);
+                        cout << "WIN";
                         break;
                     }
                 }

@@ -256,6 +256,16 @@ bool CheckFocusWithRect(const int& x, const int& y, const SDL_Rect& rect)
     if (x >= rect.x && x <= rect.x + rect.w &&
         y >= rect.y && y <= rect.y + rect.h){
             return true;
-        }
+    }
     return false;
 }
+
+//menu in game
+//restart + back to home (we just need to call show menu start or not and after that, before that we set lose) + pause <resume>
+
+void menu_playing()
+{
+
+}
+
+

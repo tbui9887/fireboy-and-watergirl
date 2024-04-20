@@ -1,5 +1,11 @@
 #include "character.h"
 
+
+Mix_Chunk *diamond = NULL;
+Mix_Chunk *jump_fb = NULL;
+Mix_Chunk *jump_wg = NULL;
+Mix_Chunk *water_step = NULL;
+
 MainObject::MainObject()
 {
     frame_ = 0;
@@ -134,6 +140,8 @@ void MainObject::HandleInputAction(SDL_Event event, SDL_Renderer* screen, CHARAC
                         status_ = FIRE_JUMP;
                         input_type_.jump_ = 1;
                         input_type_.stand_ = 0;
+                        jump_fb = Mix_LoadWAV("Data/sound/Jump fb.wav");
+                        Mix_PlayChannel(-1, jump_fb, 0);
                     }
                     break;
             }
@@ -162,10 +170,16 @@ void MainObject::HandleInputAction(SDL_Event event, SDL_Renderer* screen, CHARAC
                     break;
                 case SDLK_w:
                     if (on_ground){
+
                         status_ = WATER_JUMP;
                         input_type_.jump_ = 1;
                         input_type_.stand_ = 0;
+                        jump_wg = Mix_LoadWAV("Data/sound/Jump wg.wav");
+                        Mix_PlayChannel(-1, jump_wg, 0);
                     }
+                    break;
+                case SDLK_ESCAPE:
+                    //menu restart, pause, back to home menu
                     break;
             }
         }
@@ -201,6 +215,9 @@ void MainObject::DoPlayer(Map& map_data)
 
 void MainObject::check_to_map(Map& map_data)
 {
+    water_step = Mix_LoadWAV("Data/sound/Water_Steps.wav");
+    diamond = Mix_LoadWAV("Data/sound/Diamond.wav");
+
     int x1 = 0;
     int x2 = 0;
 
@@ -226,12 +243,14 @@ void MainObject::check_to_map(Map& map_data)
             map_data.tile[y1][x2] = BLANK_TILE;
             map_data.tile[y2][x2] = BLANK_TILE;
             coin_increase();
+            Mix_PlayChannel(-1, diamond, 0);
         }
 
         if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && character == WATERGIRL) {
             map_data.tile[y1][x2] = BLANK_TILE;
             map_data.tile[y2][x2] = BLANK_TILE;
             coin_increase();
+            Mix_PlayChannel(-1, diamond, 0);
         }
 
         if ( (value_1 == ABOVE_FIRE_DOOR || value_1 == END_FIRE_DOOR ||
@@ -271,12 +290,14 @@ void MainObject::check_to_map(Map& map_data)
             map_data.tile[y1][x1] = BLANK_TILE;
             map_data.tile[y2][x1] = BLANK_TILE;
             coin_increase();
+            Mix_PlayChannel(-1, diamond, 0);
         }
 
         if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && character == WATERGIRL) {
             map_data.tile[y1][x1] = BLANK_TILE;
             map_data.tile[y2][x1] = BLANK_TILE;
             coin_increase();
+            Mix_PlayChannel(-1, diamond, 0);
         }
 
         if ( (value_1 == ABOVE_FIRE_DOOR || value_1 == END_FIRE_DOOR ||
@@ -302,7 +323,6 @@ void MainObject::check_to_map(Map& map_data)
                 x_pos_ = (x1 + 1) * BLOCK_SIZE;
                 x_val_ = 0;
             }
-
         //check khi vào liquid không hợp lí thì thua
         if (check_liquid (value_1, value_2, character)){
             setLose(true);
@@ -330,12 +350,14 @@ void MainObject::check_to_map(Map& map_data)
             map_data.tile[y2][x1] = BLANK_TILE;
             map_data.tile[y2][x2] = BLANK_TILE;
             coin_increase();
+            Mix_PlayChannel(-1, diamond, 0);
         }
 
         if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && character == WATERGIRL) {
             map_data.tile[y2][x1] = BLANK_TILE;
             map_data.tile[y2][x2] = BLANK_TILE;
             coin_increase();
+            Mix_PlayChannel(-1, diamond, 0);
         }
 
         //đi vào cửa thì set thành win
@@ -379,12 +401,14 @@ void MainObject::check_to_map(Map& map_data)
             map_data.tile[y1][x1] = BLANK_TILE;
             map_data.tile[y1][x2] = BLANK_TILE;
             coin_increase();
+            Mix_PlayChannel(-1, diamond, 0);
         }
 
         if ( (value_1 == BLUE_COIN || value_2 == BLUE_COIN) && character == WATERGIRL) {
             map_data.tile[y1][x1] = BLANK_TILE;
             map_data.tile[y1][x2] = BLANK_TILE;
             coin_increase();
+            Mix_PlayChannel(-1, diamond, 0);
         }
 
         //đi vào cửa thì set thành win

@@ -30,6 +30,7 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
 int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enemy> &enemies_list, SDL_Renderer* screen, SDL_Event event, string &path_map, bool &quit);
 int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enemy> &enemies_list, bool &quit);
 bool CheckFocusWithRect(const int& x, const int& y, const SDL_Rect& rect);
+int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object> &obj, vector<Enemy> &enemies_list, MainObject &Player1, MainObject &Player2, string path_map);
 
 
 #endif // SELECT_MENU_H

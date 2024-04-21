@@ -28,6 +28,8 @@ public:
     SDL_Rect getRect() {return mRect; }
     SDL_Texture* getTexture() {return mTexture; }
 
+    void ChangeColorTexture(int r, int b, int g) { SDL_SetTextureColorMod(mTexture, r, g, b); }
+
 private:
     SDL_Texture* mTexture;
     SDL_Rect mRect;

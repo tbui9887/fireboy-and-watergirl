@@ -139,13 +139,14 @@ int main(int argc, char* args[])
         if (!loadMedia()) return -1;
         else{
             bool quit = false;
+            int ReturnMenu = -1;
             std::stringstream timeText;
             string path_map;
                 int startTime = 0;
                 SDL_Event event;
-                int ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit);
 
                 while (1){
+                int ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit);
                 gMap.LoadMap(path_map);
                 gMap.LoadTiles(gRenderer);
                 Map map_data = gMap.getMap();
@@ -162,7 +163,14 @@ int main(int argc, char* args[])
                         if (event.type == SDL_QUIT) quit = true;
                         Fire.HandleInputAction(event, gRenderer, FIREBOY);
                         Water.HandleInputAction(event, gRenderer, WATERGIRL);
+                        if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE){
+                            ReturnMenu = menu_playing(gRenderer, event, quit, obj, enemies_list, Fire, Water, path_map);
+                        }
+                    }
 
+                    if (ReturnMenu == 1){
+                        ReturnMenu = 0;
+                        break;
                     }
                     //time counting
                     timeText.str("");
@@ -251,6 +259,7 @@ int main(int argc, char* args[])
                         cout << "LOSE";
                         SDL_Delay(2000);
 
+
                         Water.setLose(false);
                         Fire.setLose(false);
                         Water.~MainObject();
@@ -258,6 +267,7 @@ int main(int argc, char* args[])
                         obj.clear();
                         enemies_list.clear();
                         ret_menu = ShowMenuStartOrNot(Water, Fire, obj, enemies_list, gRenderer, event, path_map, quit);
+
                         break;
                     }
 
@@ -266,14 +276,16 @@ int main(int argc, char* args[])
 
                         Water.setWin(false);
                         Fire.setWin(false);
-                        Water.~MainObject();
-                        Fire.~MainObject();
+                        //Water.~MainObject();
+                        //Fire.~MainObject();
                         obj.clear();
                         enemies_list.clear();
                         ret_menu = ShowMenuStartOrNot(Water, Fire, obj, enemies_list, gRenderer, event, path_map, quit);
+
                         cout << "WIN";
                         break;
                     }
+                    if (quit == true) break;
                 }
             if (quit == true) break;
             }

@@ -40,7 +40,6 @@ MainObject::~MainObject()
     input_type_.stand_ = 0;
     input_type_.up_ = 0;
     //defaut
-    free();
 }
 
 bool MainObject::loadFromFile(std::string path, SDL_Renderer* screen)

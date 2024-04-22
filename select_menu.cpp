@@ -25,8 +25,9 @@ int Randomlevel()
     return level;
 }
 
-string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj, vector<Enemy> &enemies_list, SDL_Renderer* screen, const int& level)
+string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj, vector<Enemy> &enemies_list, SDL_Renderer* screen, const int& level, int &StartTime)
 {
+    StartTime = SDL_GetTicks(); //return time 0
     string map_path;
 
     switch(level)
@@ -110,7 +111,7 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
     return map_path;
 }
 
-int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enemy> &enemies_list, SDL_Renderer* screen, SDL_Event event, string &path_map, bool &quit) //tí nữa code phần khi bấm vào từng phần lựa chọn thì show ra một cửa sổ mới
+int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enemy> &enemies_list, SDL_Renderer* screen, SDL_Event event, string &path_map, bool &quit, int &StartTime) //tí nữa code phần khi bấm vào từng phần lựa chọn thì show ra một cửa sổ mới
 {
     menuMusic = Mix_LoadMUS("Data/sound/Menu Music.wav");
     if (menuMusic == NULL) cout << "can't open menuMusic\n";
@@ -171,12 +172,12 @@ int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> 
                 y_mouse = event.motion.y;
 
                 if (CheckFocusWithRect(x_mouse, y_mouse,select_button[0].getRect())){
-                    int if_choose = ShowSelectLevel(screen, event, path_map, Player1, Player2, obj, enemies_list, quit);
+                    int if_choose = ShowSelectLevel(screen, event, path_map, Player1, Player2, obj, enemies_list, quit, StartTime);
                     return if_choose;
                 }
                 else if (CheckFocusWithRect(x_mouse, y_mouse, select_button[1].getRect())){
                     int level = Randomlevel();
-                    path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, level);
+                    path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, level, StartTime);
                     return 0;
                 }
                 else if (CheckFocusWithRect(x_mouse, y_mouse, select_button[2].getRect())){
@@ -200,7 +201,7 @@ int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> 
     return 1;
 }
 
-int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enemy> &enemies_list, bool &quit)
+int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enemy> &enemies_list, bool &quit, int &StartTime)
 {
     //if (ShowMenuStartOrNot(Player1, Player2, obj, enemies_list, screen, event, path_map) == 1) return 1;
     //free luon texture kia luon
@@ -258,7 +259,7 @@ int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, Mai
 
                 for (int i = 0; i < level_num; i++){
                     if (CheckFocusWithRect(x_mouse, y_mouse, level_button[i].getRect()) ){
-                        path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, i); //lay path roi return ve 0 luon (thoat khoi vong lap
+                        path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, i, StartTime); //lay path roi return ve 0 luon (thoat khoi vong lap
                         return 0; //0 là không quit
                     }
                 }
@@ -292,7 +293,7 @@ bool CheckFocusWithRect(const int& x, const int& y, const SDL_Rect& rect)
 //menu in game
 //restart + back to home (we just need to call show menu start or not and after that, before that we set lose) + pause <resume>
 
-int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object> &obj, vector<Enemy> &enemies_list, MainObject &Player1, MainObject &Player2, string path_map)
+int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object> &obj, vector<Enemy> &enemies_list, MainObject &Player1, MainObject &Player2, string path_map, int &StartTime)
 {
     const int num_button = 3;
     LTexture playing_button [num_button];
@@ -348,7 +349,7 @@ int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object
                         else if (path_map == "Data/map/MapLevel2.txt") level = 1;
                         else level = 2;
 
-                        path_map = LevelMap(Player2, Player1, obj, enemies_list, screen, level);
+                        path_map = LevelMap(Player2, Player1, obj, enemies_list, screen, level, StartTime); //TimeCount is StartTime
                         return 0;
                 }
                 else if (CheckFocusWithRect(x_mouse, y_mouse, playing_button[1].getRect())){
@@ -378,7 +379,7 @@ int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object
     }
 }
 
-int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object> &obj, vector<Enemy> &enemies_list, MainObject &Player1, MainObject &Player2, string path_map, bool win, const int &time_num)
+int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object> &obj, vector<Enemy> &enemies_list, MainObject &Player1, MainObject &Player2, string path_map, bool win, const int &time_num, int &StartTime)
 {
     normal_letter = TTF_OpenFont("Data/font/Oswald-VariableFont_wght.ttf", 24);
     if (normal_letter == NULL){
@@ -455,11 +456,11 @@ int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object>
 
     //result
     Text Result;
-    if (evaluate == 3) Result.setText("A");
-    else if (evaluate == 2) Result.setText("B");
-    else if (evaluate == 1) Result.setText("C");
+    if (evaluate == 3) Result.setText("SCORE:   A");
+    else if (evaluate == 2) Result.setText("SCORE:  B");
+    else if (evaluate == 1) Result.setText("SCORE:  C");
 
-    if (!win) Result.setText("F");
+    if (!win) Result.setText("SCORE:    F");
     Result.setTextColor(RED_TEXT);
 
     //delete all before playing
@@ -479,7 +480,7 @@ int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object>
         WaterCoin.CreateGameText(normal_letter, screen, x_back + 10, y_back + 50);
         FireCoin.CreateGameText(normal_letter, screen, x_back + 10, y_back + 90);
         TimeCount.CreateGameText(normal_letter, screen, x_back + 10, y_back + 130);
-        Result.CreateGameText(normal_letter, screen, x_back + 450/2, y_back + 175);
+        Result.CreateGameText(normal_letter, screen, x_back + 10, y_back + 175);
 
         //interact with button
         while (SDL_PollEvent(&event) != 0){
@@ -502,7 +503,7 @@ int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object>
                     else if (path_map == "Data/map/MapLevel2.txt") level = 1;
                     else level = 2;
 
-                    path_map = LevelMap(Player2, Player1, obj, enemies_list, screen, level);
+                    path_map = LevelMap(Player2, Player1, obj, enemies_list, screen, level, StartTime);
                     return 0;
                 }
                 break;

@@ -145,11 +145,11 @@ int main(int argc, char* args[])
             string path_map;
             int startTime = 0;
             SDL_Event event;
-            int ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit);
+            int ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit, startTime);
 
             while (1){
                 if (ReturnMenu == 1){
-                    ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit);
+                    ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit, startTime);
                     ReturnMenu = 0;
                 }
                 gMap.LoadMap(path_map);
@@ -169,7 +169,7 @@ int main(int argc, char* args[])
                         Fire.HandleInputAction(event, gRenderer, FIREBOY);
                         Water.HandleInputAction(event, gRenderer, WATERGIRL);
                         if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE){
-                            ReturnMenu = menu_playing(gRenderer, event, quit, obj, enemies_list, Fire, Water, path_map);
+                            ReturnMenu = menu_playing(gRenderer, event, quit, obj, enemies_list, Fire, Water, path_map, startTime);
                         }
                     }
 
@@ -267,7 +267,7 @@ int main(int argc, char* args[])
 
                         obj.clear();
                         enemies_list.clear();
-                        ReturnMenu = MenuResult(gRenderer, event, quit, obj, enemies_list, Water, Fire, path_map, false, SDL_GetTicks() - startTime);
+                        ReturnMenu = MenuResult(gRenderer, event, quit, obj, enemies_list, Water, Fire, path_map, false, SDL_GetTicks() - startTime, startTime);
                         Water.set_coin(); Fire.set_coin();
                         break;
                     }
@@ -279,7 +279,7 @@ int main(int argc, char* args[])
 
                         obj.clear();
                         enemies_list.clear();
-                        ReturnMenu = MenuResult(gRenderer, event, quit, obj, enemies_list, Water, Fire, path_map, true, SDL_GetTicks() - startTime);
+                        ReturnMenu = MenuResult(gRenderer, event, quit, obj, enemies_list, Water, Fire, path_map, true, SDL_GetTicks() - startTime, startTime);
                         break;
                     }
                     if (quit == true) break;

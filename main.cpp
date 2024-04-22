@@ -142,11 +142,15 @@ int main(int argc, char* args[])
             int ReturnMenu = -1;
             std::stringstream timeText;
             string path_map;
-                int startTime = 0;
-                SDL_Event event;
+            int startTime = 0;
+            SDL_Event event;
+            int ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit);
 
-                while (1){
-                int ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit);
+            while (1){
+                if (ReturnMenu == 1){
+                    ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit);
+                    ReturnMenu = 0;
+                }
                 gMap.LoadMap(path_map);
                 gMap.LoadTiles(gRenderer);
                 Map map_data = gMap.getMap();
@@ -169,7 +173,6 @@ int main(int argc, char* args[])
                     }
 
                     if (ReturnMenu == 1){
-                        ReturnMenu = 0;
                         break;
                     }
                     //time counting

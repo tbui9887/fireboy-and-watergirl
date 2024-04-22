@@ -8,9 +8,9 @@
 #include "text.h"
 #include "select_menu.h"
 
-static SDL_Window* gWindow = NULL;
-static SDL_Renderer* gRenderer = NULL;
-static TTF_Font* gFont = NULL;
+SDL_Window* gWindow = NULL;
+SDL_Renderer* gRenderer = NULL;
+TTF_Font* gFont = NULL;
 
 Mix_Music* gMusic = NULL;
 Mix_Chunk *death = NULL;
@@ -72,6 +72,7 @@ bool init()
         success = false;
         cout << "can't open font\n";
     }
+
     return success;
 }
 
@@ -259,33 +260,26 @@ int main(int argc, char* args[])
                     }
                     if ( Water.getLose() || Fire.getLose() ){
                         Mix_PlayChannel(-1, death, 0);
-                        cout << "LOSE";
-                        SDL_Delay(2000);
 
-
+                        Water.~MainObject(); Fire.~MainObject();
                         Water.setLose(false);
                         Fire.setLose(false);
-                        Water.~MainObject();
-                        Fire.~MainObject();
+
                         obj.clear();
                         enemies_list.clear();
-                        ret_menu = ShowMenuStartOrNot(Water, Fire, obj, enemies_list, gRenderer, event, path_map, quit);
-
+                        ReturnMenu = MenuResult(gRenderer, event, quit, obj, enemies_list, Water, Fire, path_map, false, SDL_GetTicks() - startTime);
+                        Water.set_coin(); Fire.set_coin();
                         break;
                     }
 
                     if ( Water.getWin() && Fire.getWin() ){
-                        SDL_Delay(2000);
-
+                        Water.~MainObject(); Fire.~MainObject();
                         Water.setWin(false);
                         Fire.setWin(false);
-                        //Water.~MainObject();
-                        //Fire.~MainObject();
+
                         obj.clear();
                         enemies_list.clear();
-                        ret_menu = ShowMenuStartOrNot(Water, Fire, obj, enemies_list, gRenderer, event, path_map, quit);
-
-                        cout << "WIN";
+                        ReturnMenu = MenuResult(gRenderer, event, quit, obj, enemies_list, Water, Fire, path_map, true, SDL_GetTicks() - startTime);
                         break;
                     }
                     if (quit == true) break;

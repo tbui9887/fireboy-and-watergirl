@@ -1,6 +1,8 @@
 #include "select_menu.h"
 
 Mix_Music *menuMusic;
+TTF_Font *normal_letter;
+TTF_Font *result_letter;
 
 int ChooseGamePlayMode()
 {
@@ -309,7 +311,6 @@ int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object
 
     int x_mouse, y_mouse;
     while(true){
-
         for (int i = 0; i < num_button; i++){
             playing_button[i].render(playing_button[i].getRect().x, playing_button[i].getRect().y, NULL, screen);
         }
@@ -333,6 +334,7 @@ int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object
                     }
                 }
                 break;
+
             case SDL_MOUSEBUTTONDOWN:
                 x_mouse = event.motion.x;
                 y_mouse = event.motion.y;
@@ -344,9 +346,9 @@ int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object
                         int level;
                         if (path_map == "Data/map/MapLevel1.txt") level = 0;
                         else if (path_map == "Data/map/MapLevel2.txt") level = 1;
-                        else level = 3;
+                        else level = 2;
 
-                        path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, level);
+                        path_map = LevelMap(Player2, Player1, obj, enemies_list, screen, level);
                         return 0;
                 }
                 else if (CheckFocusWithRect(x_mouse, y_mouse, playing_button[1].getRect())){
@@ -374,7 +376,140 @@ int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object
         }
         SDL_RenderPresent(screen);
     }
-
 }
 
+int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object> &obj, vector<Enemy> &enemies_list, MainObject &Player1, MainObject &Player2, string path_map, bool win, const int &time_num)
+{
+    normal_letter = TTF_OpenFont("Data/font/Oswald-VariableFont_wght.ttf", 24);
+    if (normal_letter == NULL){
+        cout << "can't open font normal letter\n";
+    }
 
+    result_letter = TTF_OpenFont("Data/font/Mario-Party-Hudson-Font.ttf", 45);
+    if (result_letter = NULL){
+        cout << "can't open result font\n";
+    }
+
+    LTexture result_background;
+    if (! result_background.loadFromFile("Data/photo/background/winning_and_losing.png", screen) );
+
+    const int num_button = 2;
+    LTexture play_button [num_button];
+
+    if (! (play_button[0].loadFromFile("Data/photo/background/home_button.png", screen)
+           && play_button[1].loadFromFile("Data/photo/background/restart_button.png", screen))){
+        cout << "can't upload photo of winning/losing button";
+    }
+
+    play_button[0].SetWidth(75); play_button[0].SetHeight(64);
+    play_button[0].SetRect(SCREEN_WIDTH/2 + 64, SCREEN_HEIGHT - 175);
+    play_button[1].SetWidth(58); play_button[1].SetHeight(64);
+    play_button[1].SetRect(SCREEN_WIDTH/2 - 64, SCREEN_HEIGHT - 175);
+
+    int x_mouse, y_mouse;
+
+    //print result to screen
+    Text game_result;
+    if (win == 0){
+        game_result.setText("You Lose !");
+    }
+    else{
+        game_result.setText("You Win !");
+    }
+    game_result.setTextColor(BLACK_TEXT);
+
+    //evaluate
+    int evaluate = 0;
+
+    //text for coin
+    Text WaterCoin, FireCoin;
+    cout << Player1.get_coin() << " " << Player2.get_coin() << endl;
+    string WaterCoinText = "Watergirl coin:     " + std::to_string(Player1.get_coin());
+    if (Player1.get_coin() >= 7){
+        WaterCoinText += "         : PASS";
+        evaluate++;
+    }
+    else WaterCoinText += "         : FAIL";
+    WaterCoin.setText(WaterCoinText);
+    WaterCoin.setTextColor(BLACK_TEXT);
+
+    string FireCoinText = "Fireboy coin:       " + std::to_string(Player2.get_coin());
+    if (Player2.get_coin() >= 7){
+        FireCoinText += "          : PASS";
+        evaluate++;
+    }
+    else FireCoinText += "          : FAIL";
+    FireCoin.setText(FireCoinText);
+    FireCoin.setTextColor(BLACK_TEXT);
+
+    //text for time
+    Text TimeCount;
+    string TimeCountText = "Playing time:        ";
+    if (time_num > 90000) TimeCountText += "            : FAIL";
+    else{
+        TimeCountText += "         : PASS";
+        evaluate++;
+    }
+    TimeCount.setText(TimeCountText);
+    TimeCount.setTextColor(BLACK_TEXT);
+
+    //result
+    Text Result;
+    if (evaluate == 3) Result.setText("A");
+    else if (evaluate == 2) Result.setText("B");
+    else if (evaluate == 1) Result.setText("C");
+
+    if (!win) Result.setText("F");
+    Result.setTextColor(RED_TEXT);
+
+    //delete all before playing
+    obj.clear();
+    enemies_list.clear();
+
+    while (true){
+        //render background and button
+        result_background.render((SCREEN_WIDTH - 450)/2, (SCREEN_HEIGHT - 650)/2, NULL, screen); //450 and 650 is demension
+        for (int i = 0; i < num_button; i++){
+            play_button[i].render(play_button[i].getRect().x, play_button[i].getRect().y, NULL, screen);
+        }
+        //show text to screen
+        int x_back = (SCREEN_WIDTH - 450)/2;
+        int y_back = (SCREEN_HEIGHT - 650)/2;
+        game_result.CreateGameText(normal_letter, screen, x_back + 450/3, y_back+ 10);
+        WaterCoin.CreateGameText(normal_letter, screen, x_back + 10, y_back + 50);
+        FireCoin.CreateGameText(normal_letter, screen, x_back + 10, y_back + 90);
+        TimeCount.CreateGameText(normal_letter, screen, x_back + 10, y_back + 130);
+        Result.CreateGameText(normal_letter, screen, x_back + 450/2, y_back + 175);
+
+        //interact with button
+        while (SDL_PollEvent(&event) != 0){
+            switch (event.type)
+            {
+            case SDL_QUIT:
+                quit = 1;
+                return 0;
+            case SDL_MOUSEBUTTONDOWN:
+                x_mouse = event.motion.x;
+                y_mouse = event.motion.y;
+
+                if (CheckFocusWithRect(x_mouse, y_mouse, play_button[0].getRect())){
+                    return 1;
+                }
+
+                if (CheckFocusWithRect(x_mouse, y_mouse, play_button[1].getRect())){
+                    int level;
+                    if (path_map == "Data/map/MapLevel1.txt") level = 0;
+                    else if (path_map == "Data/map/MapLevel2.txt") level = 1;
+                    else level = 2;
+
+                    path_map = LevelMap(Player2, Player1, obj, enemies_list, screen, level);
+                    return 0;
+                }
+                break;
+            default:
+                break;
+            }
+        }
+        SDL_RenderPresent(screen);
+    }
+}

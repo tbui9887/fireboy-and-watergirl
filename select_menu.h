@@ -7,6 +7,7 @@
 #include "enermy.h"
 #include "texture.h"
 #include "text.h"
+#include "text.h"
 
 
 enum GAME_PLAY_MODE
@@ -31,6 +32,6 @@ int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> 
 int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enemy> &enemies_list, bool &quit);
 bool CheckFocusWithRect(const int& x, const int& y, const SDL_Rect& rect);
 int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object> &obj, vector<Enemy> &enemies_list, MainObject &Player1, MainObject &Player2, string path_map);
-
+int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object> &obj, vector<Enemy> &enemies_list, MainObject &Player1, MainObject &Player2, string path_map, bool win, const int &time_num);
 
 #endif // SELECT_MENU_H

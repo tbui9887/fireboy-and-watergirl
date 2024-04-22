@@ -28,11 +28,8 @@ MainObject::MainObject()
 
 MainObject::~MainObject()
 {
-    x_pos_ = 0;
-    y_pos_ = 0;
     x_val_ = 0;
     y_val_ = 0;
-    coin = 0;
 
     input_type_.jump_ = 0;
     input_type_.left_ = 0;

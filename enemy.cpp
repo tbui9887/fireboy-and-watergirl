@@ -45,6 +45,16 @@ Enemy::~Enemy()
     height_frame_ = 0;
 }
 
+void Enemy::DeleteEnemy()
+{
+    x_pos_ = 0;
+    y_pos_ = 0;
+    x_val_ = 0;
+    y_val_ = 0;
+    width_frame_ = 0;
+    height_frame_ = 0;
+}
+
 bool Enemy::loadImg(string path, SDL_Renderer* screen)
 {
     bool ret = LTexture::loadFromFile(path, screen);
@@ -222,6 +232,34 @@ void Enemy::CheckToMap(Map& map_data)
 
 }
 
+bool check_collision(SDL_Rect charRect, SDL_Rect button)
+{
+    // Check for collision on all sides
+    bool collisionLeft = charRect.x + charRect.w >= button.x &&
+                         charRect.x + charRect.w <= button.x + button.w &&
+                         charRect.y + charRect.h >= button.y &&
+                         charRect.y <= button.y + button.h;
+
+    bool collisionRight = charRect.x <= button.x + button.w &&
+                          charRect.x >= button.x &&
+                          charRect.y + charRect.h >= button.y &&
+                          charRect.y <= button.y + button.h;
+
+    bool collisionTop = charRect.y + charRect.h >= button.y &&
+                        charRect.y + charRect.h <= button.y + button.h &&
+                        charRect.x + charRect.w >= button.x &&
+                        charRect.x <= button.x + button.w;
+
+    bool collisionBottom = charRect.y <= button.y + button.h &&
+                           charRect.y >= button.y &&
+                           charRect.x + charRect.w >= button.x &&
+                           charRect.x <= button.x + button.w;
+
+    // Check if any collision occurred
+    return collisionLeft || collisionRight || collisionTop || collisionBottom;
+}
+
+
 void Enemy::controlMoving(SDL_Renderer* screen, string left_animation_Enemy, string right_animation_Enemy)
 {
     if (type_move_ == STANDING_ENEMY){
@@ -249,12 +287,3 @@ void Enemy::controlMoving(SDL_Renderer* screen, string left_animation_Enemy, str
 
 }
 
-bool check_collision(SDL_Rect charRect, SDL_Rect button)
-{
-    // Kiểm tra va chạm theo cả hai trục x và y
-    bool collision = (charRect.x < button.x + button.w &&
-                      charRect.x + charRect.w > button.x &&
-                      charRect.y < button.y + button.h &&
-                      charRect.y + charRect.h > button.y);
-    return collision;
-}

@@ -122,7 +122,7 @@ void Bomb::check_to_map(const Map &map_data){
     x_explode = x_bomb - 64; y_explode = y_bomb - 35; //update explode in the same time
 }
 
-void Bomb::ExplosionAfterPutBomb(SDL_Renderer *screen)
+void Bomb::ExplosionAfterPutBomb(SDL_Renderer *screen, MainObject &FirePlay, MainObject &WaterPlay, vector<Enemy> &enemies_list)
 {
     int time_distance = SDL_GetTicks() - TimePutBomb;
 
@@ -131,10 +131,40 @@ void Bomb::ExplosionAfterPutBomb(SDL_Renderer *screen)
     }
     else if (time_distance <= 4000){
         ShowExplode(screen);
+        InteractWithCharAndEnemy(FirePlay, WaterPlay, enemies_list);
     }
     else{
         isPutBomb = false;
         DeleteBomb();
     }
 }
+
+void Bomb::InteractWithCharAndEnemy(MainObject &FirePlay, MainObject &WaterPlay, vector<Enemy> &enemies_list)
+{
+    setExplosionRect();
+    //check with main character
+    SDL_Rect mainRect [2];
+
+    mainRect[FIREBOY] = FirePlay.getRectChar();
+    mainRect[WATERGIRL] = WaterPlay.getRectChar();
+
+    for (int i = 0; i < 2; i++){
+        if ( check_collision(mainRect[i], ExplosionRect) ){
+            cout << mainRect[i].x << " " << mainRect[i].y << " " << mainRect[i].w << " " << mainRect[i].h << " "
+                 << ExplosionRect.x << " " << ExplosionRect.y << " " << ExplosionRect.w << " " << ExplosionRect.h << endl;
+            FirePlay.setLose(true); WaterPlay.setLose(true);
+        }
+    }
+
+    //check with enemy
+    for (int i = 0; i < (int) enemies_list.size(); i++){
+        if ( check_collision(enemies_list[i].get_current_pos(), ExplosionRect) ){
+            enemies_list[i].DeleteEnemy();
+        }
+    }
+}
+
+
+
+
 

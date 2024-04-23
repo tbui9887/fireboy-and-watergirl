@@ -6,6 +6,7 @@
 #include "texture.h"
 #include "game_map.h"
 #include "character.h"
+#include "enemy.h"
 
 class Bomb : LTexture
 {
@@ -18,7 +19,7 @@ private:
 
     int x_explode, y_explode;
     int explode_width, explode_height;
-    SDL_Rect ExlosionRect;
+    SDL_Rect ExplosionRect;
 
     int TimePutBomb;
     bool isPutBomb = false;
@@ -33,10 +34,12 @@ public:
     void setXposBomb(int x) { x_bomb = x; }
     void setYposBomb(int y) { y_bomb = y; }
     void HandleInputAction (SDL_Event event, SDL_Renderer *screen, MainObject &Player);
-    void ExplosionAfterPutBomb(SDL_Renderer *screen);
+    void ExplosionAfterPutBomb(SDL_Renderer *screen, MainObject &FirePlay, MainObject &WaterPlay, vector<Enemy> &enemies_list);
     void FallDown(const Map &map_data);
     void check_to_map(const Map &map_data);
     bool getIsPutBomb() { return isPutBomb; }
+    void setExplosionRect() { ExplosionRect = {x_explode, y_explode, explode_width, explode_height}; }
+    void InteractWithCharAndEnemy(MainObject &FirePlay, MainObject &WaterPlay, vector<Enemy> &enemies_list);
 };
 
 

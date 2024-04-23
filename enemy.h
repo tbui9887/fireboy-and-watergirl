@@ -22,6 +22,7 @@ public:
     Enemy();
     Enemy(int x, int y);
     ~Enemy();
+    void DeleteEnemy();
 
     void set_x_val(const float& xVal) { x_val_ = xVal; }
     void set_y_val(const float& yVal) { y_val_ = yVal; }
@@ -65,6 +66,8 @@ private:
     Input input_type_;
     SDL_Rect current_pos;
 };
+
+bool check_collision(SDL_Rect charRect, SDL_Rect button);
 
 
 #endif // Enemy_H_

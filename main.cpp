@@ -213,7 +213,7 @@ int main(int argc, char* args[])
                         if (bomb[i].getIsPutBomb()){
                             cout << "getIsPutBomb is true\n";
                             bomb[i].FallDown(map_data);
-                            bomb[i].ExplosionAfterPutBomb(gRenderer);
+                            bomb[i].ExplosionAfterPutBomb(gRenderer, Fire, Water, enemies_list);
                         }
                     }
 

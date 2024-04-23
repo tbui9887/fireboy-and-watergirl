@@ -18,20 +18,22 @@ private:
 
     int x_explode, y_explode;
     int explode_width, explode_height;
+    SDL_Rect ExlosionRect;
 
     int TimePutBomb;
     bool isPutBomb = false;
 
 public:
     Bomb();
-    ~Bomb();
+    void DeleteBomb();
+
     void loadImg(SDL_Renderer *screen);
     void ShowBomb(SDL_Renderer *screen);
     void ShowExplode (SDL_Renderer *screen);
     void setXposBomb(int x) { x_bomb = x; }
     void setYposBomb(int y) { y_bomb = y; }
     void HandleInputAction (SDL_Event event, SDL_Renderer *screen, MainObject &WaterPlayer, MainObject &FirePlayer);
-    void ExplosionAfterPutBomb();
+    void ExplosionAfterPutBomb(SDL_Renderer *screen);
     void FallDown(const Map &map_data);
     void check_to_map(const Map &map_data);
     bool getIsPutBomb() { return isPutBomb; }

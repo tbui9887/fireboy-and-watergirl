@@ -22,7 +22,7 @@ GameMap gMap;
 
 MainObject Water;
 MainObject Fire;
-Bomb bomb; Bomb fire_bomb;
+Bomb bomb;
 vector<Object> obj;
 vector<Enemy> enemies_list;
 
@@ -197,7 +197,7 @@ int main(int argc, char* args[])
                     bomb.loadImg(gRenderer);
                     if (bomb.getIsPutBomb()){
                         bomb.FallDown(map_data);
-                        bomb.ShowBomb(gRenderer);
+                        bomb.ExplosionAfterPutBomb(gRenderer);
                     }
 
                     //main character

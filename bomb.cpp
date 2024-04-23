@@ -16,7 +16,7 @@ Bomb::Bomb()
 
 }
 
-Bomb::~Bomb()
+void Bomb::DeleteBomb()
 {
     x_bomb = 0;
     y_bomb = 0;
@@ -113,5 +113,22 @@ void Bomb::check_to_map(const Map &map_data){
         }
     }
     y_bomb += y_val_bomb;
+    x_explode = x_bomb - 64; y_explode = y_bomb - 35; //update explode in the same time
+}
+
+void Bomb::ExplosionAfterPutBomb(SDL_Renderer *screen)
+{
+    int time_distance = SDL_GetTicks() - TimePutBomb;
+
+    if (time_distance <= 2000){
+        ShowBomb(screen);
+    }
+    else if (time_distance <= 4000){
+        ShowExplode(screen);
+    }
+    else{
+        isPutBomb = false;
+        DeleteBomb();
+    }
 }
 

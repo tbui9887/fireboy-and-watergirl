@@ -324,7 +324,7 @@ int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object
                 return 0;
             case SDL_MOUSEMOTION:
                 x_mouse = event.motion.x;
-                x_mouse = event.motion.y;
+                y_mouse = event.motion.y;
 
                 for (int i = 0; i < num_button; i++){
                     if (CheckFocusWithRect(x_mouse, y_mouse, playing_button[i].getRect())){
@@ -343,13 +343,14 @@ int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object
                 if (CheckFocusWithRect(x_mouse, y_mouse, playing_button[0].getRect())){
                         obj.clear();
                         enemies_list.clear();
+                        Player1.set_coin(0); Player2.set_coin(0);
 
                         int level;
                         if (path_map == "Data/map/MapLevel1.txt") level = 0;
                         else if (path_map == "Data/map/MapLevel2.txt") level = 1;
                         else level = 2;
 
-                        path_map = LevelMap(Player2, Player1, obj, enemies_list, screen, level, StartTime); //TimeCount is StartTime
+                        path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, level, StartTime); //TimeCount is StartTime
                         return 0;
                 }
                 else if (CheckFocusWithRect(x_mouse, y_mouse, playing_button[1].getRect())){
@@ -358,6 +359,7 @@ int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object
                 else if (CheckFocusWithRect(x_mouse, y_mouse, playing_button[2].getRect())){
                         obj.clear();
                         enemies_list.clear();
+                        Player1.set_coin(0); Player2.set_coin(0);
 
                         /*for (int i = 0; i < obj.size(); i++){
                             cout << obj[i].getXbar();
@@ -425,8 +427,8 @@ int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object>
     //text for coin
     Text WaterCoin, FireCoin;
     cout << Player1.get_coin() << " " << Player2.get_coin() << endl;
-    string WaterCoinText = "Watergirl coin:     " + std::to_string(Player1.get_coin());
-    if (Player1.get_coin() >= 7){
+    string WaterCoinText = "Watergirl coin:     " + std::to_string(Player1.get_coin()) + "/5";
+    if (Player1.get_coin() >= 5){
         WaterCoinText += "         : PASS";
         evaluate++;
     }
@@ -434,8 +436,8 @@ int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object>
     WaterCoin.setText(WaterCoinText);
     WaterCoin.setTextColor(BLACK_TEXT);
 
-    string FireCoinText = "Fireboy coin:       " + std::to_string(Player2.get_coin());
-    if (Player2.get_coin() >= 7){
+    string FireCoinText = "Fireboy coin:       " + std::to_string(Player2.get_coin()) + "/5";
+    if (Player2.get_coin() >= 5){
         FireCoinText += "          : PASS";
         evaluate++;
     }
@@ -445,7 +447,7 @@ int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object>
 
     //text for time
     Text TimeCount;
-    string TimeCountText = "Playing time:        ";
+    string TimeCountText = "Playing time:        " + set_standard_time(time_num) + "/1:30";
     if (time_num > 90000) TimeCountText += "            : FAIL";
     else{
         TimeCountText += "         : PASS";
@@ -502,8 +504,9 @@ int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object>
                     if (path_map == "Data/map/MapLevel1.txt") level = 0;
                     else if (path_map == "Data/map/MapLevel2.txt") level = 1;
                     else level = 2;
+                    Player1.set_coin(0); Player2.set_coin(0);
 
-                    path_map = LevelMap(Player2, Player1, obj, enemies_list, screen, level, StartTime);
+                    path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, level, StartTime);
                     return 0;
                 }
                 break;

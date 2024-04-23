@@ -51,7 +51,7 @@ void Bomb::HandleInputAction (SDL_Event event, SDL_Renderer *screen, MainObject 
         if (event.type == SDL_KEYDOWN){
             switch (event.key.keysym.sym)
             {
-            case SDLK_1:
+            case SDLK_l:
                 x_bomb = Player.getXpos();
                 y_bomb = Player.getYpos();
                 TimePutBomb = SDL_GetTicks();

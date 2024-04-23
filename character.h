@@ -63,7 +63,7 @@ public:
 
     void coin_increase() { coin++; }
     int get_coin() { return coin; }
-    void set_coin() { coin = 0; }
+    void set_coin(int x) { coin = x; }
     bool check_liquid(int val_1, int val_2, CHARACTER char_main);
 
     void setCharacter(CHARACTER charact) { character = charact; }

@@ -7,7 +7,7 @@
 #include "enermy.h"
 #include "texture.h"
 #include "text.h"
-#include "text.h"
+#include "timer.h"
 
 
 enum GAME_PLAY_MODE

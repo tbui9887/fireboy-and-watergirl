@@ -22,7 +22,7 @@ GameMap gMap;
 
 MainObject Water;
 MainObject Fire;
-Bomb bomb;
+Bomb bomb[2]; // for water and fire
 vector<Object> obj;
 vector<Enemy> enemies_list;
 
@@ -110,6 +110,11 @@ bool loadMedia()
         cout << "Sound effect loaded successfully!" << endl;
     }
 
+    //load bomb image
+    for (int i = 0; i < 2; i++){
+        bomb[i].loadImg(gRenderer);
+    }
+
     return success;
 }
 
@@ -173,7 +178,8 @@ int main(int argc, char* args[])
                         if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE){
                             ReturnMenu = menu_playing(gRenderer, event, quit, obj, enemies_list, Fire, Water, path_map, startTime);
                         }
-                        bomb.HandleInputAction(event, gRenderer, Water, Fire);
+                            bomb[FIREBOY].HandleInputAction(event, gRenderer, Fire);
+                            bomb[WATERGIRL].HandleInputAction(event, gRenderer, Water);
                     }
 
                     if (ReturnMenu == 1){
@@ -193,13 +199,6 @@ int main(int argc, char* args[])
                     //render background
                     gBackground.render(0,0, NULL, gRenderer);
 
-                    //bomb: show to screen and activity with it
-                    bomb.loadImg(gRenderer);
-                    if (bomb.getIsPutBomb()){
-                        bomb.FallDown(map_data);
-                        bomb.ExplosionAfterPutBomb(gRenderer);
-                    }
-
                     //main character
                     Fire.DoPlayer(map_data);
                     SDL_Rect FireRect = Fire.getRectChar();
@@ -208,6 +207,15 @@ int main(int argc, char* args[])
                     Water.DoPlayer(map_data);
                     SDL_Rect WaterRect = Water.getRectChar();
                     Water.Show(gRenderer);
+
+                    //bomb: show to screen and activity with it
+                    for (int i = 0; i < 2; i++){
+                        if (bomb[i].getIsPutBomb()){
+                            cout << "getIsPutBomb is true\n";
+                            bomb[i].FallDown(map_data);
+                            bomb[i].ExplosionAfterPutBomb(gRenderer);
+                        }
+                    }
 
                     //render map
                     gMap.DrawMap(gRenderer);

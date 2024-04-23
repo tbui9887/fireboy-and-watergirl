@@ -32,7 +32,7 @@ public:
     void ShowExplode (SDL_Renderer *screen);
     void setXposBomb(int x) { x_bomb = x; }
     void setYposBomb(int y) { y_bomb = y; }
-    void HandleInputAction (SDL_Event event, SDL_Renderer *screen, MainObject &WaterPlayer, MainObject &FirePlayer);
+    void HandleInputAction (SDL_Event event, SDL_Renderer *screen, MainObject &Player);
     void ExplosionAfterPutBomb(SDL_Renderer *screen);
     void FallDown(const Map &map_data);
     void check_to_map(const Map &map_data);

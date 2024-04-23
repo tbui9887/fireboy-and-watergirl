@@ -23,9 +23,6 @@ void Bomb::DeleteBomb()
 
     x_explode = 0;
     y_explode = 0;
-
-    bomb_obj.~LTexture();
-    explode_obj.~LTexture();
 }
 
 void Bomb::loadImg(SDL_Renderer *screen)
@@ -48,23 +45,32 @@ void Bomb::ShowExplode (SDL_Renderer *screen)
     explode_obj.render(x_explode, y_explode, NULL, screen);
 }
 
-void Bomb::HandleInputAction (SDL_Event event, SDL_Renderer *screen, MainObject &WaterPlayer, MainObject &FirePlayer)
+void Bomb::HandleInputAction (SDL_Event event, SDL_Renderer *screen, MainObject &Player)
 {
-    if (event.type == SDL_KEYDOWN){
-        switch (event.key.keysym.sym)
-        {
-        case SDLK_1:
-            x_bomb = FirePlayer.getXpos();
-            y_bomb = FirePlayer.getYpos();
-            TimePutBomb = SDL_GetTicks();
-            isPutBomb = true;
-            break;
-        case SDLK_q:
-            x_bomb = WaterPlayer.getXpos();
-            y_bomb = WaterPlayer.getYpos();
-            TimePutBomb = SDL_GetTicks();
-            isPutBomb = true;
-            break;
+    if (Player.getCharacter() == FIREBOY){
+        if (event.type == SDL_KEYDOWN){
+            switch (event.key.keysym.sym)
+            {
+            case SDLK_1:
+                x_bomb = Player.getXpos();
+                y_bomb = Player.getYpos();
+                TimePutBomb = SDL_GetTicks();
+                isPutBomb = true;
+                break;
+            }
+        }
+    }
+    else{
+        if (event.type == SDL_KEYDOWN){
+            switch (event.key.keysym.sym)
+            {
+            case SDLK_q:
+                x_bomb = Player.getXpos();
+                y_bomb = Player.getYpos();
+                TimePutBomb = SDL_GetTicks();
+                isPutBomb = true;
+                break;
+            }
         }
     }
 }

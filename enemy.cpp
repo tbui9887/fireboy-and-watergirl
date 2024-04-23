@@ -37,7 +37,12 @@ Enemy::Enemy(int x, int y)
 
 Enemy::~Enemy()
 {
-
+    x_pos_ = 0;
+    y_pos_ = 0;
+    x_val_ = 0;
+    y_val_ = 0;
+    width_frame_ = 0;
+    height_frame_ = 0;
 }
 
 bool Enemy::loadImg(string path, SDL_Renderer* screen)

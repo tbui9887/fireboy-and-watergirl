@@ -7,6 +7,7 @@
 #include "enermy.h"
 #include "text.h"
 #include "select_menu.h"
+#include "bomb.h"
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
@@ -21,6 +22,7 @@ GameMap gMap;
 
 MainObject Water;
 MainObject Fire;
+Bomb bomb; Bomb fire_bomb;
 vector<Object> obj;
 vector<Enemy> enemies_list;
 
@@ -80,7 +82,7 @@ bool loadMedia()
 {
     bool success = true;
     //load background
-    gBackground.loadFromFile("Data/photo/background/background.png",gRenderer);
+    gBackground.loadFromFile("Data/photo/background/brick_background.png",gRenderer);
 
     //load watergirl character
     Water.loadFromFile("Data/photo/character/water_girl_stand.png", gRenderer);
@@ -171,6 +173,7 @@ int main(int argc, char* args[])
                         if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE){
                             ReturnMenu = menu_playing(gRenderer, event, quit, obj, enemies_list, Fire, Water, path_map, startTime);
                         }
+                        bomb.HandleInputAction(event, gRenderer, Water, Fire);
                     }
 
                     if (ReturnMenu == 1){
@@ -189,6 +192,13 @@ int main(int argc, char* args[])
 
                     //render background
                     gBackground.render(0,0, NULL, gRenderer);
+
+                    //bomb: show to screen and activity with it
+                    bomb.loadImg(gRenderer);
+                    if (bomb.getIsPutBomb()){
+                        bomb.FallDown(map_data);
+                        bomb.ShowBomb(gRenderer);
+                    }
 
                     //main character
                     Fire.DoPlayer(map_data);

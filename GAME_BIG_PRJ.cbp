@@ -40,6 +40,8 @@
 		<Unit filename="Data/map/MapLevel2.txt" />
 		<Unit filename="Data/map/MapLevel3.txt" />
 		<Unit filename="Data/map/update_map_easy.txt" />
+		<Unit filename="bomb.cpp" />
+		<Unit filename="bomb.h" />
 		<Unit filename="character.cpp" />
 		<Unit filename="character.h" />
 		<Unit filename="enemy.cpp" />

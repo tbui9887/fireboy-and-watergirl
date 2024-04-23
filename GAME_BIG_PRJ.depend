@@ -715,7 +715,7 @@
 	"header.h"
 	"texture.h"
 
-1713686480 c:\fireboy-and-watergirl\character.h
+1713879579 c:\fireboy-and-watergirl\character.h
 	"header.h"
 	"texture.h"
 	"game_map.h"
@@ -729,13 +729,13 @@
 1713798956 source:c:\fireboy-and-watergirl\character.cpp
 	"character.h"
 
-1713584841 source:c:\fireboy-and-watergirl\enemy.cpp
+1713879585 source:c:\fireboy-and-watergirl\enemy.cpp
 	"enemy.h"
 
 1713584841 source:c:\fireboy-and-watergirl\game_map.cpp
 	"game_map.h"
 
-1713804725 source:c:\fireboy-and-watergirl\main.cpp
+1713882655 source:c:\fireboy-and-watergirl\main.cpp
 	"header.h"
 	"character.h"
 	"game_map.h"
@@ -745,6 +745,7 @@
 	"enermy.h"
 	"text.h"
 	"select_menu.h"
+	"bomb.h"
 
 1713584842 c:\fireboy-and-watergirl\timer.h
 	"header.h"
@@ -777,7 +778,7 @@
 	"object_button.h"
 	"header.h"
 
-1713805143 source:c:\fireboy-and-watergirl\select_menu.cpp
+1713805432 source:c:\fireboy-and-watergirl\select_menu.cpp
 	"select_menu.h"
 
 1713797417 source:c:\fireboy-and-watergirl\text.cpp
@@ -789,4 +790,13 @@
 1713584842 source:c:\fireboy-and-watergirl\timer.cpp
 	"timer.h"
 	"header.h"
+
+1713882546 c:\fireboy-and-watergirl\bomb.h
+	"header.h"
+	"texture.h"
+	"game_map.h"
+	"character.h"
+
+1713882511 source:c:\fireboy-and-watergirl\bomb.cpp
+	"bomb.h"
 

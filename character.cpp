@@ -441,7 +441,7 @@ void MainObject::check_to_map(Map& map_data)
     int block_below_1 = map_data.tile[y2][x1];
     int block_below_2 = map_data.tile[y2][x2];
 
-    if (block_below_1 == 1 || block_below_2 == 1 || block_below_1 == 2 || block_below_2 == 2){ //nếu chỉ có cái này, nó chỉ check ở dưới chân của nó có block kia khôgn thì mới giảm thôi (thích hợp để làm cái nhún)
+    if (block_below_1 == 92 || block_below_2 == 92 || block_below_1 == 93 || block_below_2 == 93){ //nếu chỉ có cái này, nó chỉ check ở dưới chân của nó có block kia khôgn thì mới giảm thôi (thích hợp để làm cái nhún)
         y_val_ -= BLOCK_SIZE/2;
     }
     //cập nhật lại vị trí của main character

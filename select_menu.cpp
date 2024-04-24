@@ -59,15 +59,16 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
             player_2.setYpos(672);
 
             enemies_list.push_back(Enemy(631, 675));
-            enemies_list.push_back(Enemy(571, 112));
-            enemies_list.push_back(Enemy(312, 336));
+            enemies_list.push_back(Enemy(426, 479));
+            enemies_list.push_back(Enemy(195, 323));
+            enemies_list.push_back(Enemy(322, 480));
 
             Object obj1, obj2;
             obj1.setXbut(864); obj1.setYbut(753);
             obj1.setXbar(546); obj1.setYbar(320);
             obj.push_back(obj1);
 
-            obj2.setXbut(495); obj2.setYbut(145);
+            obj2.setXbut(479); obj2.setYbut(83);
             obj2.setXbar(224); obj2.setYbar(32);
             obj.push_back(obj2);
 
@@ -78,8 +79,8 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
         {
             map_path = "Data/map/MapLevel3.txt";
             //set position for water and fire in start game
-            player_1.setXpos(250);
-            player_1.setYpos(93);
+            player_1.setXpos(275);
+            player_1.setYpos(706);
 
             player_2.setXpos(141);
             player_2.setYpos(360);
@@ -458,11 +459,13 @@ int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object>
 
     //result
     Text Result;
-    if (evaluate == 3) Result.setText("SCORE:   A");
-    else if (evaluate == 2) Result.setText("SCORE:  B");
-    else if (evaluate == 1) Result.setText("SCORE:  C");
+    cout << evaluate << endl;
+    if (evaluate == 3) Result.setText("SCORE:           A");
+    else if (evaluate == 2) Result.setText("SCORE:            B");
+    else if (evaluate == 1) Result.setText("SCORE:          C");
+    else if (evaluate == 0) Result.setText("SCORE:          D");
 
-    if (!win) Result.setText("SCORE:    F");
+    if (!win) Result.setText("SCORE:            F");
     Result.setTextColor(RED_TEXT);
 
     //delete all before playing

@@ -29,6 +29,7 @@ public:
     void DeleteBomb();
 
     void loadImg(SDL_Renderer *screen);
+    void loadChunk();
     void ShowBomb(SDL_Renderer *screen);
     void ShowExplode (SDL_Renderer *screen);
     void setXposBomb(int x) { x_bomb = x; }

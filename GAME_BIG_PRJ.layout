@@ -2,47 +2,29 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="texture.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+	<File name="text.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="407" topLine="0" />
+			<Cursor1 position="412" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="object_button.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="Data\map\update_map_easy.txt" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="635" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="4" />
-		</Folding>
-	</File>
-	<File name="Data\map\MapLevel2.txt" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1843" topLine="0" />
+			<Cursor1 position="300" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="select_menu.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="bomb.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="356" topLine="1" />
-		</Cursor>
-	</File>
-	<File name="game_map.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1101" topLine="7" />
+			<Cursor1 position="5611" topLine="143" />
 		</Cursor>
 	</File>
 	<File name="bomb.h" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="947" topLine="10" />
+			<Cursor1 position="564" topLine="10" />
 		</Cursor>
 	</File>
-	<File name="timer.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Data\map\MapLevel2.txt" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="395" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="character.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1876" topLine="61" />
+			<Cursor1 position="1843" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="enemy.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -63,45 +45,14 @@
 			<Collapse line="263" />
 		</Folding>
 	</File>
-	<File name="select_menu.cpp" open="1" top="1" tabpos="7" split="2" active="2" splitpos="704" zoom_1="-1" zoom_2="-1">
+	<File name="Data\map\MapLevel1.txt" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="11856" topLine="297" />
-			<Cursor2 position="17139" topLine="429" />
-		</Cursor>
-		<Folding>
-			<Collapse line="8" />
-			<Collapse line="15" />
-			<Collapse line="22" />
-		</Folding>
-	</File>
-	<File name="header.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1523" topLine="37" />
+			<Cursor1 position="1164" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Data\map\update_map_easy.txt" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="texture.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="300" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="texture.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="181" topLine="4" />
-		</Cursor>
-	</File>
-	<File name="bomb.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1178" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="object_button.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="598" topLine="12" />
-		</Cursor>
-	</File>
-	<File name="Data\map\MapLevel3.txt" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="888" topLine="0" />
+			<Cursor1 position="407" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="text.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -114,51 +65,94 @@
 			<Cursor1 position="1320" topLine="22" />
 		</Cursor>
 	</File>
+	<File name="character.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2087" topLine="58" />
+		</Cursor>
+	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="690" zoom_1="-1" zoom_2="-1">
 		<Cursor>
-			<Cursor1 position="598" topLine="0" />
+			<Cursor1 position="3159" topLine="106" />
 		</Cursor>
 		<Folding>
 			<Collapse line="35" />
-			<Collapse line="81" />
-			<Collapse line="121" />
 		</Folding>
 	</File>
-	<File name="timer.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="timer.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1229" topLine="53" />
+			<Cursor1 position="395" topLine="0" />
 		</Cursor>
-	</File>
-	<File name="character.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="784" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6835" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="9" />
-			<Collapse line="29" />
-			<Collapse line="42" />
-			<Collapse line="54" />
-			<Collapse line="66" />
-			<Collapse line="116" />
-			<Collapse line="192" />
-			<Collapse line="464" />
-			<Collapse line="470" />
-			<Collapse line="480" />
-		</Folding>
 	</File>
 	<File name="game_map.h" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1160" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="text.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="timer.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="412" topLine="0" />
+			<Cursor1 position="1229" topLine="53" />
 		</Cursor>
 	</File>
-	<File name="Data\map\MapLevel1.txt" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="game_map.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1164" topLine="0" />
+			<Cursor1 position="1101" topLine="16" />
 		</Cursor>
+	</File>
+	<File name="select_menu.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="134" topLine="1" />
+		</Cursor>
+	</File>
+	<File name="Data\map\MapLevel3.txt" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="888" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="texture.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="181" topLine="4" />
+		</Cursor>
+	</File>
+	<File name="select_menu.cpp" open="1" top="0" tabpos="7" split="2" active="2" splitpos="654" zoom_1="-1" zoom_2="-1">
+		<Cursor>
+			<Cursor1 position="11856" topLine="312" />
+			<Cursor2 position="19099" topLine="483" />
+		</Cursor>
+		<Folding>
+			<Collapse line="8" />
+			<Collapse line="15" />
+			<Collapse line="22" />
+		</Folding>
+	</File>
+	<File name="object_button.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="598" topLine="12" />
+		</Cursor>
+	</File>
+	<File name="object_button.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="635" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="4" />
+		</Folding>
+	</File>
+	<File name="header.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1523" topLine="37" />
+		</Cursor>
+	</File>
+	<File name="character.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="784" zoom_1="4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="13891" topLine="222" />
+		</Cursor>
+		<Folding>
+			<Collapse line="14" />
+			<Collapse line="34" />
+			<Collapse line="47" />
+			<Collapse line="59" />
+			<Collapse line="71" />
+			<Collapse line="197" />
+		</Folding>
 	</File>
 </CodeBlocks_layout_file>

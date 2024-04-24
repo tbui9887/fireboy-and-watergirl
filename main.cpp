@@ -4,7 +4,7 @@
 #include "texture.h"
 #include "timer.h"
 #include "object_button.h"
-#include "enermy.h"
+#include "enemy.h"
 #include "text.h"
 #include "select_menu.h"
 #include "bomb.h"
@@ -94,27 +94,17 @@ bool loadMedia()
 
     //load music
     gMusic = Mix_LoadMUS("Data/sound/Fireboy and Watergirl Playthrough Soundtrack.mp3");
-    if (gMusic == NULL){
-        cout << "Error loading music: " << Mix_GetError() << endl;
-        success = false;
-    }
-    else {
-        cout << "Music loaded successfully!" << endl;
-    }
     death = Mix_LoadWAV("Data/sound/Death.wav");
-    if (death == NULL){
-        cout << "Error loading sound effect: " << Mix_GetError() << endl;
-        success = false;
+    if (gMusic == NULL || death == NULL){
+        cout << "fail load music \n";
     }
-    else {
-        cout << "Sound effect loaded successfully!" << endl;
-    }
-
     //load bomb image
     for (int i = 0; i < 2; i++){
         bomb[i].loadImg(gRenderer);
     }
-
+    Fire.loadChunk();
+    Water.loadChunk();
+    bomb[FIREBOY].loadChunk();; bomb[WATERGIRL].loadChunk();
     return success;
 }
 
@@ -152,11 +142,11 @@ int main(int argc, char* args[])
             string path_map;
             int startTime = 0;
             SDL_Event event;
-            int ret = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit, startTime);
+            ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit, startTime);
 
             while (1){
                 if (ReturnMenu == 1){
-                    ret = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit, startTime);
+                    ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit, startTime);
                     ReturnMenu = 0;
                 }
                 gMap.LoadMap(path_map);
@@ -279,6 +269,7 @@ int main(int argc, char* args[])
                     }
                     if ( Water.getLose() || Fire.getLose() ){
                         Mix_PlayChannel(-1, death, 0);
+                        Mix_HaltMusic();
 
                         Water.~MainObject(); Fire.~MainObject();
                         Water.setLose(false);
@@ -293,6 +284,8 @@ int main(int argc, char* args[])
 
                     if ( Water.getWin() && Fire.getWin() ){
                         Water.~MainObject(); Fire.~MainObject();
+                        Mix_HaltMusic();
+
                         Water.setWin(false);
                         Fire.setWin(false);
 

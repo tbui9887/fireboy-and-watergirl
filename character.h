@@ -68,6 +68,7 @@ public:
 
     void setCharacter(CHARACTER charact) { character = charact; }
     CHARACTER getCharacter() { return character; }
+    void loadChunk();
 
 private:
     float x_val_; //vận tốc theo chiều ngang

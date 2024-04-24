@@ -1,10 +1,15 @@
 #include "character.h"
 
-
 Mix_Chunk *diamond = NULL;
 Mix_Chunk *jump_fb = NULL;
 Mix_Chunk *jump_wg = NULL;
-Mix_Chunk *water_step = NULL;
+Mix_Chunk *door = NULL;
+
+void MainObject::loadChunk()
+{
+    diamond = Mix_LoadWAV("Data/sound/Diamond.wav");
+    door = Mix_LoadWAV("Data/sound/Door.wav");
+}
 
 MainObject::MainObject()
 {
@@ -213,10 +218,6 @@ void MainObject::DoPlayer(Map& map_data)
 
 void MainObject::check_to_map(Map& map_data)
 {
-    Mix_FreeChunk(water_step); Mix_FreeChunk(diamond);
-    water_step = Mix_LoadWAV("Data/sound/Water_Steps.wav");
-    diamond = Mix_LoadWAV("Data/sound/Diamond.wav");
-
     int x1 = 0;
     int x2 = 0;
 
@@ -362,6 +363,7 @@ void MainObject::check_to_map(Map& map_data)
         //đi vào cửa thì set thành win
         if ( (value_1 == ABOVE_FIRE_DOOR || value_1 == END_FIRE_DOOR ||
               value_2 == ABOVE_FIRE_DOOR || value_2 == END_FIRE_DOOR ) && character == FIREBOY){
+
                 setWin(true);
         }
 
@@ -413,11 +415,13 @@ void MainObject::check_to_map(Map& map_data)
         //đi vào cửa thì set thành win
         if ( (value_1 == ABOVE_FIRE_DOOR || value_1 == END_FIRE_DOOR ||
               value_2 == ABOVE_FIRE_DOOR || value_2 == END_FIRE_DOOR ) && character == FIREBOY){
+                Mix_PlayChannel(-1, door, 0);
                 setWin(true);
         }
 
         if ( (value_1 == ABOVE_WATER_DOOR || value_1 == END_WATER_DOOR ||
               value_2 == ABOVE_WATER_DOOR || value_2 == END_WATER_DOOR ) && character == WATERGIRL){
+                Mix_PlayChannel(-1, door, 0);
                 setWin(true);
         }
 
@@ -439,6 +443,7 @@ void MainObject::check_to_map(Map& map_data)
             setLose(true);
         }
     }
+    }
 
     //check fan
     int block_below_1 = map_data.tile[y2][x1];
@@ -459,7 +464,7 @@ void MainObject::check_to_map(Map& map_data)
     {
         x_pos_ = SCREEN_WIDTH - width_frame_ + 1;
     }
-} }
+}
 
 void MainObject::setRectchar(int x, int y)
 {

@@ -1,6 +1,8 @@
 
 #include "bomb.h"
 
+Mix_Chunk *bomb_chunk = NULL;
+
 Bomb::Bomb()
 {
     x_bomb = 0;
@@ -131,6 +133,7 @@ void Bomb::ExplosionAfterPutBomb(SDL_Renderer *screen, MainObject &FirePlay, Mai
     }
     else if (time_distance <= 4000){
         ShowExplode(screen);
+        Mix_PlayChannel(-1, bomb_chunk, 0);
         InteractWithCharAndEnemy(FirePlay, WaterPlay, enemies_list);
     }
     else{
@@ -162,6 +165,12 @@ void Bomb::InteractWithCharAndEnemy(MainObject &FirePlay, MainObject &WaterPlay,
             enemies_list[i].DeleteEnemy();
         }
     }
+}
+
+void Bomb::loadChunk()
+{
+    bomb_chunk = Mix_LoadWAV("Data/sound/Bomb+2.wav");
+    Mix_VolumeChunk(bomb_chunk, MIX_MAX_VOLUME / 5);
 }
 
 

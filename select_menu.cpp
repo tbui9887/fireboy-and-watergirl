@@ -499,6 +499,7 @@ int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object>
                 y_mouse = event.motion.y;
 
                 if (CheckFocusWithRect(x_mouse, y_mouse, play_button[0].getRect())){
+                    Player1.set_coin(0); Player2.set_coin(0);
                     return 1;
                 }
 

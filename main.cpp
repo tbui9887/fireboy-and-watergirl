@@ -277,7 +277,7 @@ int main(int argc, char* args[])
 
                         obj.clear();
                         enemies_list.clear();
-                        ReturnMenu = MenuResult(gRenderer, event, quit, obj, enemies_list, Water, Fire, path_map, false, SDL_GetTicks() - startTime, startTime);
+                        ReturnMenu = MenuResult(gRenderer, event, quit, obj, enemies_list, Fire, Water, path_map, false, SDL_GetTicks() - startTime, startTime);
                         Water.set_coin(0); Fire.set_coin(0);
                         break;
                     }
@@ -291,7 +291,7 @@ int main(int argc, char* args[])
 
                         obj.clear();
                         enemies_list.clear();
-                        ReturnMenu = MenuResult(gRenderer, event, quit, obj, enemies_list, Water, Fire, path_map, true, SDL_GetTicks() - startTime, startTime);
+                        ReturnMenu = MenuResult(gRenderer, event, quit, obj, enemies_list, Fire, Water, path_map, true, SDL_GetTicks() - startTime, startTime);
                         break;
                     }
                     if (quit == true) break;

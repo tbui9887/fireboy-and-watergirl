@@ -152,11 +152,11 @@ int main(int argc, char* args[])
             string path_map;
             int startTime = 0;
             SDL_Event event;
-            int ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit, startTime);
+            int ret = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit, startTime);
 
             while (1){
                 if (ReturnMenu == 1){
-                    ret_menu = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit, startTime);
+                    ret = ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit, startTime);
                     ReturnMenu = 0;
                 }
                 gMap.LoadMap(path_map);
@@ -165,6 +165,7 @@ int main(int argc, char* args[])
 
                 Fire.setCharacter(FIREBOY);
                 Water.setCharacter(WATERGIRL); Water.SetHeight(50);
+                //Mix_FreeMusic(gMusic);
                 if (Mix_PlayMusic(gMusic, -1) == -1){
                     cout << "can't play music! \n";
                 }

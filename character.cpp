@@ -136,6 +136,7 @@ void MainObject::HandleInputAction(SDL_Event event, SDL_Renderer* screen, CHARAC
                         status_ = FIRE_JUMP;
                         input_type_.jump_ = 1;
                         input_type_.stand_ = 0;
+                        Mix_FreeChunk(jump_fb);
                         jump_fb = Mix_LoadWAV("Data/sound/Jump fb.wav");
                         Mix_PlayChannel(-1, jump_fb, 0);
                     }
@@ -170,6 +171,7 @@ void MainObject::HandleInputAction(SDL_Event event, SDL_Renderer* screen, CHARAC
                         status_ = WATER_JUMP;
                         input_type_.jump_ = 1;
                         input_type_.stand_ = 0;
+                        Mix_FreeChunk(jump_fb);
                         jump_wg = Mix_LoadWAV("Data/sound/Jump wg.wav");
                         Mix_PlayChannel(-1, jump_wg, 0);
                     }
@@ -211,6 +213,7 @@ void MainObject::DoPlayer(Map& map_data)
 
 void MainObject::check_to_map(Map& map_data)
 {
+    Mix_FreeChunk(water_step); Mix_FreeChunk(diamond);
     water_step = Mix_LoadWAV("Data/sound/Water_Steps.wav");
     diamond = Mix_LoadWAV("Data/sound/Diamond.wav");
 

@@ -2,7 +2,6 @@
 
 Mix_Music *menuMusic;
 TTF_Font *normal_letter;
-TTF_Font *result_letter;
 
 int ChooseGamePlayMode()
 {
@@ -114,6 +113,7 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
 
 int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> &obj, vector<Enemy> &enemies_list, SDL_Renderer* screen, SDL_Event event, string &path_map, bool &quit, int &StartTime) //tí nữa code phần khi bấm vào từng phần lựa chọn thì show ra một cửa sổ mới
 {
+    Mix_FreeMusic(menuMusic);
     menuMusic = Mix_LoadMUS("Data/sound/Menu Music.wav");
     if (menuMusic == NULL) cout << "can't open menuMusic\n";
 
@@ -384,14 +384,10 @@ int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object
 
 int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object> &obj, vector<Enemy> &enemies_list, MainObject &Player1, MainObject &Player2, string path_map, bool win, const int &time_num, int &StartTime)
 {
+    TTF_CloseFont(normal_letter);
     normal_letter = TTF_OpenFont("Data/font/Oswald-VariableFont_wght.ttf", 24);
     if (normal_letter == NULL){
         cout << "can't open font normal letter\n";
-    }
-
-    result_letter = TTF_OpenFont("Data/font/Mario-Party-Hudson-Font.ttf", 45);
-    if (result_letter = NULL){
-        cout << "can't open result font\n";
     }
 
     LTexture result_background;

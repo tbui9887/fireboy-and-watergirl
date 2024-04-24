@@ -45,7 +45,6 @@ public:
     void setMovingpos(const int& pos_start, const int& pos_end) { start_move = pos_start; end_move = pos_end; }
     void controlMoving(SDL_Renderer* screen,  string left_animation_Enemy, string right_animation_Enemy);
 
-    bool check_collision(SDL_Rect charRect, SDL_Rect button);
     SDL_Rect get_current_pos() { current_pos = {int(x_pos_), int(y_pos_), width_frame_, height_frame_} ; return current_pos; }
 
 private:

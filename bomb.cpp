@@ -2,6 +2,8 @@
 #include "bomb.h"
 
 Mix_Chunk *bomb_chunk = NULL;
+TTF_Font *mFont = NULL;
+Text NotReadyBomb;
 
 Bomb::Bomb()
 {
@@ -127,18 +129,20 @@ void Bomb::check_to_map(const Map &map_data){
 void Bomb::ExplosionAfterPutBomb(SDL_Renderer *screen, MainObject &FirePlay, MainObject &WaterPlay, vector<Enemy> &enemies_list)
 {
     int time_distance = SDL_GetTicks() - TimePutBomb;
-
-    if (time_distance <= 2000){
-        ShowBomb(screen);
-    }
-    else if (time_distance <= 4000){
-        ShowExplode(screen);
-        Mix_PlayChannel(-1, bomb_chunk, 0);
-        InteractWithCharAndEnemy(FirePlay, WaterPlay, enemies_list);
-    }
-    else{
-        isPutBomb = false;
-        DeleteBomb();
+    if (SDL_GetTicks() - ReadyBomb >= 30 * 1000 || ReadyBomb == 0){
+        if (time_distance <= 2000){
+            ShowBomb(screen);
+        }
+        else if (time_distance <= 4000){
+            ShowExplode(screen);
+            Mix_PlayChannel(-1, bomb_chunk, 0);
+            InteractWithCharAndEnemy(FirePlay, WaterPlay, enemies_list);
+        }
+        else{
+            isPutBomb = false;
+            ReadyBomb = SDL_GetTicks();
+            DeleteBomb();
+        }
     }
 }
 
@@ -171,6 +175,11 @@ void Bomb::loadChunk()
 {
     bomb_chunk = Mix_LoadWAV("Data/sound/Bomb+2.wav");
     Mix_VolumeChunk(bomb_chunk, MIX_MAX_VOLUME / 5);
+
+    mFont = TTF_OpenFont("Data/font/Roboto-Medium.ttf", 24);
+    if (mFont == NULL){
+        cout << "can't open mFont";
+    }
 }
 
 

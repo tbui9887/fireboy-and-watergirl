@@ -1,0 +1,44 @@
+- Từ class nhân vật lấy hình chữ nhật ra đễ check xem có va chạm hay không
+- check collision bình thường giống như trên lazyfoo
+- cái này chỉ cần check theo chiều ngang thôi 
+
+bool collision = false;
+if (x1 + width_1 > x2 && x1 + width_1 < x2 + width_2) collision = true;
+else if (x1 > x2 && x1 < x2 + width_2) collison = true;
+
+- trường hợp của y cũng tương tự 
+
+=> check xong thì return ra bool collision 
+
+- Nếu collision đúng thì hình chữ nhật (barrier sẽ y-- lên) (x_b, y_b, w_b, h_b
+	+ cần một biến count để tính max nó sẽ lên đâu (chắc lên 2 block để cho nó có thể đi được) = 32 x 2 = 64
+
+- Ngoài ra mình cũng cần phải check va chạm với hình chữ nhật kia, nếu va chạm thì không cho đi 
+	x_val = 0; x_pos_ = x_b - character_width;
+
+- tạo một biến on_button 
+b1. khởi tạo 2 hình chữ nhật bằng LTexture (có mRect trong đó rồi, sau đó tải ảnh lên) - trong character luôn 
+b2. get hình chữ nhật của character để tiến hành check collision (finish)
+b3. check collision, trả về biến bool 
+b4. Nếu đúng, thì rect barrier sẽ có tung độ giảm dần tới một giá trị max nào đó thì dừng, on_button = true;
+    Nếu sai thì vẫn giữ nguyên 
+b5. Nếu char đi ra khỏi nút đó thì biến count trở về 0, tăng lại tung độ về giá trị cũ (finished)
+
+
+------------------------------------------------
+FIXED ERROR TIME:
+
+1. 2 con cùng đứng trên nút thì nó sẽ tiếp tục nâng lên (DONE)
+=> 2 con là 2 class khác nhau nên nó sẽ như vậy, đặt giá trị bắt buộc cho thanh chắn (chỉnh sửa sẽ hơi khó khăn chút nhưng giải pháp 1 là như vậy)
+
+2. khi đi từ phải qua trái nó đi qua cái barrier luôn (DONE)
+=> xóa đi phần điều kiện sau x_val_ < 0 kia 
+=> một lỗi khác là khi nhấn đồng thời hai phím thì nó bay ra bên kia luôn 
+
+3. Không nhảy qua được thanh chắn => có thể lỗi từ code collision 
+
+
+4. đi qua phải trái vẫn bị giật
+
+
+5. 

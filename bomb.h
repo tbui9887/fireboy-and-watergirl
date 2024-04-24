@@ -7,6 +7,7 @@
 #include "game_map.h"
 #include "character.h"
 #include "enemy.h"
+#include "text.h"
 
 class Bomb : LTexture
 {
@@ -22,6 +23,7 @@ private:
     SDL_Rect ExplosionRect;
 
     int TimePutBomb;
+    int ReadyBomb = 0;
     bool isPutBomb = false;
 
 public:

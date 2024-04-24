@@ -2,6 +2,8 @@
 
 Mix_Music *menuMusic;
 TTF_Font *normal_letter;
+TTF_Font *win_lose_letter;
+TTF_Font *evaluate_letter;
 
 int ChooseGamePlayMode()
 {
@@ -119,7 +121,7 @@ int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> 
 
     enemies_list.clear(); obj.clear();
     LTexture StartMenu;
-    if ( ! StartMenu.loadFromFile("Data/photo/background/brick_background.png", screen) ){
+    if ( ! StartMenu.loadFromFile("Data/photo/background/first_menu.png", screen) ){
         cout << "can't upload brick background\n";
         return -1;
     }
@@ -136,9 +138,10 @@ int ShowMenuStartOrNot(MainObject &Player1, MainObject &Player2, vector<Object> 
     for (int i = 0; i < option_type; i++){
         select_button[i].SetWidth(MENU_BUTTON_WIDTH);
         select_button[i].SetHeight(MENU_BUTTON_HEIGHT);
-        select_button[i].SetRect((SCREEN_WIDTH - MENU_BUTTON_WIDTH)/2, 50+i*MENU_BUTTON_WIDTH);
+        select_button[i].SetRect(MENU_BUTTON_WIDTH * i + 10, SCREEN_HEIGHT / 2 - 20);
         select_button[i].ChangeColorTexture(255, 14, 201);
     }
+    select_button[1].SetRect(MENU_BUTTON_WIDTH * 1 + 10, SCREEN_HEIGHT / 2 + MENU_BUTTON_HEIGHT);
 
     //bool selected[option_type] = {0,0};
     int x_mouse, y_mouse;
@@ -207,7 +210,7 @@ int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, Mai
     //if (ShowMenuStartOrNot(Player1, Player2, obj, enemies_list, screen, event, path_map) == 1) return 1;
     //free luon texture kia luon
     LTexture menu_background;
-    if ( ! menu_background.loadFromFile("Data/photo/background/brick_background.png", screen) ){
+    if ( ! menu_background.loadFromFile("Data/photo/background/level_menu.png", screen) ){
         cout << "can't upload menu background in ShowSelectLevel function\n";
     }
     const int level_num = 3;
@@ -223,7 +226,7 @@ int ShowSelectLevel(SDL_Renderer* screen, SDL_Event event, string &path_map, Mai
     for (int i = 0; i < level_num; i++){
         level_button[i].SetWidth(MENU_BUTTON_WIDTH);
         level_button[i].SetHeight(MENU_BUTTON_HEIGHT);
-        level_button[i].SetRect((SCREEN_WIDTH - MENU_BUTTON_WIDTH)/2, 50+MENU_BUTTON_WIDTH*i);
+        level_button[i].SetRect(MENU_BUTTON_WIDTH * i + 15, 32);
         level_button[i].ChangeColorTexture(255, 14, 201);
     }
 
@@ -307,7 +310,7 @@ int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object
     for (int i = 0; i < num_button; i++){
         playing_button[i].SetWidth(MENU_BUTTON_WIDTH);
         playing_button[i].SetHeight(MENU_BUTTON_HEIGHT);
-        playing_button[i].SetRect((SCREEN_WIDTH - MENU_BUTTON_WIDTH)/2, 50+i*MENU_BUTTON_WIDTH);
+        playing_button[i].SetRect((SCREEN_WIDTH - MENU_BUTTON_WIDTH)/2, (100 + MENU_BUTTON_HEIGHT) * i + 100);
         playing_button[i].ChangeColorTexture(255, 14, 201);
     }
 
@@ -361,17 +364,7 @@ int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object
                         obj.clear();
                         enemies_list.clear();
                         Player1.set_coin(0); Player2.set_coin(0);
-
-                        /*for (int i = 0; i < obj.size(); i++){
-                            cout << obj[i].getXbar();
-                        }
-
-                        for (int i = 0; i < enemies_list.size(); i++){
-                            cout << enemies_list[i].get_x_pos();
-                        }
-
-                        ShowMenuStartOrNot(Player1, Player2, obj, enemies_list, screen, event, path_map, quit);
-                        */return 1;
+                        return 1;
                 }
                 break;
             default:
@@ -385,11 +378,22 @@ int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object
 int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object> &obj, vector<Enemy> &enemies_list, MainObject &Player1, MainObject &Player2, string path_map, bool win, const int &time_num, int &StartTime)
 {
     TTF_CloseFont(normal_letter);
-    normal_letter = TTF_OpenFont("Data/font/Oswald-VariableFont_wght.ttf", 24);
+    normal_letter = TTF_OpenFont("Data/font/Roboto-Medium.ttf", 24);
     if (normal_letter == NULL){
         cout << "can't open font normal letter\n";
     }
 
+    TTF_CloseFont(win_lose_letter);
+    win_lose_letter = TTF_OpenFont("Data/font/Jersey15Charted-Regular.ttf", 48);
+    if (win_lose_letter == NULL){
+        cout << "can't open font win lose letter\n";
+    }
+
+    TTF_CloseFont(evaluate_letter);
+    evaluate_letter = TTF_OpenFont("Data/font/Mario-Party-Hudson-Font.ttf", 45);
+    if (evaluate_letter == NULL){
+        cout << "can't open font evalute letter";
+    }
     LTexture result_background;
     if (! result_background.loadFromFile("Data/photo/background/winning_and_losing.png", screen) );
 
@@ -402,9 +406,9 @@ int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object>
     }
 
     play_button[0].SetWidth(75); play_button[0].SetHeight(64);
-    play_button[0].SetRect(SCREEN_WIDTH/2 + 64, SCREEN_HEIGHT - 175);
+    play_button[0].SetRect(SCREEN_WIDTH/2 + 64, SCREEN_HEIGHT - 250);
     play_button[1].SetWidth(58); play_button[1].SetHeight(64);
-    play_button[1].SetRect(SCREEN_WIDTH/2 - 64, SCREEN_HEIGHT - 175);
+    play_button[1].SetRect(SCREEN_WIDTH/2 - 96, SCREEN_HEIGHT - 250);
 
     int x_mouse, y_mouse;
 
@@ -424,30 +428,30 @@ int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object>
     //text for coin
     Text WaterCoin, FireCoin;
     cout << Player1.get_coin() << " " << Player2.get_coin() << endl;
-    string WaterCoinText = "Watergirl coin:     " + std::to_string(Player1.get_coin()) + "/5";
+    string WaterCoinText = "Watergirl coin: " + std::to_string(Player1.get_coin()) + "/5";
     if (Player1.get_coin() >= 5){
-        WaterCoinText += "         : PASS";
+        WaterCoinText += "  ---> PASS";
         evaluate++;
     }
-    else WaterCoinText += "         : FAIL";
+    else WaterCoinText += " ---> FAIL";
     WaterCoin.setText(WaterCoinText);
     WaterCoin.setTextColor(BLACK_TEXT);
 
-    string FireCoinText = "Fireboy coin:       " + std::to_string(Player2.get_coin()) + "/5";
+    string FireCoinText = "Fireboy coin:    " + std::to_string(Player2.get_coin()) + "/5";
     if (Player2.get_coin() >= 5){
-        FireCoinText += "          : PASS";
+        FireCoinText += "   ---> PASS";
         evaluate++;
     }
-    else FireCoinText += "          : FAIL";
+    else FireCoinText += "  ---> FAIL";
     FireCoin.setText(FireCoinText);
     FireCoin.setTextColor(BLACK_TEXT);
 
     //text for time
     Text TimeCount;
-    string TimeCountText = "Playing time:        " + set_standard_time(time_num) + "/1:30";
-    if (time_num > 90000) TimeCountText += "            : FAIL";
+    string TimeCountText = "Playing time:   " + set_standard_time(time_num) + "/1:30";
+    if (time_num > 90000) TimeCountText += "    ---> FAIL";
     else{
-        TimeCountText += "         : PASS";
+        TimeCountText += "  ---> PASS";
         evaluate++;
     }
     TimeCount.setText(TimeCountText);
@@ -456,12 +460,12 @@ int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object>
     //result
     Text Result;
     cout << evaluate << endl;
-    if (evaluate == 3) Result.setText("SCORE:           A");
-    else if (evaluate == 2) Result.setText("SCORE:            B");
-    else if (evaluate == 1) Result.setText("SCORE:          C");
-    else if (evaluate == 0) Result.setText("SCORE:          D");
+    if (evaluate == 3) Result.setText("SCORE:   A");
+    else if (evaluate == 2) Result.setText("SCORE:  B");
+    else if (evaluate == 1) Result.setText("SCORE:  C");
+    else if (evaluate == 0) Result.setText("SCORE:  D");
 
-    if (!win) Result.setText("SCORE:            F");
+    if (!win) Result.setText("SCORE:    F");
     Result.setTextColor(RED_TEXT);
 
     //delete all before playing
@@ -470,18 +474,18 @@ int MenuResult(SDL_Renderer *screen, SDL_Event event, bool &quit, vector<Object>
 
     while (true){
         //render background and button
-        result_background.render((SCREEN_WIDTH - 450)/2, (SCREEN_HEIGHT - 650)/2, NULL, screen); //450 and 650 is demension
+        result_background.render((SCREEN_WIDTH - 500)/2, (SCREEN_HEIGHT - 500)/2, NULL, screen); //450 and 650 is demension
         for (int i = 0; i < num_button; i++){
             play_button[i].render(play_button[i].getRect().x, play_button[i].getRect().y, NULL, screen);
         }
         //show text to screen
-        int x_back = (SCREEN_WIDTH - 450)/2;
-        int y_back = (SCREEN_HEIGHT - 650)/2;
-        game_result.CreateGameText(normal_letter, screen, x_back + 450/3, y_back+ 10);
-        WaterCoin.CreateGameText(normal_letter, screen, x_back + 10, y_back + 50);
-        FireCoin.CreateGameText(normal_letter, screen, x_back + 10, y_back + 90);
-        TimeCount.CreateGameText(normal_letter, screen, x_back + 10, y_back + 130);
-        Result.CreateGameText(normal_letter, screen, x_back + 10, y_back + 175);
+        int x_back = (SCREEN_WIDTH - 500)/2;
+        int y_back = (SCREEN_HEIGHT - 500)/2;
+        game_result.CreateGameText(evaluate_letter, screen, x_back + 450/3, y_back+ 10) ;
+        WaterCoin.CreateGameText(normal_letter, screen, x_back + 30, y_back + 90);
+        FireCoin.CreateGameText(normal_letter, screen, x_back + 30, y_back + 150);
+        TimeCount.CreateGameText(normal_letter, screen, x_back + 30, y_back + 210);
+        Result.CreateGameText(evaluate_letter, screen, x_back + 135, y_back + 270);
 
         //interact with button
         while (SDL_PollEvent(&event) != 0){

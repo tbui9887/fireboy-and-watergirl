@@ -29,8 +29,8 @@ vector<Enemy> enemies_list;
 
 LTimer fps_timer;
 Text time_count;
-Text water_coin;
-Text fire_coin;
+//Text water_coin;
+//Text fire_coin;
 
 bool init()
 {
@@ -262,12 +262,12 @@ int main(int argc, char* args[])
                     }
 
                     //show coin
-                    string show_f_coin = "FIRE'S COIN: " + std::to_string(Fire.get_coin()) ; fire_coin.setText(show_f_coin);
+                    /*string show_f_coin = "FIRE'S COIN: " + std::to_string(Fire.get_coin()) ; fire_coin.setText(show_f_coin);
                     string show_w_coin = "WATER'S COIN: " + std::to_string(Water.get_coin()) ; water_coin.setText(show_w_coin);
                     fire_coin.setTextColor(WHITE_TEXT) ; water_coin.setTextColor(WHITE_TEXT);
                     if ( ! ( fire_coin.CreateGameText(gFont, gRenderer, 0, 0) && water_coin.CreateGameText(gFont, gRenderer, SCREEN_WIDTH - water_coin.getWidth(), 0) ) ) {
                         cout << "can't create game text of coin !\n";
-                    }
+                    }*/
                     //show to screen
                     SDL_RenderPresent(gRenderer);
 

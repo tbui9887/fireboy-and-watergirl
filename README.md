@@ -24,6 +24,7 @@
 # Các thành phần trong game 
 ## Nhân vật chính
 ### Fireboy
+![Link ảnh Fireboy](Data/readme_photo/fireboy.png)
 - Bạn sẽ điều khiển nhân vật này để đi tới cửa của mình 
 ### Watergirl
 - Một người chơi khác sẽ điều khiển nhân vật này, mục tiêu cuối cùng cũng là đi tới của của mình
@@ -36,7 +37,7 @@
 ### Barrier và button 
 [Link ảnh Barrier](    )
 - Barrier là một thanh chắn có thể di chuyển được. Nếu nhân vật mà bạn của bạn điều khiển không đứng trên nút thì Barrier sẽ không di chuyển lên trên, bạn sẽ bị chắn và không thể đi qua được
-[Link ảnh Buttonn](    )
+[Link ảnh Button](    )
 - Như đã đề cập ở trên, khi nhân vật của bạn đứng trên button, thanh chắn Barrier của bạn sẽ di chuyển và bạn của bạn có thể đi qua được nó
 ### Bomb
 [Linh ảnh Bomb]()

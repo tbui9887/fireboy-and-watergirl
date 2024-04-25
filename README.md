@@ -2,12 +2,27 @@
 - Họ và tên: Bùi Trung Thanh 
 - Lớp K68J, Trường Đại học Công Nghệ, Đại học Quốc gia Hà Nội (UET - VNU)
 
+# Video Demo
+
+# Table Of Content
+- [**Fireboy and Watergirl**](#Fireboy-and-Watergirl-Adventure)
+    - [**Video Demo**](#Video-demo)
+    - [***Table Of Contents***](#Table-Of-Contents)
+    - [**Giới thiệu game**](#Giới-thiệu-game)
+    - [**Cách tải game**](#cách-tải-game)
+        - [**Cài đặt môi trường**](#cài-đặt-môi-trường-cho-game-windows)
+        - [**Tải game**](#tải-game)
+    - [**Hướng dẫn chơi**](#Hướng-dẫn-chơi)
+    - [**Các thành phần trong game**](#Các-thành-phần-trong-game)
+    - [**Chiến thắng và thất bại**](#Chiến-thắng-và-thất-bại )
+    - [**Về đồ họa**](#Về-đồ-họa)
+    - [**Nguồn tham khảo**](#Nguồn-tham-khảo)
 # Giới thiệu game 
 - Fireboy and Watergirl Adventure là một trò chơi dành cho 2 người.
 - Ngoài ra đây cũng có thể coi là một trò chơi phối hợp đơn giản. Bạn chỉ có thể qua màn một khi hai nhân vật cùng tới đích.
 - Nhân vật chính trong game là Fireboy (chú bé lửa) và Watergirl (cô bé nước). Hai nhân vật này bị mắc kẹt trong một mê cung và họ chỉ có thể qua được khi có thể vượt qua những chướng ngại vật vô cùng khó khăn, cùng lúc đó cũng cần phải biết cách giúp đỡ, phối hợp, biết suy nghĩ để có thể qua cánh cửa để thoát ra khỏi bên ngoài. 
 
-# Cách chơi 
+# Hướng dẫn chơi 
 ## Đối với người điều khiển Watergirl 
 - Sử dụng phím `a` để di chuyển sang trái
 - Sử dụng phím `d` để di chuyển sang phái 
@@ -76,3 +91,39 @@
 - Khi thất bại, dù bạn có `Pass` tất cả các điều kiện thì bạn vẫn chỉ nhận được `F` mà thôi.
 
 - Tại đây bạn có thể bấm vào icon hình ngôi nhà để đi ra màn hình chính, bấm vào nút quay lại để chơi lại. Trong cả màn hình thắng và thua đều có 2 icon này để bạn lựa chọn.
+
+# Kĩ thuật lập trình 
+## Phát triển trên nền tảng
+- IDE Code::Blocks 20.03
+- Ngôn ngữ lập trình C++
+- Thư viện SDL2 
+- Extension của SDL2:
+	- SDL_Image: Hỗ trợ xử lý hình ảnh 
+	- SDL_Mixer: Hỗ trợ xử lý âm thanh
+	- SDL_TTF: Hỗ trợ xử lý font
+
+## Các kĩ thuật lập trình
+- Vòng lặp, cấu trúc rẽ nhánh,...
+- Con trỏ, vector, string,...
+- Class
+- Đọc viết file: ifstream
+- Tách file quản lý code
+- Kỹ thuật duyệt mảng, sinh số ngẫu nhiên
+- Các kĩ thuật, syntax của SDL
+- Kĩ thuật giải phóng bộ nhớ
+- Kĩ thuật xử lý thời gian 
+
+# Về đồ họa 
+- Các texture trong game được lấy từ:
+	- Map [itch.io](https://itch.io/)
+	- Hình ảnh nhân vật [sanderfrenken.github.io](https://sanderfrenken.github.io/Universal-LPC-Spritesheet-Character-Generator/#?body=Body_color_light&head=Human_male_light)
+	- Hình ảnh Slime [itch.io](https://itch.io/)
+	- Hình ảnh Background: sưu tầm 
+	- Âm thanh soundtrack và music sound [downloads.khinider.com](https://downloads.khinsider.com/game-soundtracks/album/fireboy-and-watergirl)
+- Các hình ảnh còn lại là bản thân mình tự làm sao cho phù hợp với game
+- Vẽ tile map bằng phần mềm: [Tiled](https://www.mapeditor.org/)
+
+# Nguồn tham khảo 
+
+- [Lazyfoo](https://lazyfoo.net/tutorials/SDL/)
+- Kênh Youtube:[Phát Triển Phần Mềm 123A-Z](https://www.youtube.com/@PhatTrienPhanMem123AZ)

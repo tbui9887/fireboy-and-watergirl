@@ -26,6 +26,7 @@ private:
     int ReadyBomb = 0;
     bool isPutBomb = false;
     bool showNotice = false;
+    int time_in_text;
 
 public:
     Bomb();

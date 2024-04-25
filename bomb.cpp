@@ -193,7 +193,13 @@ void Bomb::loadChunk()
 
 void Bomb::ShowNoticeText(SDL_Renderer *screen)
 {
+    time_in_text = 30 - (SDL_GetTicks() - ReadyBomb) / 1000;
+    if (time_in_text <= 0){
+        time_in_text = 0;
+        showNotice = false;
+    }
     if (showNotice){
+
         NotReadyBomb.setText("Can't put bomb right now. Please wait for " + std::to_string( 30 - (SDL_GetTicks() - ReadyBomb) / 1000) + " second !");
         NotReadyBomb.setTextColor(WHITE_TEXT);
         NotReadyBomb.CreateGameText(mFont, screen, SCREEN_WIDTH / 2 - 250, SCREEN_HEIGHT - 32);

@@ -25,12 +25,16 @@ private:
     int TimePutBomb;
     int ReadyBomb = 0;
     bool isPutBomb = false;
+    bool showNotice = false;
 
 public:
     Bomb();
     void DeleteBomb();
-    void setIsPutBomb(bool setBomb) { ReadyBomb = setBomb; }
+
+    void setReadyBomb(bool setBomb) { ReadyBomb = setBomb; }
     void setTimePutBomb(int x) { TimePutBomb = 0; }
+    void ShowNoticeText(SDL_Renderer *screen);
+
     void loadImg(SDL_Renderer *screen);
     void loadChunk();
     void ShowBomb(SDL_Renderer *screen);

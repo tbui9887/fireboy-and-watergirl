@@ -145,6 +145,7 @@ int main(int argc, char* args[])
             ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit, startTime);
 
             while (1){
+                bomb[FIREBOY].setReadyBomb(0); bomb[WATERGIRL].setReadyBomb(0);
                 if (ReturnMenu == 1){
                     ShowMenuStartOrNot(Fire, Water, obj, enemies_list, gRenderer, event, path_map, quit, startTime);
                     ReturnMenu = 0;
@@ -175,6 +176,10 @@ int main(int argc, char* args[])
 
                     if (ReturnMenu == 1){
                         break;
+                    }
+                    if (ReturnMenu == 2){
+                        bomb[FIREBOY].setReadyBomb(0); bomb[WATERGIRL].setReadyBomb(0);
+                        ReturnMenu = 0;
                     }
                     //time counting
                     timeText.str("");
@@ -251,6 +256,10 @@ int main(int argc, char* args[])
                         cout << "can't create time count !\n";
                     }
 
+                    //show bomb notice text
+                    bomb[FIREBOY].ShowNoticeText(gRenderer);
+                    bomb[WATERGIRL].ShowNoticeText(gRenderer);
+
                     //show coin
                     /*string show_f_coin = "FIRE'S COIN: " + std::to_string(Fire.get_coin()) ; fire_coin.setText(show_f_coin);
                     string show_w_coin = "WATER'S COIN: " + std::to_string(Water.get_coin()) ; water_coin.setText(show_w_coin);
@@ -272,9 +281,17 @@ int main(int argc, char* args[])
                         Mix_HaltMusic();
 
                         Water.~MainObject(); Fire.~MainObject();
+                        //load watergirl character
+                        Water.loadFromFile("Data/photo/character/water_girl_stand.png", gRenderer);
+                        Water.set_clips();
+
+                        //load fireboy character
+                        Fire.loadFromFile("Data/photo/character/fire_boy_stand.png", gRenderer);
+                        Fire.set_clips();
+
                         Water.setLose(false);
                         Fire.setLose(false);
-                        //bomb[FIREBOY].setTimePutBomb(SDL_GetTicks()); bomb[WATERGIRL].setTimePutBomb(SDL_GetTicks());
+                        bomb[FIREBOY].setReadyBomb(0); bomb[WATERGIRL].setReadyBomb(0);
                         //bomb[FIREBOY].setIsPutBomb(false); bomb[WATERGIRL].setIsPutBomb(false);
                         obj.clear();
                         enemies_list.clear();
@@ -285,8 +302,13 @@ int main(int argc, char* args[])
 
                     if ( Water.getWin() && Fire.getWin() ){
                         Water.~MainObject(); Fire.~MainObject();
+                        Water.loadFromFile("Data/photo/character/water_girl_stand.png", gRenderer);
+                        Water.set_clips();
+                        //load fireboy character
+                        Fire.loadFromFile("Data/photo/character/fire_boy_stand.png", gRenderer);
+                        Fire.set_clips();
                         Mix_HaltMusic();
-                        //bomb[FIREBOY].setTimePutBomb(SDL_GetTicks()); bomb[WATERGIRL].setTimePutBomb(SDL_GetTicks());
+                        bomb[FIREBOY].setReadyBomb(0); bomb[WATERGIRL].setReadyBomb(0);
                         //bomb[FIREBOY].setIsPutBomb(false); bomb[WATERGIRL].setIsPutBomb(false);
                         Water.setWin(false);
                         Fire.setWin(false);

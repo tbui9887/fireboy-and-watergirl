@@ -145,12 +145,11 @@ void Bomb::ExplosionAfterPutBomb(SDL_Renderer *screen, MainObject &FirePlay, Mai
         }
     }
     else{
-        if (time_distance <= 2000){
-            NotReadyBomb.setText("Can't put bomb right now. Please wait for " + std::to_string( 30 - (SDL_GetTicks() - ReadyBomb) / 1000) + " second !");
-            NotReadyBomb.setTextColor(BLACK_TEXT);
-            NotReadyBomb.CreateGameText(mFont, screen, SCREEN_WIDTH / 2 - 250, 32);
+        if (time_distance <= 1000){
+            showNotice = true;
         }
         else{
+            showNotice = false;
             isPutBomb = false;
         }
     }
@@ -189,6 +188,15 @@ void Bomb::loadChunk()
     mFont = TTF_OpenFont("Data/font/Roboto-Medium.ttf", 24);
     if (mFont == NULL){
         cout << "can't open mFont";
+    }
+}
+
+void Bomb::ShowNoticeText(SDL_Renderer *screen)
+{
+    if (showNotice){
+        NotReadyBomb.setText("Can't put bomb right now. Please wait for " + std::to_string( 30 - (SDL_GetTicks() - ReadyBomb) / 1000) + " second !");
+        NotReadyBomb.setTextColor(WHITE_TEXT);
+        NotReadyBomb.CreateGameText(mFont, screen, SCREEN_WIDTH / 2 - 250, SCREEN_HEIGHT - 32);
     }
 }
 

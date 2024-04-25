@@ -355,7 +355,7 @@ int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object
                         else level = 2;
 
                         path_map = LevelMap(Player1, Player2, obj, enemies_list, screen, level, StartTime); //TimeCount is StartTime
-                        return 0;
+                        return 2;
                 }
                 else if (CheckFocusWithRect(x_mouse, y_mouse, playing_button[1].getRect())){
                         return 0;

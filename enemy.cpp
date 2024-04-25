@@ -235,25 +235,25 @@ void Enemy::CheckToMap(Map& map_data)
 bool check_collision(SDL_Rect charRect, SDL_Rect button)
 {
     // Check for collision on all sides
-    bool collisionLeft = charRect.x + charRect.w >= button.x &&
-                         charRect.x + charRect.w <= button.x + button.w &&
+    bool collisionLeft = charRect.x + charRect.w - diff_walk >= button.x &&
+                         charRect.x + charRect.w - diff_walk <= button.x + button.w &&
                          charRect.y + charRect.h >= button.y &&
                          charRect.y <= button.y + button.h;
 
-    bool collisionRight = charRect.x <= button.x + button.w &&
-                          charRect.x >= button.x &&
+    bool collisionRight = charRect.x + diff_walk <= button.x + button.w &&
+                          charRect.x + diff_walk >= button.x &&
                           charRect.y + charRect.h >= button.y &&
                           charRect.y <= button.y + button.h;
 
     bool collisionTop = charRect.y + charRect.h >= button.y &&
                         charRect.y + charRect.h <= button.y + button.h &&
-                        charRect.x + charRect.w >= button.x &&
-                        charRect.x <= button.x + button.w;
+                        charRect.x + charRect.w - diff_walk >= button.x &&
+                        charRect.x + diff_walk <= button.x + button.w;
 
     bool collisionBottom = charRect.y <= button.y + button.h &&
                            charRect.y >= button.y &&
-                           charRect.x + charRect.w >= button.x &&
-                           charRect.x <= button.x + button.w;
+                           charRect.x + charRect.w - diff_walk >= button.x &&
+                           charRect.x + diff_walk <= button.x + button.w;
 
     // Check if any collision occurred
     return collisionLeft || collisionRight || collisionTop || collisionBottom;

@@ -144,6 +144,16 @@ void Bomb::ExplosionAfterPutBomb(SDL_Renderer *screen, MainObject &FirePlay, Mai
             DeleteBomb();
         }
     }
+    else{
+        if (time_distance <= 2000){
+            NotReadyBomb.setText("Can't put bomb right now. Please wait for " + std::to_string( 30 - (SDL_GetTicks() - ReadyBomb) / 1000) + " second !");
+            NotReadyBomb.setTextColor(BLACK_TEXT);
+            NotReadyBomb.CreateGameText(mFont, screen, SCREEN_WIDTH / 2 - 250, 32);
+        }
+        else{
+            isPutBomb = false;
+        }
+    }
 }
 
 void Bomb::InteractWithCharAndEnemy(MainObject &FirePlay, MainObject &WaterPlay, vector<Enemy> &enemies_list)

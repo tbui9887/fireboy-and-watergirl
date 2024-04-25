@@ -274,7 +274,8 @@ int main(int argc, char* args[])
                         Water.~MainObject(); Fire.~MainObject();
                         Water.setLose(false);
                         Fire.setLose(false);
-
+                        //bomb[FIREBOY].setTimePutBomb(SDL_GetTicks()); bomb[WATERGIRL].setTimePutBomb(SDL_GetTicks());
+                        //bomb[FIREBOY].setIsPutBomb(false); bomb[WATERGIRL].setIsPutBomb(false);
                         obj.clear();
                         enemies_list.clear();
                         ReturnMenu = MenuResult(gRenderer, event, quit, obj, enemies_list, Fire, Water, path_map, false, SDL_GetTicks() - startTime, startTime);
@@ -285,7 +286,8 @@ int main(int argc, char* args[])
                     if ( Water.getWin() && Fire.getWin() ){
                         Water.~MainObject(); Fire.~MainObject();
                         Mix_HaltMusic();
-
+                        //bomb[FIREBOY].setTimePutBomb(SDL_GetTicks()); bomb[WATERGIRL].setTimePutBomb(SDL_GetTicks());
+                        //bomb[FIREBOY].setIsPutBomb(false); bomb[WATERGIRL].setIsPutBomb(false);
                         Water.setWin(false);
                         Fire.setWin(false);
 

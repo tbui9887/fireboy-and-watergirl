@@ -66,7 +66,7 @@ string LevelMap (MainObject &player_1, MainObject &player_2, vector<Object> &obj
 
             Object obj1, obj2;
             obj1.setXbut(864); obj1.setYbut(753);
-            obj1.setXbar(546); obj1.setYbar(320);
+            obj1.setXbar(106); obj1.setYbar(160);
             obj.push_back(obj1);
 
             obj2.setXbut(479); obj2.setYbut(83);

@@ -29,7 +29,8 @@ private:
 public:
     Bomb();
     void DeleteBomb();
-
+    void setIsPutBomb(bool setBomb) { ReadyBomb = setBomb; }
+    void setTimePutBomb(int x) { TimePutBomb = 0; }
     void loadImg(SDL_Renderer *screen);
     void loadChunk();
     void ShowBomb(SDL_Renderer *screen);

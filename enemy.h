@@ -8,7 +8,7 @@
 #include "character.h"
 
 #define ENEMY_GRAVITY_SPEED 0.8
-#define ENEMY_MOVING_SPEED 2
+#define ENEMY_MOVING_SPEED 1.5
 
 enum TypeMove
 {

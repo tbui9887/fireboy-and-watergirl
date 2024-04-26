@@ -3,7 +3,7 @@
 - Lớp K68J, Trường Đại học Công Nghệ, Đại học Quốc gia Hà Nội (UET - VNU)
 
 # Video Demo
-
+- Link video giải thích + gameplay: [link](https://youtu.be/dwLwtVIRIjg)
 # Table Of Content
 - [**Fireboy and Watergirl**](#Fireboy-and-Watergirl-Adventure)
     - [**Video Demo**](#Video-demo)

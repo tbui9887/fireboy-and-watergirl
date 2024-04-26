@@ -228,8 +228,8 @@ void MainObject::check_to_map(Map& map_data)
     int height_min = height_frame_ < BLOCK_SIZE ? height_frame_ : BLOCK_SIZE;
 
     //block lân cận vị trí của main character
-    x1 = (x_pos_ + x_val_) / BLOCK_SIZE;
-    x2 = (x_pos_ + x_val_ + width_frame_) / BLOCK_SIZE;
+    x1 = (x_pos_ + x_val_ + diff_walk) / BLOCK_SIZE;
+    x2 = (x_pos_ + x_val_ + width_frame_ - diff_walk) / BLOCK_SIZE;
 
     y1 = y_pos_ / BLOCK_SIZE;
     y2 = (y_pos_ + height_min) / BLOCK_SIZE;

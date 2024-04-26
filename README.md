@@ -8,10 +8,12 @@
 - [**Fireboy and Watergirl**](#Fireboy-and-Watergirl-Adventure)
     - [**Video Demo**](#Video-demo)
     - [***Table Of Contents***](#Table-Of-Contents)
+    - [***Cách tải game***](#Cách-tải-gamegame)
     - [**Giới thiệu game**](#Giới-thiệu-game)
     - [**Hướng dẫn chơi**](#Hướng-dẫn-chơi)
     - [**Các thành phần trong game**](#Các-thành-phần-trong-game)
     - [**Chiến thắng và thất bại**](#Chiến-thắng-và-thất-bại )
+    - [**Cấu trúc game**](#Cấu-trúc-game)
     - [**Về đồ họa**](#Về-đồ-họa)
     - [**Nguồn tham khảo**](#Nguồn-tham-khảo)
 # Giới thiệu game 
@@ -19,6 +21,19 @@
 - Ngoài ra đây cũng có thể coi là một trò chơi phối hợp đơn giản. Bạn chỉ có thể qua màn một khi hai nhân vật cùng tới đích.
 - Nhân vật chính trong game là Fireboy (chú bé lửa) và Watergirl (cô bé nước). Hai nhân vật này bị mắc kẹt trong một mê cung và họ chỉ có thể qua được khi có thể vượt qua những chướng ngại vật vô cùng khó khăn, cùng lúc đó cũng cần phải biết cách giúp đỡ, phối hợp, biết suy nghĩ để có thể qua cánh cửa để thoát ra khỏi bên ngoài. 
 
+# Cách tải game 
+## Cách 1: Không bao gồm code
+- Tải game (được nén thành file .zip) tại [đây](https://github.com/tbui9887/fireboy-and-watergirl/releases/download/release/fireboy-and-watergirl.zip)
+- File zip này khoảng 36 MB nên thời gian tải rất nhanh 
+- Sau khi giải nén, file chỉ chiếm khoảng 75 MB
+## Cách 2: Bao gồm code
+### 1. Clone trên github
+- Nếu trong máy bạn cài sẵn Code::Blocks bạn chỉ cần git về, sau đó vào file `bin` → `Debug`, sau đó bạn click vào file `.exe`để chạy game như bình thường 
+- Tuy nhiên cách này sẽ tải cả phần `.git` nên file sẽ khá nặng
+## Cách 2: Tải file `.zip`
+- Click vào `Code` màu xanh ở phần phía trên 
+- Sau đó bạn nhấn vào `Download ZIP`
+- File này sẽ nhẹ hơn phía trên, tùy theo mục đích của bạn để lựa chọn phương thức tải cho phù hợp 
 # Hướng dẫn chơi 
 ## Đối với người điều khiển Watergirl 
 - Sử dụng phím `a` để di chuyển sang trái
@@ -31,7 +46,7 @@
 - Sử dụng phím `→` để di chuyển sang phải
 - Sử dụng phím `↑` để nhảy lên trên
 - Sử dụng phím `l` để đặt bom
-  
+
 # Các thành phần trong game 
 ## Nhân vật chính
 ### Fireboy
@@ -110,6 +125,19 @@
 - Kĩ thuật giải phóng bộ nhớ
 - Kĩ thuật xử lý thời gian 
 
+# Về source code game
+- File header.h
+    - Khai báo các thư viện có sẵn trong C++, SDL2
+    - Các define sử dụng trong các hàm 
+    - Các thông số cố định sử dụng trong game 
+- File character: tương tác map, tương tác với các thành phần đặc biệt của map, xử lý event, load ảnh, load audio,...
+- File game_map: truyền dữ liệu từ file vào trong game, load map tiles
+- File enemy: tương tác map, tương tác với nhân vật người chơi điều khiển, load ảnh, tính toán vị trí mới khi vị trí khởi đầu và vị trí kết thúc không hợp lý,...
+- File select_menu: toàn bộ các hàm xử lý liên quan tới menu, load các thành phần ban đầu khi khởi động màn mới của game 
+- Các file texture, timer, text: các thành phần cơ bản để load ảnh lên, xử lý thời gian, tạo text cho game
+    - File texture bao gồm class LTexture làm class cha để class MainObject, Enemy,.. kế thừa 
+- Hàm bomb: xử lý thời gian nổ, xử lý khi va chạm với nhân vật mà người chơi điều khiển và enemy
+- File object_button: xử lý khi va chạm với button thì barrier sẽ đi lên để cho nhân vật người chơi điều khiển có thể đi qua 
 # Về đồ họa 
 - Các texture trong game được lấy từ:
 	- Map [itch.io](https://itch.io/)

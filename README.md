@@ -3,7 +3,10 @@
 - Lớp K68J, Trường Đại học Công Nghệ, Đại học Quốc gia Hà Nội (UET - VNU)
 
 # Video Demo
-- Link video giải thích + gameplay: [link](https://youtu.be/dwLwtVIRIjg)
+- Link video giải thích + gameplay: [Giải thích code game + gameplay](https://youtu.be/dwLwtVIRIjg)
+- Bổ sung thêm về một hàm mà mình chưa nói ở trong video là hàm Object_button:
+	- Hàm này cũng tương tự như các hàm khác là sẽ check va chạm, tuy nhiên có điểm khác là khi mình đứng trên button, barrier sẽ tự động đi lên bằng cách làm cho y giảm dần, mình sử dụng một biến phụ làm trung gian là barrier_move nó đi tới giá trị Max, khiến cho barrier chỉ dừng lại ở một vị trí nhật định nào đó. Ngược lại, khi check va chạm trở thành false, nó tăng y tới khi barrier_move trở vể 0 thì kết thúc.
+	- Đồng thời mình cũng sẽ nói về vấn đề check va chạm với barrier trong này. Khi va chạm với barrier mình sẽ set vị trí x của character bằng x_pos - x_val, tức là vị trí mới (sau khi thêm x_val)  trừ đi giá trị tăng thêm → nó sẽ là giá trị ban đầu → không di chuyển qua được. Tương tự với y_val mình cũng sẽ có điều này.
 # Table Of Content
 - [**Fireboy and Watergirl**](#Fireboy-and-Watergirl-Adventure)
     - [**Video Demo**](#Video-demo)

@@ -25,13 +25,11 @@ void GameMap::LoadTiles(SDL_Renderer* screen)
         map_tile[i].loadFromFile(map_name, screen);
     }
 
-    //obj.loadImg(screen);
 }
 
 void GameMap::DrawMap(SDL_Renderer* screen)
 {
     int x_of_file, y_of_file = 0;
-
     for (int i = 0; i < SCREEN_WIDTH; i += BLOCK_SIZE){
         x_of_file = 0;
         for (int j = 0; j < SCREEN_HEIGHT; j += BLOCK_SIZE){

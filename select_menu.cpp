@@ -297,7 +297,7 @@ bool CheckFocusWithRect(const int& x, const int& y, const SDL_Rect& rect)
 //menu in game
 //restart + back to home (we just need to call show menu start or not and after that, before that we set lose) + pause <resume>
 
-int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object> &obj, vector<Enemy> &enemies_list, MainObject &Player1, MainObject &Player2, string path_map, int &StartTime)
+int menu_playing(SDL_Renderer *screen, SDL_Event event, bool quit, vector<Object> &obj, vector<Enemy> &enemies_list, MainObject &Player1, MainObject &Player2, string &path_map, int &StartTime)
 {
     const int num_button = 3;
     LTexture playing_button [num_button];

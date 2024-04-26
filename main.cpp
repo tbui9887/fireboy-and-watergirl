@@ -180,6 +180,7 @@ int main(int argc, char* args[])
                     if (ReturnMenu == 2){
                         bomb[FIREBOY].setReadyBomb(0); bomb[WATERGIRL].setReadyBomb(0);
                         ReturnMenu = 0;
+                        break;
                     }
                     //time counting
                     timeText.str("");

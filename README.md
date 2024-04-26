@@ -17,9 +17,9 @@
     - [**Về đồ họa**](#Về-đồ-họa)
     - [**Nguồn tham khảo**](#Nguồn-tham-khảo)
 # Giới thiệu game 
-- Fireboy and Watergirl Adventure là một trò chơi dành cho 2 người.
-- Ngoài ra đây cũng có thể coi là một trò chơi phối hợp đơn giản. Bạn chỉ có thể qua màn một khi hai nhân vật cùng tới đích.
-- Nhân vật chính trong game là Fireboy (chú bé lửa) và Watergirl (cô bé nước). Hai nhân vật này bị mắc kẹt trong một mê cung và họ chỉ có thể qua được khi có thể vượt qua những chướng ngại vật vô cùng khó khăn, cùng lúc đó cũng cần phải biết cách giúp đỡ, phối hợp, biết suy nghĩ để có thể qua cánh cửa để thoát ra khỏi bên ngoài. 
+- Fireboy and Watergirl Adventure là một trò chơi dành cho 2 người, phối hợp đơn giản. Bạn chỉ có thể qua màn một khi hai nhân vật cùng tới đích.
+- Nhân vật chính trong game là Fireboy (chú bé lửa) và Watergirl (cô bé nước). Hai nhân vật này bị mắc kẹt trong một mê cung. Để thoát ra được, họ phải trải qua rất nhiều thử thách khó khăn và thú vị. 
+- Hãy rủ bạn bè của mình cùng hóa thân vào hai nhân vật này để có những giây phút thoải mái nhé.
 
 # Cách tải game 
 ## Cách 1: Không bao gồm code
@@ -51,25 +51,26 @@
 ## Nhân vật chính
 ### Fireboy
 ![Link ảnh Fireboy](Data/readme_photo/fireboy.png)
-- Bạn sẽ điều khiển nhân vật này để đi tới cửa của mình 
+- Bạn sẽ điều khiển nhân vật này để đi tới cửa của mình (cửa có kí hiệu màu cam) 
 ### Watergirl
 ![Link ảnh Watergirl](Data/readme_photo/watergirl.png)
-- Một người chơi khác sẽ điều khiển nhân vật này, mục tiêu cuối cùng cũng là đi tới của của mình
+- Một người chơi khác sẽ điều khiển nhân vật này, mục tiêu cuối cùng cũng như Fireboy (cửa có kí hiệu màu xanh)
 - Hãy cố gắng phối hợp với nhau thật tốt, đừng bỏ quên bạn bè mà đi một mình nhé, vì chưa chắc một mình đã có thể qua cửa đâu 
 ## Các object tương tác với người chơi 
 ### Slime
 ![Link ảnh Slime](Data/readme_photo/slime.png)
-- Slime sẽ liên tục di chuyển trong suốt quá trình chơi, việc của bạn là tránh đụng khỏi nó, nếu không nhân vật của bạn sẽ chết 
+- Slime sẽ liên tục di chuyển trong suốt quá trình chơi, việc của bạn là tránh đụng vào nó, nếu không nhân vật của bạn sẽ chết 
 - Bạn sẽ thua cuộc khi chạm, dù chỉ một chút với Slime. 
 ### Barrier và button 
 ![Link ảnh Barrier](Data/photo/block/barrier_blue.png)
 - Barrier là một thanh chắn có thể di chuyển được. Nếu nhân vật mà bạn của bạn điều khiển không đứng trên nút thì Barrier sẽ không di chuyển lên trên, bạn sẽ bị chắn và không thể đi qua được
+
 ![Link ảnh Button](Data/photo/block/button_blue.png)
 - Như đã đề cập ở trên, khi nhân vật của bạn đứng trên button, thanh chắn Barrier của bạn sẽ di chuyển và bạn của bạn có thể đi qua được nó
 ### Bomb
 ![Linh ảnh Bomb](Data/readme_photo/bomb.png)
 - Bomb sẽ nổ sau 2 giây sau khi bắt đầu đặt.
-- Tuy nhiên với mỗi một nhân vật, bạn chỉ có thể đặt lại một quả bom nữa chỉ khi đã qua 30 giây. 
+- Tuy nhiên với mỗi một nhân vật, bạn chỉ có thể đặt lại một quả bom nữa chỉ khi đã qua 30 giây kể từ lần đặt gần nhất. 
 ### Thời gian chơi 
 ![Link thời gian chơi](Data/readme_photo/time.png)
 - Thời gian sẽ hiện ở chính giữa của màn hình chơi.
@@ -81,7 +82,7 @@
 - Nhớ rằng, bạn chỉ có thể ăn được khi ăn đúng với nhân vật của mình: Fireboy ăn kim cương vàng, Watergirl ăn kim cương xanh.
 ### Hồ dung nham 
 ![Ho dung nham](Data/readme_photo/lava_liquid.png)
-- Fireboy có thể đi qua được hồ này mà không bị làm sao cả, trong khi đó Watergirl sẽ bốc hơi khi đắm mình trong đây.
+- Fireboy có thể đi qua được hồ này mà không bị làm sao cả, trong khi đó Watergirl sẽ bốc hơi khi đắm mình trong đó.
 ### Hồ nước lạnh 
 ![Ho nuoc lanh](Data/readme_photo/water_liquid.png)
 - Tương tự như vậy, Watergirl có thể đi qua được hồ nước, nhưng Fireboy thì không thể đi qua được.
@@ -117,8 +118,8 @@
 ## Các kĩ thuật lập trình
 - Vòng lặp, cấu trúc rẽ nhánh,...
 - Con trỏ, vector, string,...
-- Class
-- Đọc viết file: ifstream
+- Class, struct, kế thừa, hàm ảo,...
+- Đọc viết file: fstream
 - Tách file quản lý code
 - Kỹ thuật duyệt mảng, sinh số ngẫu nhiên
 - Các kĩ thuật, syntax của SDL
@@ -136,7 +137,7 @@
 - File select_menu: toàn bộ các hàm xử lý liên quan tới menu, load các thành phần ban đầu khi khởi động màn mới của game 
 - Các file texture, timer, text: các thành phần cơ bản để load ảnh lên, xử lý thời gian, tạo text cho game
     - File texture bao gồm class LTexture làm class cha để class MainObject, Enemy,.. kế thừa 
-- Hàm bomb: xử lý thời gian nổ, xử lý khi va chạm với nhân vật mà người chơi điều khiển và enemy
+- Hàm bomb: xử lý thời gian nổ, xử lý khi va chạm với nhân vật mà người chơi điều khiển và enemy, tương tác map, hiện thông báo khi chưa đủ thời gian đặt bom,...
 - File object_button: xử lý khi va chạm với button thì barrier sẽ đi lên để cho nhân vật người chơi điều khiển có thể đi qua 
 # Về đồ họa 
 - Các texture trong game được lấy từ:
@@ -150,5 +151,5 @@
 
 # Nguồn tham khảo 
 
-- [Lazyfoo](https://lazyfoo.net/tutorials/SDL/)
-- Kênh Youtube:[Phát Triển Phần Mềm 123A-Z](https://www.youtube.com/@PhatTrienPhanMem123AZ)
+- Các syntax SDL cơ bản: [Lazyfoo](https://lazyfoo.net/tutorials/SDL/)
+- Map, character: [Phát Triển Phần Mềm 123A-Z](https://www.youtube.com/@PhatTrienPhanMem123AZ)

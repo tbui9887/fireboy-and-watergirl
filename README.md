@@ -115,7 +115,7 @@
 	- Map [itch.io](https://itch.io/)
 	- Hình ảnh nhân vật [sanderfrenken.github.io](https://sanderfrenken.github.io/Universal-LPC-Spritesheet-Character-Generator/#?body=Body_color_light&head=Human_male_light)
 	- Hình ảnh Slime [itch.io](https://itch.io/)
-	- Hình ảnh Background: sưu tầm 
+	- Hình ảnh Background [freepik.com](https://www.freepik.com/premium-vector/pixel-art-landscape-farm-coast-with-house-barn-silo-mill-8bit-game-background_31399610.htm)
 	- Âm thanh soundtrack và music sound [downloads.khinider.com](https://downloads.khinsider.com/game-soundtracks/album/fireboy-and-watergirl)
 - Các hình ảnh còn lại là bản thân mình tự làm sao cho phù hợp với game
 - Vẽ tile map bằng phần mềm: [Tiled](https://www.mapeditor.org/)
